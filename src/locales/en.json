@@ -1,0 +1,131 @@
+{
+  "title": {
+    "transfer": "Transfer funds",
+    "createContact": "Create contact"
+  },
+  "transferPanel": {
+    "transferTo": "Transfer funds to",
+    "searchPlaceholder": "Search",
+    "contact": "Contact",
+    "betweenAccounts": "Between accounts",
+    "byPhone": "By phone number",
+    "newContact": "Create new contact",
+    "newContactHint": "Or create a one-time transfer"
+  },
+  "contactList": {
+    "favorites": "Favorites",
+    "others": "Other recipient",
+    "emptyFavorites": "You don't have favorite contacts",
+    "emptyRegulars": "You don't have regular contacts"
+  },
+  "createContact": {
+    "name": "Name",
+    "namePlaceholder": "Account holder's name",
+    "dni": "Identification",
+    "dniPlaceholder": "Contact's ID number",
+    "bank": "Bank",
+    "accountNumber": "Account Number",
+    "accountNumberPlaceholder": "(Numbers only)",
+    "alias": "Alias",
+    "aliasPlaceholder": "(Optional)"
+  },
+  "ongoingTransfer": {
+    "title": "Transfer funds to",
+    "change": "Change",
+    "from": "From",
+    "amount": "Amount",
+    "amountPlaceholder": "$ 0",
+    "addMessage": "Add a message",
+    "addMessagePlaceholder": "Max. 180 characters",
+    "transactionFee": "Transaction fee"
+  },
+  "collapse": {
+    "lessOptions": "Less Options",
+    "schedule": "Schedule",
+    "scheduleHint": "The transfer will be instantaneous and will not auto-repeat.",
+    "recurring": "Recurring",
+    "yesLabel": "Yes",
+    "noLabel": "No",
+    "noScheduleLabel": "This is a one time payment",
+    "noRecurrentLabel": "This payment will not repeat"
+  },
+  "alert": {
+    "notPay": "You have nothing to pay yet",
+    "wrong": "Oops! Something Went Wrong",
+    "newContactMessage": "Your new contact has been saved"
+  },
+  "modal": {
+    "transfer": {
+      "title": "Transfer {amount}?",
+      "text": "You are sending money to {name} - {bank} {mask} from your {productFrom}",
+      "transactionCost": "The transaction fee is: <strong>{charge}</strong>",
+      "timeTransfer": "The payment will be received within the next <strong>3 Business Days.</strong>"
+    },
+    "recurring": {
+      "title": "Recurring",
+      "repeat": "Repeat",
+      "on": "On",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "custom": "Custom",
+      "ends": "Ends",
+      "oneYear": "1 Year",
+      "date": "Date",
+      "occurrences": "Occurrences",
+      "yes": "Yes",
+      "no": "No",
+      "saturday": "S",
+      "monday": "M",
+      "tuesday": "T",
+      "wednesday": "W",
+      "thursday": "T",
+      "friday": "F",
+      "sunday": "S",
+      "every-1": "Every month",
+      "every-2": "Every other month",
+      "every-3": "Every 3 months",
+      "every-6": "Every 6 months",
+      "every-12": "Every 12 months"
+    }
+  },
+  "hint": {
+    "available": "{amount} available",
+    "withAmount": "{amount} remaining after transfer"
+  },
+  "button": {
+    "transfer": "Transfer",
+    "cancel": "Cancel",
+    "back": "Back to products",
+    "confirm": "Confirm",
+    "retry": "Retry",
+    "continue": "Continue",
+    "save": "Save",
+    "share": "Share",
+    "download": "Download"
+  },
+  "transfer": {
+    "title": "Quick Transfer To",
+    "change": "Change",
+    "from": "From",
+    "total": "Total",
+    "actionSingle": "Transfer"
+  },
+  "result": {
+    "transferSuccess": "Transfer successful",
+    "transferFailed": "Transfer failure",
+    "transferErrorMessage": "No pudimos realizar la transferencia debido a problemas de comunicación con el banco del destinatario.",
+    "errorSolution": "Please {solution}",
+    "moneyPaid": "Money transferred",
+    "transferTo": "Transfer to",
+    "transactionId": "Transaction ID",
+    "timeDate": "Time & Date",
+    "terms": {
+      "text": "All your transactions are safe and fast.",
+      "link": "Terms & Conditions."
+    }
+  },
+  "updateFavorite": {
+    "success": "Favorite contacts have been updated",
+    "error": "Unable to update favorite contact"
+  }
+}

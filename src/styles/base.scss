@@ -1,0 +1,10 @@
+.contacts,
+.favorite-contacts,
+.products {
+  .m-quick-action-button {
+    --bs-m-quick-action-button-border-radius: 0;
+    --bs-m-quick-action-button-border-right: 0;
+    --bs-m-quick-action-button-border-left: 0;
+    --bs-m-quick-action-button-border-bottom: 0;
+  }
+}
