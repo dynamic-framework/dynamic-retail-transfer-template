@@ -58,7 +58,7 @@
   "modal": {
     "transfer": {
       "title": "¿Transferir {amount}?",
-      "text": "Estás transfiriendo a {name} - {bank} {mask} desde tu {productFrom}",
+      "text": "Estás transfiriendo a {name} - {bank} {mask} desde tu {accountFrom}",
       "transactionCost": "Esta transacción tiene un costo de operación de: <strong>{charge}</strong>",
       "timeTransfer": "El destinatario lo vera en su cuenta dentro de los próximos <strong>3 días.</strong>"
     },

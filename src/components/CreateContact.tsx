@@ -5,42 +5,42 @@ import {
   MFormikInputSelect,
 } from '@dynamic-framework/ui-react';
 import * as Yup from 'yup';
-import type { Bank, Contact } from '@modyo-dynamic/modyo-service-retail';
 
 import { useTranslation } from 'react-i18next';
-import useBanks from '../hooks/useBanks';
-import useCreateContact from '../hooks/useCreateContact';
+import useBanksEffect from '../services/hooks/useBanksEffect';
+import useCreateContact from '../services/hooks/useCreateContact';
 import { useAppDispatch } from '../store/hooks';
 import { setSelectedContact, setView } from '../store/slice';
+import { Bank, Contact } from '../services/interface';
 
 const NewContactSchema = Yup.object().shape({
   name: Yup.string().required(),
   targetDNI: Yup.string().required(),
-  productNumber: Yup.string().required(),
+  accountNumber: Yup.string().required(),
 });
 
 export default function CreateContact() {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  const { loading: loadingBanks, banks } = useBanks();
+  const { loading: loadingBanks, banks } = useBanksEffect();
   const { callback: createContact } = useCreateContact();
   return (
     <Formik
       initialValues={{
         name: '',
         targetDNI: '',
-        productNumber: '',
+        accountNumber: '',
         targetBank: banks[0],
       }}
       validationSchema={NewContactSchema}
-      onSubmit={async (values) => {
-        const newContact = await createContact({
+      onSubmit={(values) => {
+        const newContact = createContact({
           name: values.name,
-          productNumber: values.productNumber,
+          accountNumber: values.accountNumber,
           bank: values.targetBank.name,
           image: `https://ui-avatars.com/api/?name=${values.name}`,
-        } as Contact /* FIXME: 🤷🤷 */);
+        } as Contact);
         dispatch(setSelectedContact(newContact));
         dispatch(setView('transfer'));
       }}
@@ -76,8 +76,8 @@ export default function CreateContact() {
               isLoading={loadingBanks}
             />
             <MFormikInput
-              mId="productNumber"
-              name="productNumber"
+              mId="accountNumber"
+              name="accountNumber"
               label={t('createContact.accountNumber')}
               placeholder={t('createContact.accountNumberPlaceholder')}
             />

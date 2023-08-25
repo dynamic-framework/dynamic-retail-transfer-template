@@ -1,6 +1,8 @@
+@import "~@dynamic-framework/ui-react/src/style/abstracts/+import";
+
 .contacts,
 .favorite-contacts,
-.products {
+.accounts {
   .m-quick-action-button {
     --bs-m-quick-action-button-border-radius: 0;
     --bs-m-quick-action-button-border-right: 0;

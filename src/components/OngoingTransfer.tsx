@@ -10,23 +10,23 @@ import {
   MQuickActionSwitch,
   useModalContext,
 } from '@dynamic-framework/ui-react';
-import type { Product } from '@modyo-dynamic/modyo-service-retail';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
-  getProducts,
   getSelectedContact,
-  getSelectedProduct,
-  getOriginProduct,
+  getSelectedAccount,
+  getOriginAccount,
+  getAccounts,
 } from '../store/selectors';
 import {
   setAmountUsed,
   setMessage,
   setSelectedContact,
-  setSelectedProduct,
-  setOriginProduct,
+  setSelectedAccount,
+  setOriginAccount,
 } from '../store/slice';
-import useAmount from '../hooks/useAmount';
+import useAmount from '../services/hooks/useAmount';
+import { Account } from '../services/interface';
 
 export default function OngoingTransfer() {
   const { t } = useTranslation();
@@ -34,48 +34,44 @@ export default function OngoingTransfer() {
   const dispatch = useAppDispatch();
   const [transferMessage, setTransferMessage] = useState<string | undefined>();
 
-  const products = useAppSelector(getProducts);
-  const originProduct = useAppSelector(getOriginProduct);
+  const accounts = useAppSelector(getAccounts);
+  const originAccount = useAppSelector(getOriginAccount);
   const selectedContact = useAppSelector(getSelectedContact);
-  const selectedProduct = useAppSelector(getSelectedProduct) as Product;
-  const productsOrigin = useMemo(
-    () => {
-      if (selectedProduct) {
-        return products.filter(({ id }) => id !== selectedProduct.id);
-      }
-
-      return products;
-    },
-    [products, selectedProduct],
-  );
+  const selectedAccount = useAppSelector(getSelectedAccount) as Account;
+  const accountsOrigin = useMemo(() => {
+    if (selectedAccount) {
+      return accounts.filter(({ id }) => id !== selectedAccount.id);
+    }
+    return accounts;
+  }, [accounts, selectedAccount]);
 
   const {
     amount,
     setAmount,
     hint,
-    originProductAmount,
+    originAccountAmount,
     canTransfer,
   } = useAmount();
 
   useEffect(() => {
-    if (originProduct === undefined) {
-      dispatch(setOriginProduct(productsOrigin[0]));
+    if (originAccount === undefined) {
+      dispatch(setOriginAccount(accountsOrigin[0]));
     }
-  }, [dispatch, originProduct, productsOrigin]);
+  }, [dispatch, originAccount, accountsOrigin]);
 
   return (
     <div className="bg-white rounded shadow-sm p-3 d-flex flex-column gap-3">
       <MInputSelect
         label={t('ongoingTransfer.from')}
         mId="selectAccountFrom"
-        {...(originProduct) && {
-          selectedOption: originProduct,
+        {...(originAccount) && {
+          selectedOption: originAccount,
         }}
-        valueExtractor={({ productNumber }: Product) => productNumber}
-        labelExtractor={({ name, productNumber }: Product) => `${name} ••• ${productNumber.slice(-3)}`}
-        options={productsOrigin}
-        onMChange={({ detail: product }: CustomEvent<Product>) => (
-          dispatch(setOriginProduct(product))
+        valueExtractor={({ accountNumber }: Account) => accountNumber}
+        labelExtractor={({ name, accountNumber }: Account) => `${name} ••• ${accountNumber.slice(-3)}`}
+        options={accountsOrigin}
+        onMChange={({ detail: account }: CustomEvent<Account>) => (
+          dispatch(setOriginAccount(account))
         )}
       />
       <MInputCurrency
@@ -86,7 +82,7 @@ export default function OngoingTransfer() {
         value={amount}
         placeholder={t('ongoingTransfer.amountPlaceholder')}
         minValue={1}
-        maxValue={originProductAmount}
+        maxValue={originAccountAmount}
       />
       <div className="d-flex flex-column gap-2">
         <h6 className="fw-bold sp px-2 text-gray">{t('ongoingTransfer.title')}</h6>
@@ -95,20 +91,20 @@ export default function OngoingTransfer() {
             <MQuickActionButton
               className="w-100"
               line1={selectedContact.name}
-              line2={`${selectedContact.bank} ${selectedContact.productNumber.slice(-3)}`}
+              line2={`${selectedContact.bank} ${selectedContact.accountNumber.slice(-3)}`}
               representativeImage={selectedContact.image}
               actionLinkText={t('ongoingTransfer.change')}
               onMClick={() => dispatch(setSelectedContact(undefined))}
             />
           )}
-          {selectedProduct && (
+          {selectedAccount && (
             <MQuickActionButton
               className="w-100"
-              line1={selectedProduct.name}
-              line2={`••• ${selectedProduct.productNumber.slice(-3)}`}
+              line1={selectedAccount.name}
+              line2={`••• ${selectedAccount.accountNumber.slice(-3)}`}
               representativeIcon="heart-fill"
               actionLinkText={t('ongoingTransfer.change')}
-              onMClick={() => dispatch(setSelectedProduct(undefined))}
+              onMClick={() => dispatch(setSelectedAccount(undefined))}
             />
           )}
         </div>

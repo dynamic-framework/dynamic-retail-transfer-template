@@ -4,26 +4,26 @@ import {
   useFormatCurrency,
   useScreenshotDownload,
   useScreenshotWebShare,
+  liquidParser,
 } from '@dynamic-framework/ui-react';
-import type { Transaction } from '@modyo-dynamic/modyo-service-retail';
 import { DateTime } from 'luxon';
 import { useTranslation } from 'react-i18next';
-import { liquidParser } from '@dynamic-framework/ui';
 
 import { useAppSelector } from '../store/hooks';
 import {
   getAmountUsed,
   getResult,
   getSelectedContact,
-  getSelectedProduct,
+  getSelectedAccount,
 } from '../store/selectors';
 import errorHandler from '../utils/errorHandler';
+import { Transaction } from '../services/interface';
 
 export default function TransferResult() {
   const amountUsed = useAppSelector(getAmountUsed);
   const result = useAppSelector(getResult) as Transaction;
   const selectedContact = useAppSelector(getSelectedContact);
-  const selectedProduct = useAppSelector(getSelectedProduct);
+  const selectedAccount = useAppSelector(getSelectedAccount);
   const { shareRef, share } = useScreenshotWebShare();
   const { downloadRef, download } = useScreenshotDownload();
 
@@ -33,7 +33,7 @@ export default function TransferResult() {
 
   const transferDone = result.status === 'completed';
 
-  const gotToProducts = () => {
+  const gotToAccounts = () => {
     window.location.href = `${liquidParser.parse('{{site.url}}')}/${liquidParser.parse('{{vars.dashboard-path}}')}`;
   };
 
@@ -69,7 +69,7 @@ export default function TransferResult() {
               <div className="d-flex flex-column px-3 gap-2">
                 <div className="row">
                   <div className="col-6 text-light-emphasis">{t('result.transferTo')}</div>
-                  <div className="col-6 text-end">{selectedContact?.name || selectedProduct?.name}</div>
+                  <div className="col-6 text-end">{selectedContact?.name || selectedAccount?.name}</div>
                 </div>
                 <div className="row">
                   <div className="col-6 text-light-emphasis">{t('result.transactionId')}</div>
@@ -93,7 +93,7 @@ export default function TransferResult() {
               <div className="d-flex flex-column px-3 gap-2">
                 <div className="row">
                   <div className="col-6 text-light-emphasis">{t('result.transferTo')}</div>
-                  <div className="col-6 text-end">{selectedContact?.name || selectedProduct?.name}</div>
+                  <div className="col-6 text-end">{selectedContact?.name || selectedAccount?.name}</div>
                 </div>
                 <div className="row">
                   <div className="col-6 text-light-emphasis">{t('result.timeDate')}</div>
@@ -155,7 +155,7 @@ export default function TransferResult() {
             text={t(transferDone ? 'button.back' : 'button.retry')}
             theme="primary"
             isPill
-            onMClick={gotToProducts}
+            onMClick={gotToAccounts}
           />
         </div>
       </div>

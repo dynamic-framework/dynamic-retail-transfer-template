@@ -3,7 +3,7 @@ import { useAppSelector } from '../store/hooks';
 import {
   getIsTransferred,
   getSelectedContact,
-  getSelectedProduct,
+  getSelectedAccount,
 } from '../store/selectors';
 import TransferPanel from './TransferPanel';
 import TransferResult from './TransferResult';
@@ -11,10 +11,10 @@ import OngoingTransfer from './OngoingTransfer';
 
 export default function Gateway() {
   const selectedContact = useAppSelector(getSelectedContact);
-  const selectedProduct = useAppSelector(getSelectedProduct);
+  const selectedAccount = useAppSelector(getSelectedAccount);
   const selectedDestiny = useMemo(
-    () => selectedContact || selectedProduct,
-    [selectedContact, selectedProduct],
+    () => selectedContact || selectedAccount,
+    [selectedContact, selectedAccount],
   );
   const isTransferred = useAppSelector(getIsTransferred);
 

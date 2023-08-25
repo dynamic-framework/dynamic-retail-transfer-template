@@ -11,9 +11,12 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getSelectedTransferType, getTransferTypes } from '../store/selectors';
 import { setView, setContactsQuery, setSelectedTransferType } from '../store/slice';
 import ContactList from './ContactList';
-import ProductList from './ProductList';
+import AccountList from './AccountList';
+import useAccountsEffect from '../services/hooks/useAccountsEffect';
 
 export default function TransferPanel() {
+  useAccountsEffect();
+
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const transferTypes = useAppSelector(getTransferTypes);
@@ -55,7 +58,7 @@ export default function TransferPanel() {
           <ContactList />
         </MTabContent>
         <MTabContent tab={transferTypes[1].tab}>
-          <ProductList />
+          <AccountList />
         </MTabContent>
       </MTabs>
     </div>

@@ -1,5 +1,4 @@
-import { liquidParser } from '@dynamic-framework/ui';
-
+import { liquidParser } from '@dynamic-framework/ui-react';
 import liquidConfig from './liquid.json';
 
 liquidParser.init(

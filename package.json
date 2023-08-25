@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@dynamic-framework/ui": "^1.1.3",
-    "@dynamic-framework/ui-react": "^1.1.4",
+    "@dynamic-framework/ui-react": "^1.2.1",
     "@reduxjs/toolkit": "^1.8.4",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
