@@ -1,8 +1,8 @@
 import { Formik } from 'formik';
 import {
-  MButton,
-  MFormikInput,
-  MFormikInputSelect,
+  DButton,
+  DFormikInput,
+  DFormikInputSelect,
 } from '@dynamic-framework/ui-react';
 import * as Yup from 'yup';
 
@@ -53,20 +53,20 @@ export default function CreateContact() {
       ) => (
         <form onSubmit={handleSubmit}>
           <div className="d-flex flex-column gap-3 px-3 py-4 rounded mb-3 bg-white shadow-sm">
-            <MFormikInput
-              mId="name"
+            <DFormikInput
+              innerId="name"
               name="name"
               label={t('createContact.name')}
               placeholder={t('createContact.namePlaceholder')}
             />
-            <MFormikInput
-              mId="targetDNI"
+            <DFormikInput
+              innerId="targetDNI"
               name="targetDNI"
               label={t('createContact.dni')}
               placeholder={t('createContact.dniPlaceholder')}
             />
-            <MFormikInputSelect
-              mId="targetBank"
+            <DFormikInputSelect
+              innerId="targetBank"
               name="targetBank"
               label={t('createContact.bank')}
               placeholder="Selecciona banco"
@@ -75,19 +75,19 @@ export default function CreateContact() {
               valueExtractor={(option: Bank) => option.id}
               isLoading={loadingBanks}
             />
-            <MFormikInput
-              mId="accountNumber"
+            <DFormikInput
+              innerId="accountNumber"
               name="accountNumber"
               label={t('createContact.accountNumber')}
               placeholder={t('createContact.accountNumberPlaceholder')}
             />
-            <MFormikInput
-              mId="aliasAccount"
+            <DFormikInput
+              innerId="aliasAccount"
               name="aliasAccount"
               label={t('createContact.alias')}
               placeholder={t('createContact.aliasPlaceholder')}
             />
-            <MButton
+            <DButton
               className="align-self-center"
               id="saveContact"
               text={t('button.save')}

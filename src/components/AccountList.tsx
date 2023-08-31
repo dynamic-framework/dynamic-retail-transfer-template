@@ -1,4 +1,4 @@
-import { MQuickActionButton } from '@dynamic-framework/ui-react';
+import { DQuickActionButton } from '@dynamic-framework/ui-react';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { setSelectedAccount } from '../store/slice';
@@ -22,12 +22,12 @@ export default function AccountList() {
   return (
     <div className="d-flex flex-column accounts">
       {accountsToTransfer.map((account) => (
-        <MQuickActionButton
+        <DQuickActionButton
           line1={account.name}
           line2={`••• ${account.accountNumber.slice(-3)}`}
           key={account.id}
           representativeIcon="heart-fill"
-          onClick={() => handleSelectAccount(account)}
+          onEventClick={() => handleSelectAccount(account)}
         />
       ))}
     </div>

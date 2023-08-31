@@ -1,6 +1,6 @@
 import {
-  MButton,
-  MIcon,
+  DButton,
+  DIcon,
   useFormatCurrency,
   useScreenshotDownload,
   useScreenshotWebShare,
@@ -48,7 +48,7 @@ export default function TransferResult() {
           }}
         >
           <div className="d-flex flex-column gap-2 align-items-center">
-            <MIcon
+            <DIcon
               icon={transferDone ? 'check-circle' : 'x-circle'}
               size="2rem"
               theme={transferDone ? 'success' : 'danger'}
@@ -103,7 +103,7 @@ export default function TransferResult() {
             </>
           )}
           <div className="d-flex gap-3 align-items-center justify-content-center">
-            <MIcon
+            <DIcon
               theme="secondary"
               icon="shield-check"
               size="1.5rem"
@@ -118,8 +118,8 @@ export default function TransferResult() {
         </div>
         <div className="row w-100">
           <div className="col-6 d-flex justify-content-end">
-            <MButton
-              onMClick={() => {
+            <DButton
+              onEventClick={() => {
                 share().catch(errorHandler);
               }}
               iconEnd="share"
@@ -129,8 +129,8 @@ export default function TransferResult() {
             />
           </div>
           <div className="col-6 d-flex justify-content-start">
-            <MButton
-              onMClick={() => {
+            <DButton
+              onEventClick={() => {
                 download().catch(errorHandler);
               }}
               iconEnd="download"
@@ -142,7 +142,7 @@ export default function TransferResult() {
         </div>
         <div className="d-flex justify-content-center align-items-center gap-4 w-100">
           {!transferDone && (
-          <MButton
+          <DButton
             className="flex-1 d-grid"
             text={t('button.back')}
             theme="secondary"
@@ -150,12 +150,12 @@ export default function TransferResult() {
             isPill
           />
           )}
-          <MButton
+          <DButton
             className={!transferDone ? 'flex-1 d-grid' : ''}
             text={t(transferDone ? 'button.back' : 'button.retry')}
             theme="primary"
             isPill
-            onMClick={gotToAccounts}
+            onEventClick={gotToAccounts}
           />
         </div>
       </div>

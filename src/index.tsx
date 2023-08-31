@@ -4,7 +4,11 @@ import { Provider } from 'react-redux';
 
 import '@dynamic-framework/ui-react/dist/css/dynamic-ui-all.css';
 
-import { LiquidContextProvider, ModalContextProvider, MToastContainer } from '@dynamic-framework/ui-react';
+import {
+  DToastContainer,
+  LiquidContextProvider,
+  ModalContextProvider,
+} from '@dynamic-framework/ui-react';
 
 import './styles/base.scss';
 import './config/liquidConfig';
@@ -27,7 +31,7 @@ root.render(
           }}
         >
           <App />
-          <MToastContainer
+          <DToastContainer
             style={{
               '--toastify-toast-width': 'auto',
             }}

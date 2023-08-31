@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { TabOption } from '@dynamic-framework/ui-react';
+import { DTabOption } from '@dynamic-framework/ui-react';
 import { t } from 'i18next';
 import {
   Account,
   Bank,
   Contact,
   Transaction,
-  Transfer,
 } from '../services/interface';
 
 export type OptionRepeatValue = {
@@ -38,7 +37,7 @@ export type WidgetState = {
   selectedAccount?: Account;
   originAccount?: Account;
   selectedContact?: Contact;
-  transferTypes: Array<TabOption>;
+  transferTypes: Array<DTabOption>;
   selectedTransferType? : string;
   view: string;
   amountUsed?: number;

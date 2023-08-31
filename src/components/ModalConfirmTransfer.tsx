@@ -1,7 +1,11 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useTranslation } from 'react-i18next';
-import { MButton, MModal, useFormatCurrency } from '@dynamic-framework/ui-react';
+import {
+  DModal,
+  DButton,
+  useFormatCurrency,
+} from '@dynamic-framework/ui-react';
 import type { ModalProps } from '@dynamic-framework/ui-react';
 
 import { useAppSelector } from '../store/hooks';
@@ -20,7 +24,6 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
   const selectedContact = useAppSelector(getSelectedContact);
   const selectedAccount = useAppSelector(getSelectedAccount);
   const originAccount = useAppSelector(getOriginAccount);
-  const message = useAppSelector(getMessage);
   const { values: [amountUsedFormatted] } = useFormatCurrency(amountUsed, 0.12);
   const { callback: transfer, loading } = useTransfer();
 
@@ -49,7 +52,7 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
     closeModal();
   };
   return (
-    <MModal
+    <DModal
       name="modalConfirmPayment"
       showCloseButton
       isCentered
@@ -73,23 +76,23 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
         </div>
       </div>
       <div slot="footer">
-        <MButton
+        <DButton
           class="d-grid"
           text={t('button.cancel')}
           theme="secondary"
           variant="outline"
           isPill
-          onMClick={() => closeModal()}
+          onEventClick={() => closeModal()}
         />
-        <MButton
+        <DButton
           class="d-grid"
           text={t('button.transfer')}
           theme="primary"
           isPill
-          onMClick={() => handleTransfer()}
+          onEventClick={() => handleTransfer()}
           isLoading={loading}
         />
       </div>
-    </MModal>
+    </DModal>
   );
 }

@@ -1,15 +1,19 @@
 import {
-  MInputSearch,
-  MQuickActionButton,
-  MTabContent,
-  MTabs,
+  DInputSearch,
+  DQuickActionButton,
+  DTabContent,
+  DTabs,
 } from '@dynamic-framework/ui-react';
 
 import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getSelectedTransferType, getTransferTypes } from '../store/selectors';
-import { setView, setContactsQuery, setSelectedTransferType } from '../store/slice';
+import {
+  setView,
+  setContactsQuery,
+  setSelectedTransferType,
+} from '../store/slice';
 import ContactList from './ContactList';
 import AccountList from './AccountList';
 import useAccountsEffect from '../services/hooks/useAccountsEffect';
@@ -36,31 +40,31 @@ export default function TransferPanel() {
   return (
     <div className="px-3 py-4 rounded shadow-sm bg-white d-flex flex-column gap-3">
       <h6 className="px-2 py-1 fw-bold text-gray-500">{t('transferPanel.transferTo')}</h6>
-      <MInputSearch
-        mId="searchContacts"
+      <DInputSearch
+        innerId="searchContacts"
         placeholder={t('transferPanel.searchPlaceholder')}
-        onMChange={({ detail }) => dispatch(setContactsQuery(detail))}
+        onEventChange={({ detail }) => dispatch(setContactsQuery(detail))}
       />
-      <MTabs
+      <DTabs
         options={transferTypes}
         defaultSelected={currentTab}
-        onChange={(type) => handleTransferSelector(type.tab)}
+        onEventChange={(type) => handleTransferSelector(type.tab)}
       >
-        <MTabContent tab={transferTypes[0].tab}>
+        <DTabContent tab={transferTypes[0].tab}>
           <div className="mb-3">
-            <MQuickActionButton
+            <DQuickActionButton
               line1={t('transferPanel.newContact')}
               line2={t('transferPanel.newContactHint')}
               representativeIcon="person-add"
-              onClick={handleCreateContact}
+              onEventClick={handleCreateContact}
             />
           </div>
           <ContactList />
-        </MTabContent>
-        <MTabContent tab={transferTypes[1].tab}>
+        </DTabContent>
+        <DTabContent tab={transferTypes[1].tab}>
           <AccountList />
-        </MTabContent>
-      </MTabs>
+        </DTabContent>
+      </DTabs>
     </div>
   );
 }
