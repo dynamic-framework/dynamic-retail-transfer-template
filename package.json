@@ -15,7 +15,7 @@
     "i18next": "~21.9.0",
     "liquidjs": "^9.39.2",
     "lodash.uniqueid": "^4.0.1",
-    "luxon": "~3.0.3",
+    "luxon": "~3.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "~11.18.3",
