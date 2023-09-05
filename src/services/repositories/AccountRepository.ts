@@ -15,7 +15,6 @@ export async function list(config: { abortSignal: GenericAbortSignal }) {
       Prefer: 'code=200, example=CURRENT_ACCOUNT, REGULAR_SAVINGS,',
     },
   });
-  console.log('data', data);
   return data
     // we make sure to only use accounts we can handle
     .filter((apiAccount: ApiAccount) => (

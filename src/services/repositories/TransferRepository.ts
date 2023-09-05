@@ -7,7 +7,6 @@ export async function transfer(
   transferItem: Transfer,
   config: { abortSignal: GenericAbortSignal },
 ) {
-  console.log('E', transferItem);
   const { data } = await ApiClient.request<Transaction>({
     url: 'transfer',
     method: 'POST',
