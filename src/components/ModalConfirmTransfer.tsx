@@ -13,7 +13,6 @@ import {
   getOriginAccount,
   getAmountUsed,
   getSelectedContact,
-  getMessage,
   getSelectedAccount,
 } from '../store/selectors';
 import useTransfer from '../services/hooks/useTransfer';

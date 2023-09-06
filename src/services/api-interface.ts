@@ -25,8 +25,8 @@ export type ApiAccount = {
   created: string;
   modified: string;
   status: string;
-  depositDetails: ApiDepositDetails | null;
-  loanDetails: ApiLoanDetails | null;
+  depositDetails: ApiDepositDetails;
+  loanDetails: ApiLoanDetails;
 };
 
 export type ApiDepositDetails = {

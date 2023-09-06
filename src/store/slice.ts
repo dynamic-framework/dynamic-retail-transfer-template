@@ -53,18 +53,11 @@ const initialState = {
   accounts: [],
   contacts: [],
   contactsQuery: '',
-  selectedAccount: undefined,
-  originAccount: undefined,
-  selectedContact: undefined,
   view: 'transfer',
-  amountUsed: undefined,
-  message: undefined,
   transferTypes: [
     { label: t('transferPanel.contact'), tab: 'contact' },
     { label: t('transferPanel.betweenAccounts'), tab: 'accounts' },
   ],
-  result: undefined,
-  isTransferred: undefined,
   banks: [],
 
   isLoadingAccounts: false,
