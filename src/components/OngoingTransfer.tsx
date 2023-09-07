@@ -123,7 +123,7 @@ export default function OngoingTransfer() {
         innerId="scheduleTransfer"
       />
       <DButton
-        className="align-self-center"
+        className="d-flex align-self-center"
         {...!canTransfer && { state: 'disabled' }}
         text={t('button.transfer')}
         isPill
