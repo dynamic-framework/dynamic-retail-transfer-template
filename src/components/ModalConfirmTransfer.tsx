@@ -56,6 +56,7 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
       showCloseButton
       isCentered
       isStatic
+      innerClass="d-block"
     >
       <div slot="header">
         <h4 className="fw-bold">
