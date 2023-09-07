@@ -11,7 +11,7 @@ export default function App() {
   const { t } = useTranslation();
 
   return (
-    <div className="container py-3">
+    <>
       <h1 className="fw-bold fs-4 mb-3">
         {t(view === 'transfer'
           ? 'title.transfer'
@@ -23,6 +23,6 @@ export default function App() {
           {view === 'newContact' && <CreateContact />}
         </div>
       </div>
-    </div>
+    </>
   );
 }
