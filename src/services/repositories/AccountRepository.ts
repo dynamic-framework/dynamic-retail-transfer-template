@@ -12,7 +12,7 @@ export async function list(config: { abortSignal: GenericAbortSignal }) {
     method: 'GET',
     signal: config.abortSignal,
     headers: {
-      Prefer: 'code=200, example=CURRENT_ACCOUNT,REGULAR_SAVINGS',
+      Prefer: 'code=200, example="CURRENT_ACCOUNT,REGULAR_SAVINGS"',
     },
   });
   return data
