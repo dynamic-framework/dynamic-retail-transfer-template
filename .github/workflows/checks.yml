@@ -21,8 +21,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
-          registry-url: https://npm.pkg.github.com/
-          scope: '@modyo-dynamic'
       - name: Install dependencies
         run: npm install
         env:

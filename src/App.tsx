@@ -6,10 +6,7 @@ import Gateway from './components/Gateway';
 import { useAppSelector } from './store/hooks';
 import { getView } from './store/selectors';
 
-import useProducts from './hooks/useProducts';
-
 export default function App() {
-  useProducts();
   const view = useAppSelector(getView);
   const { t } = useTranslation();
 

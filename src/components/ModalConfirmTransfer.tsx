@@ -1,65 +1,63 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useTranslation } from 'react-i18next';
-import { MButton, MModal, useFormatCurrency } from '@dynamic-framework/ui-react';
+import {
+  DModal,
+  DButton,
+  useFormatCurrency,
+} from '@dynamic-framework/ui-react';
 import type { ModalProps } from '@dynamic-framework/ui-react';
 
 import { useAppSelector } from '../store/hooks';
 import {
-  getOriginProduct,
+  getOriginAccount,
   getAmountUsed,
   getSelectedContact,
-  getMessage,
-  getSelectedProduct,
+  getSelectedAccount,
 } from '../store/selectors';
-import useTransfer from '../hooks/useTransfer';
+import useTransfer from '../services/hooks/useTransfer';
 
 export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
   const { t } = useTranslation();
   const amountUsed = useAppSelector(getAmountUsed);
   const selectedContact = useAppSelector(getSelectedContact);
-  const selectedProduct = useAppSelector(getSelectedProduct);
-  const originProduct = useAppSelector(getOriginProduct);
-  const message = useAppSelector(getMessage);
+  const selectedAccount = useAppSelector(getSelectedAccount);
+  const originAccount = useAppSelector(getOriginAccount);
   const { values: [amountUsedFormatted] } = useFormatCurrency(amountUsed, 0.12);
   const { callback: transfer, loading } = useTransfer();
 
   const handleTransfer = async () => {
-    if (!originProduct) {
+    if (!originAccount) {
       return;
     }
     if (selectedContact) {
       await transfer(
         {
-          targetId: selectedContact.id,
-          targetName: selectedContact.name,
-          targetProductNumber: selectedContact.id, // TODO: Revisar typos del ID para contactos
-          sourceProductNumber: originProduct.id as string,
+          toAccountId: selectedContact.id,
+          fromAccountId: originAccount.id,
           amount: amountUsed,
-          message,
         },
       );
     }
-    if (selectedProduct) {
+    if (selectedAccount) {
       await transfer(
         {
-          targetId: `${selectedProduct.id}`,
-          targetName: selectedProduct.name,
-          targetProductNumber: selectedProduct.id as string,
-          sourceProductNumber: originProduct.id as string,
+          toAccountId: selectedAccount.id,
+          fromAccountId: originAccount.id,
           amount: amountUsed,
-          message,
         },
       );
     }
     closeModal();
   };
   return (
-    <MModal
+    <DModal
       name="modalConfirmPayment"
       showCloseButton
       isCentered
       isStatic
+      innerClass="d-block"
+      onEventClose={() => closeModal()}
     >
       <div slot="header">
         <h4 className="fw-bold">
@@ -70,32 +68,32 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
         <div className="bg-gray-soft mx-4 mb-4 p-3 rounded-1">
           <p>
             {t('modal.transfer.text', {
-              name: selectedContact?.name || selectedProduct?.name,
-              bank: selectedContact?.bank || selectedProduct?.type,
-              mask: selectedContact?.productNumber.slice(-3) || selectedProduct?.productNumber.slice(-3),
-              productFrom: `${originProduct?.name || ''} ${originProduct?.productNumber.slice(-3) || '***'}`,
+              name: selectedContact?.name || selectedAccount?.name,
+              bank: selectedContact?.bank || selectedAccount?.type,
+              mask: selectedContact?.accountNumber.slice(-3) || selectedAccount?.accountNumber.slice(-3),
+              accountFrom: `${originAccount?.name || ''} ${originAccount?.accountNumber.slice(-3) || '***'}`,
             })}
           </p>
         </div>
       </div>
       <div slot="footer">
-        <MButton
+        <DButton
           class="d-grid"
           text={t('button.cancel')}
           theme="secondary"
           variant="outline"
           isPill
-          onClick={() => closeModal()}
+          onEventClick={() => closeModal()}
         />
-        <MButton
+        <DButton
           class="d-grid"
           text={t('button.transfer')}
           theme="primary"
           isPill
-          onClick={() => handleTransfer()}
+          onEventClick={() => handleTransfer()}
           isLoading={loading}
         />
       </div>
-    </MModal>
+    </DModal>
   );
 }

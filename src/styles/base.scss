@@ -1,10 +1,12 @@
+@import "~@dynamic-framework/ui-react/src/style/abstracts/+import";
+
 .contacts,
 .favorite-contacts,
-.products {
-  .m-quick-action-button {
-    --bs-m-quick-action-button-border-radius: 0;
-    --bs-m-quick-action-button-border-right: 0;
-    --bs-m-quick-action-button-border-left: 0;
-    --bs-m-quick-action-button-border-bottom: 0;
+.accounts {
+  .d-quick-action-button {
+    --bs-quick-action-button-border-radius: 0;
+    --bs-quick-action-button-border-right: 0;
+    --bs-quick-action-button-border-left: 0;
+    --bs-quick-action-button-border-bottom: 0;
   }
 }

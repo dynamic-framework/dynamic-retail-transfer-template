@@ -1,29 +1,29 @@
 import {
-  MButton,
-  MIcon,
+  DButton,
+  DIcon,
   useFormatCurrency,
   useScreenshotDownload,
   useScreenshotWebShare,
+  liquidParser,
 } from '@dynamic-framework/ui-react';
-import type { Transaction } from '@modyo-dynamic/modyo-service-retail';
 import { DateTime } from 'luxon';
 import { useTranslation } from 'react-i18next';
-import { liquidParser } from '@dynamic-framework/ui';
 
 import { useAppSelector } from '../store/hooks';
 import {
   getAmountUsed,
   getResult,
   getSelectedContact,
-  getSelectedProduct,
+  getSelectedAccount,
 } from '../store/selectors';
 import errorHandler from '../utils/errorHandler';
+import { Transaction } from '../services/interface';
 
 export default function TransferResult() {
   const amountUsed = useAppSelector(getAmountUsed);
   const result = useAppSelector(getResult) as Transaction;
   const selectedContact = useAppSelector(getSelectedContact);
-  const selectedProduct = useAppSelector(getSelectedProduct);
+  const selectedAccount = useAppSelector(getSelectedAccount);
   const { shareRef, share } = useScreenshotWebShare();
   const { downloadRef, download } = useScreenshotDownload();
 
@@ -33,7 +33,7 @@ export default function TransferResult() {
 
   const transferDone = result.status === 'completed';
 
-  const gotToProducts = () => {
+  const gotToAccounts = () => {
     window.location.href = `${liquidParser.parse('{{site.url}}')}/${liquidParser.parse('{{vars.dashboard-path}}')}`;
   };
 
@@ -48,7 +48,7 @@ export default function TransferResult() {
           }}
         >
           <div className="d-flex flex-column gap-2 align-items-center">
-            <MIcon
+            <DIcon
               icon={transferDone ? 'check-circle' : 'x-circle'}
               size="2rem"
               theme={transferDone ? 'success' : 'danger'}
@@ -69,7 +69,7 @@ export default function TransferResult() {
               <div className="d-flex flex-column px-3 gap-2">
                 <div className="row">
                   <div className="col-6 text-light-emphasis">{t('result.transferTo')}</div>
-                  <div className="col-6 text-end">{selectedContact?.name || selectedProduct?.name}</div>
+                  <div className="col-6 text-end">{selectedContact?.name || selectedAccount?.name}</div>
                 </div>
                 <div className="row">
                   <div className="col-6 text-light-emphasis">{t('result.transactionId')}</div>
@@ -93,7 +93,7 @@ export default function TransferResult() {
               <div className="d-flex flex-column px-3 gap-2">
                 <div className="row">
                   <div className="col-6 text-light-emphasis">{t('result.transferTo')}</div>
-                  <div className="col-6 text-end">{selectedContact?.name || selectedProduct?.name}</div>
+                  <div className="col-6 text-end">{selectedContact?.name || selectedAccount?.name}</div>
                 </div>
                 <div className="row">
                   <div className="col-6 text-light-emphasis">{t('result.timeDate')}</div>
@@ -103,7 +103,7 @@ export default function TransferResult() {
             </>
           )}
           <div className="d-flex gap-3 align-items-center justify-content-center">
-            <MIcon
+            <DIcon
               theme="secondary"
               icon="shield-check"
               size="1.5rem"
@@ -118,8 +118,8 @@ export default function TransferResult() {
         </div>
         <div className="row w-100">
           <div className="col-6 d-flex justify-content-end">
-            <MButton
-              onMClick={() => {
+            <DButton
+              onEventClick={() => {
                 share().catch(errorHandler);
               }}
               iconEnd="share"
@@ -129,8 +129,8 @@ export default function TransferResult() {
             />
           </div>
           <div className="col-6 d-flex justify-content-start">
-            <MButton
-              onMClick={() => {
+            <DButton
+              onEventClick={() => {
                 download().catch(errorHandler);
               }}
               iconEnd="download"
@@ -142,7 +142,7 @@ export default function TransferResult() {
         </div>
         <div className="d-flex justify-content-center align-items-center gap-4 w-100">
           {!transferDone && (
-          <MButton
+          <DButton
             className="flex-1 d-grid"
             text={t('button.back')}
             theme="secondary"
@@ -150,12 +150,12 @@ export default function TransferResult() {
             isPill
           />
           )}
-          <MButton
+          <DButton
             className={!transferDone ? 'flex-1 d-grid' : ''}
             text={t(transferDone ? 'button.back' : 'button.retry')}
             theme="primary"
             isPill
-            onMClick={gotToProducts}
+            onEventClick={gotToAccounts}
           />
         </div>
       </div>

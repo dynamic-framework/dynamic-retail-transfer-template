@@ -1,15 +1,14 @@
 import { createDraftSafeSelector } from '@reduxjs/toolkit';
 
-import { getProductValue } from '@modyo-dynamic/modyo-service-retail';
-import type { Contact } from '@modyo-dynamic/modyo-service-retail';
-
 import { RootState } from './store';
+import { Contact } from '../services/interface';
+import getAccountValue from '../services/utils/getAccountValue';
 
 const getState = (state: RootState) => state.widget;
 
-export const getProducts = createDraftSafeSelector(
+export const getAccounts = createDraftSafeSelector(
   getState,
-  (widget) => widget.products,
+  (widget) => widget.accounts,
 );
 
 export const getContacts = createDraftSafeSelector(
@@ -27,9 +26,9 @@ export const getSelectedContact = createDraftSafeSelector(
   (widget) => widget.selectedContact,
 );
 
-export const getSelectedProduct = createDraftSafeSelector(
+export const getSelectedAccount = createDraftSafeSelector(
   getState,
-  (widget) => widget.selectedProduct,
+  (widget) => widget.selectedAccount,
 );
 
 export const getAmountUsed = createDraftSafeSelector(
@@ -42,14 +41,14 @@ export const getMessage = createDraftSafeSelector(
   (widget) => widget.message,
 );
 
-export const getOriginProduct = createDraftSafeSelector(
+export const getOriginAccount = createDraftSafeSelector(
   getState,
-  (widget) => widget.originProduct,
+  (widget) => widget.originAccount,
 );
 
-export const getOriginProductAmount = createDraftSafeSelector(
-  getOriginProduct,
-  (product) => (product ? getProductValue(product) : 0),
+export const getOriginAccountAmount = createDraftSafeSelector(
+  getOriginAccount,
+  (account) => (account ? getAccountValue(account) : 0),
 );
 
 export const getResult = createDraftSafeSelector(
@@ -90,9 +89,9 @@ export const getContactsFiltered = createDraftSafeSelector(
       return contacts;
     }
 
-    return contacts.filter(({ name, productNumber }: Contact) => (
+    return contacts.filter(({ name, accountNumber }: Contact) => (
       name.toLowerCase().includes(contactsQuery.toLowerCase())
-        || productNumber.includes(contactsQuery.toLowerCase())
+        || accountNumber.includes(contactsQuery.toLowerCase())
     ));
   },
 );
@@ -105,4 +104,9 @@ export const getFavoriteContacts = createDraftSafeSelector(
 export const getRegularContacts = createDraftSafeSelector(
   getContactsFiltered,
   (contacts) => contacts.filter((contact) => !contact.isFavorite),
+);
+
+export const getIsLoadingAccounts = createDraftSafeSelector(
+  getState,
+  (widget) => widget.isLoadingAccounts,
 );

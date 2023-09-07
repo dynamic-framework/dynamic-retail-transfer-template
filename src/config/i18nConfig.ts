@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { liquidParser } from '@dynamic-framework/ui';
-import { configureI18n } from '@dynamic-framework/ui-react';
+import { configureI18n, liquidParser } from '@dynamic-framework/ui-react';
 
 import es from '../locales/es.json';
 import en from '../locales/en.json';

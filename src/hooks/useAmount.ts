@@ -4,41 +4,41 @@ import { useTranslation } from 'react-i18next';
 import { useFormatCurrency } from '@dynamic-framework/ui-react';
 
 import { useAppSelector } from '../store/hooks';
-import { getOriginProductAmount } from '../store/selectors';
+import { getOriginAccountAmount } from '../store/selectors';
+import getAccountAmountQueryString from '../services/utils/getAccountAmountQueryString';
 
 export default function useAmount() {
   const { t } = useTranslation();
-  const originProductAmount = useAppSelector(getOriginProductAmount);
   const { format } = useFormatCurrency();
+  const originAccountAmount = useAppSelector(getOriginAccountAmount);
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const amountFromUrl = urlParams.has('amount') ? Number(urlParams.get('amount')) : undefined;
+  const amountFromUrl = getAccountAmountQueryString();
 
   const [amount, setAmount] = useState<number | undefined>(amountFromUrl);
 
   const hint = useMemo(() => {
-    if (originProductAmount === 0 || !amount) {
+    if (originAccountAmount === 0 || !amount) {
       return {
-        message: t('hint.available', { amount: format(originProductAmount) }),
+        message: t('hint.available', { amount: format(originAccountAmount) }),
         icon: 'info-circle',
       };
     }
     return {
-      message: t('hint.withAmount', { amount: format(originProductAmount - (amount ?? 0)) }),
+      message: t('hint.withAmount', { amount: format(originAccountAmount - (amount ?? 0)) }),
       icon: 'info-circle',
     };
-  }, [amount, format, t, originProductAmount]);
+  }, [amount, format, t, originAccountAmount]);
 
   const canTransfer = useMemo(() => {
     if (amount === 0 || amount === undefined) {
       return false;
     }
-    return amount <= originProductAmount;
-  }, [amount, originProductAmount]);
+    return amount <= originAccountAmount;
+  }, [amount, originAccountAmount]);
 
   return {
     hint,
-    originProductAmount,
+    originAccountAmount,
     amount,
     setAmount,
     canTransfer,

@@ -2,31 +2,31 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  MButton,
-  MInput,
-  MInputCurrency,
-  MInputSelect,
-  MQuickActionButton,
-  MQuickActionSwitch,
+  DButton,
+  DInput,
+  DInputCurrency,
+  DInputSelect,
+  DQuickActionButton,
+  DQuickActionSwitch,
   useModalContext,
 } from '@dynamic-framework/ui-react';
-import type { Product } from '@modyo-dynamic/modyo-service-retail';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
-  getProducts,
   getSelectedContact,
-  getSelectedProduct,
-  getOriginProduct,
+  getSelectedAccount,
+  getOriginAccount,
+  getAccounts,
 } from '../store/selectors';
 import {
   setAmountUsed,
   setMessage,
   setSelectedContact,
-  setSelectedProduct,
-  setOriginProduct,
+  setSelectedAccount,
+  setOriginAccount,
 } from '../store/slice';
 import useAmount from '../hooks/useAmount';
+import { Account } from '../services/interface';
 
 export default function OngoingTransfer() {
   const { t } = useTranslation();
@@ -34,105 +34,100 @@ export default function OngoingTransfer() {
   const dispatch = useAppDispatch();
   const [transferMessage, setTransferMessage] = useState<string | undefined>();
 
-  const products = useAppSelector(getProducts);
-  const originProduct = useAppSelector(getOriginProduct);
+  const accounts = useAppSelector(getAccounts);
+  const originAccount = useAppSelector(getOriginAccount);
   const selectedContact = useAppSelector(getSelectedContact);
-  const selectedProduct = useAppSelector(getSelectedProduct) as Product;
-  const productsOrigin = useMemo(
-    () => {
-      if (selectedProduct) {
-        return products.filter(({ id }) => id !== selectedProduct.id);
-      }
-
-      return products;
-    },
-    [products, selectedProduct],
-  );
+  const selectedAccount = useAppSelector(getSelectedAccount) as Account;
+  const accountsOrigin = useMemo(() => {
+    if (selectedAccount) {
+      return accounts.filter(({ id }) => id !== selectedAccount.id);
+    }
+    return accounts;
+  }, [accounts, selectedAccount]);
 
   const {
     amount,
     setAmount,
     hint,
-    originProductAmount,
+    originAccountAmount,
     canTransfer,
   } = useAmount();
 
   useEffect(() => {
-    if (originProduct === undefined) {
-      dispatch(setOriginProduct(productsOrigin[0]));
+    if (originAccount === undefined) {
+      dispatch(setOriginAccount(accountsOrigin[0]));
     }
-  }, [dispatch, originProduct, productsOrigin]);
+  }, [dispatch, originAccount, accountsOrigin]);
 
   return (
     <div className="bg-white rounded shadow-sm p-3 d-flex flex-column gap-3">
-      <MInputSelect
+      <DInputSelect
         label={t('ongoingTransfer.from')}
-        mId="selectAccountFrom"
-        {...(originProduct) && {
-          selectedOption: originProduct,
+        innerId="selectAccountFrom"
+        {...(originAccount) && {
+          selectedOption: originAccount,
         }}
-        valueExtractor={({ productNumber }: Product) => productNumber}
-        labelExtractor={({ name, productNumber }: Product) => `${name} ••• ${productNumber.slice(-3)}`}
-        options={productsOrigin}
-        onMChange={({ detail: product }: CustomEvent<Product>) => (
-          dispatch(setOriginProduct(product))
+        valueExtractor={({ accountNumber }: Account) => accountNumber}
+        labelExtractor={({ name, accountNumber }: Account) => `${name} ••• ${accountNumber.slice(-3)}`}
+        options={accountsOrigin}
+        onEventChange={({ detail: account }: CustomEvent<Account>) => (
+          dispatch(setOriginAccount(account))
         )}
       />
-      <MInputCurrency
+      <DInputCurrency
         label={t('ongoingTransfer.amount')}
-        mId="amountToTransfer"
+        innerId="amountToTransfer"
         hint={hint.message}
-        onChange={(value) => setAmount(value)}
+        onEventChange={(value) => setAmount(value)}
         value={amount}
         placeholder={t('ongoingTransfer.amountPlaceholder')}
         minValue={1}
-        maxValue={originProductAmount}
+        maxValue={originAccountAmount}
       />
       <div className="d-flex flex-column gap-2">
         <h6 className="fw-bold sp px-2 text-gray">{t('ongoingTransfer.title')}</h6>
         <div>
           {selectedContact && (
-            <MQuickActionButton
+            <DQuickActionButton
               className="w-100"
               line1={selectedContact.name}
-              line2={`${selectedContact.bank} ${selectedContact.productNumber.slice(-3)}`}
+              line2={`${selectedContact.bank} ${selectedContact.accountNumber.slice(-3)}`}
               representativeImage={selectedContact.image}
               actionLinkText={t('ongoingTransfer.change')}
-              onMClick={() => dispatch(setSelectedContact(undefined))}
+              onEventClick={() => dispatch(setSelectedContact(undefined))}
             />
           )}
-          {selectedProduct && (
-            <MQuickActionButton
+          {selectedAccount && (
+            <DQuickActionButton
               className="w-100"
-              line1={selectedProduct.name}
-              line2={`••• ${selectedProduct.productNumber.slice(-3)}`}
+              line1={selectedAccount.name}
+              line2={`••• ${selectedAccount.accountNumber.slice(-3)}`}
               representativeIcon="heart-fill"
               actionLinkText={t('ongoingTransfer.change')}
-              onMClick={() => dispatch(setSelectedProduct(undefined))}
+              onEventClick={() => dispatch(setSelectedAccount(undefined))}
             />
           )}
         </div>
       </div>
-      <MInput
-        mId="optionalMessage"
+      <DInput
+        innerId="optionalMessage"
         label={t('ongoingTransfer.addMessage')}
         placeholder={t('ongoingTransfer.addMessagePlaceholder')}
         value={transferMessage}
-        onMChange={({ detail }) => setTransferMessage(detail as string)}
+        onEventChange={({ detail }) => setTransferMessage(detail as string)}
       />
-      <MQuickActionSwitch
+      <DQuickActionSwitch
         isDisabled
         label={t('collapse.schedule')}
         hint={t('collapse.scheduleHint')}
-        mId="scheduleTransfer"
+        innerId="scheduleTransfer"
       />
-      <MButton
-        className="align-self-center"
+      <DButton
+        className="d-flex align-self-center"
         {...!canTransfer && { state: 'disabled' }}
-        {...selectedContact && { state: 'disabled' }}
         text={t('button.transfer')}
         isPill
-        onMClick={() => {
+        onEventClick={() => {
           dispatch(setMessage(transferMessage));
           dispatch(setAmountUsed(amount));
           openModal('confirmTransfer');

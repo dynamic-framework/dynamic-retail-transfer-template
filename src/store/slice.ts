@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import type {
-  Product,
-  Transaction,
+import { DTabOption } from '@dynamic-framework/ui-react';
+import { t } from 'i18next';
+import {
+  Account,
   Bank,
   Contact,
-} from '@modyo-dynamic/modyo-service-retail';
-import { TabOption } from '@dynamic-framework/ui-react';
-import { t } from 'i18next';
+  Transaction,
+} from '../services/interface';
 
 export type OptionRepeatValue = {
   id: string;
@@ -31,13 +31,13 @@ export type EndRepeat = {
 };
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type WidgetState = {
-  products: Array<Product>;
+  accounts: Array<Account>;
   contacts: Array<Contact>;
   contactsQuery: string;
-  selectedProduct?: Product;
-  originProduct?: Product;
+  selectedAccount?: Account;
+  originAccount?: Account;
   selectedContact?: Contact;
-  transferTypes: Array<TabOption>;
+  transferTypes: Array<DTabOption>;
   selectedTransferType? : string;
   view: string;
   amountUsed?: number;
@@ -45,36 +45,33 @@ export type WidgetState = {
   result?: Transaction;
   isTransferred?: boolean;
   banks: Array<Bank>;
+
+  isLoadingAccounts: boolean;
 };
 
 const initialState = {
-  products: [],
+  accounts: [],
   contacts: [],
   contactsQuery: '',
-  selectedProduct: undefined,
-  originProduct: undefined,
-  selectedContact: undefined,
   view: 'transfer',
-  amountUsed: undefined,
-  message: undefined,
   transferTypes: [
     { label: t('transferPanel.contact'), tab: 'contact' },
-    { label: t('transferPanel.betweenAccounts'), tab: 'products' },
+    { label: t('transferPanel.betweenAccounts'), tab: 'accounts' },
   ],
-  result: undefined,
-  isTransferred: undefined,
   banks: [],
+
+  isLoadingAccounts: false,
 } as WidgetState;
 
 const slice = createSlice({
   name: 'widget',
   initialState,
   reducers: {
-    setProducts(state, action: PayloadAction<Array<Product>>) {
-      state.products = action.payload;
+    setAccounts(state, action: PayloadAction<Array<Account>>) {
+      state.accounts = action.payload;
     },
-    setOriginProduct(state, action: PayloadAction<Product | undefined>) {
-      state.originProduct = action.payload;
+    setOriginAccount(state, action: PayloadAction<Account | undefined>) {
+      state.originAccount = action.payload;
     },
     setContacts(state, action: PayloadAction<Array<Contact>>) {
       state.contacts = action.payload;
@@ -85,8 +82,8 @@ const slice = createSlice({
     setSelectedContact(state, action: PayloadAction<Contact | undefined>) {
       state.selectedContact = action.payload;
     },
-    setSelectedProduct(state, action: PayloadAction<Product | undefined>) {
-      state.selectedProduct = action.payload;
+    setSelectedAccount(state, action: PayloadAction<Account | undefined>) {
+      state.selectedAccount = action.payload;
     },
     setView(state, action: PayloadAction<string>) {
       state.view = action.payload;
@@ -112,22 +109,20 @@ const slice = createSlice({
     setSelectedTransferType(state, action: PayloadAction<string>) {
       state.selectedTransferType = action.payload;
     },
-    changeContactFavorite(state, action: PayloadAction<string>) {
-      const contact = state.contacts.find(({ id }) => id === action.payload);
-      if (contact) {
-        contact.isFavorite = !contact.isFavorite;
-      }
+
+    setIsLoadingAccounts(state, action: PayloadAction<boolean>) {
+      state.isLoadingAccounts = action.payload;
     },
   },
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 export const {
-  setProducts,
+  setAccounts,
   setContacts,
   setContactsQuery,
-  setSelectedProduct,
-  setOriginProduct,
+  setSelectedAccount,
+  setOriginAccount,
   setSelectedContact,
   addContact,
   setView,
@@ -137,6 +132,6 @@ export const {
   setIsTransferred,
   setBanks,
   setSelectedTransferType,
-  changeContactFavorite,
+  setIsLoadingAccounts,
 } = slice.actions;
 export default slice.reducer;

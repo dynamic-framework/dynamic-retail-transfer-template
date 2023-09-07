@@ -57,7 +57,7 @@
   "modal": {
     "transfer": {
       "title": "Transfer {amount}?",
-      "text": "You are sending money to {name} - {bank} {mask} from your {productFrom}",
+      "text": "You are sending money to {name} - {bank} {mask} from your {accountFrom}",
       "transactionCost": "The transaction fee is: <strong>{charge}</strong>",
       "timeTransfer": "The payment will be received within the next <strong>3 Business Days.</strong>"
     },
