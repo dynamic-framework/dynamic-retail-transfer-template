@@ -25,7 +25,7 @@ import {
   setSelectedAccount,
   setOriginAccount,
 } from '../store/slice';
-import useAmount from '../services/hooks/useAmount';
+import useAmount from '../hooks/useAmount';
 import { Account } from '../services/interface';
 
 export default function OngoingTransfer() {
