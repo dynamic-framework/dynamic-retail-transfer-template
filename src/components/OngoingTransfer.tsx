@@ -125,7 +125,6 @@ export default function OngoingTransfer() {
       <DButton
         className="align-self-center"
         {...!canTransfer && { state: 'disabled' }}
-        {...selectedContact && { state: 'disabled' }}
         text={t('button.transfer')}
         isPill
         onEventClick={() => {
