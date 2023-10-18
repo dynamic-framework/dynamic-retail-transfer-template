@@ -26,7 +26,8 @@ import {
   setOriginAccount,
 } from '../store/slice';
 import useAmount from '../hooks/useAmount';
-import { Account } from '../services/interface';
+
+import type { Account } from '../services/interface';
 
 export default function OngoingTransfer() {
   const { t } = useTranslation();
@@ -61,24 +62,24 @@ export default function OngoingTransfer() {
 
   return (
     <div className="bg-white rounded shadow-sm p-3 d-flex flex-column gap-3">
-      <DInputSelect
+      <DInputSelect<Account>
         label={t('ongoingTransfer.from')}
-        innerId="selectAccountFrom"
+        id="selectAccountFrom"
         {...(originAccount) && {
           selectedOption: originAccount,
         }}
         valueExtractor={({ accountNumber }: Account) => accountNumber}
         labelExtractor={({ name, accountNumber }: Account) => `${name} ••• ${accountNumber.slice(-3)}`}
         options={accountsOrigin}
-        onEventChange={({ detail: account }: CustomEvent<Account>) => (
+        onChange={(account) => (
           dispatch(setOriginAccount(account))
         )}
       />
       <DInputCurrency
         label={t('ongoingTransfer.amount')}
-        innerId="amountToTransfer"
+        id="amountToTransfer"
         hint={hint.message}
-        onEventChange={(value) => setAmount(value)}
+        onChange={(value) => setAmount(value)}
         value={amount}
         placeholder={t('ongoingTransfer.amountPlaceholder')}
         minValue={1}
@@ -94,7 +95,7 @@ export default function OngoingTransfer() {
               line2={`${selectedContact.bank} ${selectedContact.accountNumber.slice(-3)}`}
               representativeImage={selectedContact.image}
               actionLinkText={t('ongoingTransfer.change')}
-              onEventClick={() => dispatch(setSelectedContact(undefined))}
+              onClick={() => dispatch(setSelectedContact(undefined))}
             />
           )}
           {selectedAccount && (
@@ -104,30 +105,30 @@ export default function OngoingTransfer() {
               line2={`••• ${selectedAccount.accountNumber.slice(-3)}`}
               representativeIcon="heart-fill"
               actionLinkText={t('ongoingTransfer.change')}
-              onEventClick={() => dispatch(setSelectedAccount(undefined))}
+              onClick={() => dispatch(setSelectedAccount(undefined))}
             />
           )}
         </div>
       </div>
       <DInput
-        innerId="optionalMessage"
+        id="optionalMessage"
         label={t('ongoingTransfer.addMessage')}
         placeholder={t('ongoingTransfer.addMessagePlaceholder')}
         value={transferMessage}
-        onEventChange={({ detail }) => setTransferMessage(detail as string)}
+        onChange={(event) => setTransferMessage(event.currentTarget.value)}
       />
       <DQuickActionSwitch
         isDisabled
         label={t('collapse.schedule')}
         hint={t('collapse.scheduleHint')}
-        innerId="scheduleTransfer"
+        id="scheduleTransfer"
       />
       <DButton
         className="d-flex align-self-center"
         {...!canTransfer && { state: 'disabled' }}
         text={t('button.transfer')}
         isPill
-        onEventClick={() => {
+        onClick={() => {
           dispatch(setMessage(transferMessage));
           dispatch(setAmountUsed(amount));
           openModal('confirmTransfer');

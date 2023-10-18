@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from 'react';
 import {
   DButton,
   DIcon,
@@ -17,7 +18,8 @@ import {
   getSelectedAccount,
 } from '../store/selectors';
 import errorHandler from '../utils/errorHandler';
-import { Transaction } from '../services/interface';
+
+import type { Transaction } from '../services/interface';
 
 export default function TransferResult() {
   const amountUsed = useAppSelector(getAmountUsed);
@@ -31,11 +33,11 @@ export default function TransferResult() {
 
   const { t } = useTranslation();
 
-  const transferDone = result.status === 'completed';
+  const transferDone = useMemo(() => result.status === 'completed', [result.status]);
 
-  const gotToAccounts = () => {
+  const gotToAccounts = useCallback(() => {
     window.location.href = `${liquidParser.parse('{{site.url}}')}/${liquidParser.parse('{{vars.dashboard-path}}')}`;
-  };
+  }, []);
 
   return (
     <div className="bg-white rounded shadow-sm p-4">
@@ -119,7 +121,7 @@ export default function TransferResult() {
         <div className="row w-100">
           <div className="col-6 d-flex justify-content-end">
             <DButton
-              onEventClick={() => {
+              onClick={() => {
                 share().catch(errorHandler);
               }}
               iconEnd="share"
@@ -130,7 +132,7 @@ export default function TransferResult() {
           </div>
           <div className="col-6 d-flex justify-content-start">
             <DButton
-              onEventClick={() => {
+              onClick={() => {
                 download().catch(errorHandler);
               }}
               iconEnd="download"
@@ -155,7 +157,7 @@ export default function TransferResult() {
             text={t(transferDone ? 'button.back' : 'button.retry')}
             theme="primary"
             isPill
-            onEventClick={gotToAccounts}
+            onClick={gotToAccounts}
           />
         </div>
       </div>

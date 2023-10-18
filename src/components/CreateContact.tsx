@@ -11,7 +11,8 @@ import useBanksEffect from '../services/hooks/useBanksEffect';
 import useCreateContact from '../services/hooks/useCreateContact';
 import { useAppDispatch } from '../store/hooks';
 import { setSelectedContact, setView } from '../store/slice';
-import { Bank, Contact } from '../services/interface';
+
+import type { Bank, Contact } from '../services/interface';
 
 const NewContactSchema = Yup.object().shape({
   name: Yup.string().required(),
@@ -54,35 +55,34 @@ export default function CreateContact() {
         <form onSubmit={handleSubmit}>
           <div className="d-flex flex-column gap-3 px-3 py-4 rounded mb-3 bg-white shadow-sm">
             <DFormikInput
-              innerId="name"
+              id="name"
               name="name"
               label={t('createContact.name')}
               placeholder={t('createContact.namePlaceholder')}
             />
             <DFormikInput
-              innerId="targetDNI"
+              id="targetDNI"
               name="targetDNI"
               label={t('createContact.dni')}
               placeholder={t('createContact.dniPlaceholder')}
             />
-            <DFormikInputSelect
-              innerId="targetBank"
+            <DFormikInputSelect<Bank>
+              id="targetBank"
               name="targetBank"
               label={t('createContact.bank')}
-              placeholder="Selecciona banco"
               options={banks}
               labelExtractor={(option: Bank) => option.name}
               valueExtractor={(option: Bank) => option.id}
               isLoading={loadingBanks}
             />
             <DFormikInput
-              innerId="accountNumber"
+              id="accountNumber"
               name="accountNumber"
               label={t('createContact.accountNumber')}
               placeholder={t('createContact.accountNumberPlaceholder')}
             />
             <DFormikInput
-              innerId="aliasAccount"
+              id="aliasAccount"
               name="aliasAccount"
               label={t('createContact.alias')}
               placeholder={t('createContact.aliasPlaceholder')}

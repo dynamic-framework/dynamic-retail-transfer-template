@@ -1,9 +1,9 @@
 {
   "name": "@dynamic-framework/dynamic-retail-transfer-template",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
-    "@dynamic-framework/ui-react": "^1.5.0",
+    "@dynamic-framework/ui-react": "^1.7.3",
     "@reduxjs/toolkit": "^1.8.4",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -13,7 +13,7 @@
     "formik": "^2.2.9",
     "html2canvas": "^1.4.1",
     "i18next": "~21.9.0",
-    "liquidjs": "^9.39.2",
+    "liquidjs": "^10.9.3",
     "lodash.uniqueid": "^4.0.1",
     "luxon": "~3.2.1",
     "react": "^18.2.0",
@@ -50,6 +50,7 @@
     "postcss": "^8.1.0",
     "react-scripts": "5.0.1",
     "sass": "~1.54.0",
+    "stylelint": "^15.11.0",
     "ts-jest": "^29.0.5",
     "typescript": "^4.6.4",
     "webpack": "^5.64.4"
@@ -60,7 +61,8 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests",
     "eject": "craco eject",
     "eslint": "eslint src/**/*{.ts,.tsx}",
-    "push": "DEBUG=* modyo-cli push --publish"
+    "push": "npm run build && npx @modyo/cli@latest push --publish",
+    "push:debug": "npm run build && DEBUG=* npx @modyo/cli@latest push --publish"
   },
   "browserslist": {
     "production": [
@@ -73,5 +75,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": ">=18.18"
   }
 }

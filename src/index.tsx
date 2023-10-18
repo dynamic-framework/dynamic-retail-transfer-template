@@ -1,8 +1,7 @@
+/* eslint-disable global-require */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-
-import '@dynamic-framework/ui-react/dist/css/dynamic-ui-react.css';
 
 import {
   DToastContainer,
@@ -10,7 +9,6 @@ import {
   ModalContextProvider,
 } from '@dynamic-framework/ui-react';
 
-import './styles/base.scss';
 import './config/liquidConfig';
 import './config/i18nConfig';
 
@@ -18,6 +16,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store/store';
 import ModalConfirmTransfer from './components/ModalConfirmTransfer';
+
+if (process.env.NODE_ENV === 'development') {
+  require('@dynamic-framework/ui-react/dist/css/dynamic-ui.css');
+}
+require('./styles/base.scss');
 
 const root = ReactDOM.createRoot(document.getElementById('transfer') as Element);
 root.render(
