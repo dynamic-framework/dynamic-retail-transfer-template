@@ -4,9 +4,9 @@ import {
   DTabContent,
   DTabs,
 } from '@dynamic-framework/ui-react';
-
 import { useTranslation } from 'react-i18next';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
+
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getSelectedTransferType, getTransferTypes } from '../store/selectors';
 import {
@@ -30,25 +30,26 @@ export default function TransferPanel() {
     [selectedTransferType, transferTypes],
   );
 
-  const handleCreateContact = () => {
+  const handleCreateContact = useCallback(() => {
     dispatch(setView('newContact'));
-  };
-  const handleTransferSelector = (option: string) => {
+  }, [dispatch]);
+
+  const handleTransferSelector = useCallback((option: string) => {
     dispatch(setSelectedTransferType(option));
-  };
+  }, [dispatch]);
 
   return (
     <div className="px-3 py-4 rounded shadow-sm bg-white d-flex flex-column gap-3">
       <h6 className="px-2 py-1 fw-bold text-gray-500">{t('transferPanel.transferTo')}</h6>
       <DInputSearch
-        innerId="searchContacts"
+        id="searchContacts"
         placeholder={t('transferPanel.searchPlaceholder')}
-        onEventChange={({ detail }) => dispatch(setContactsQuery(detail))}
+        onChange={(event) => dispatch(setContactsQuery(event.currentTarget.value))}
       />
       <DTabs
         options={transferTypes}
         defaultSelected={currentTab}
-        onEventChange={(type) => handleTransferSelector(type.tab)}
+        onChange={(type) => handleTransferSelector(type.tab)}
       >
         <DTabContent tab={transferTypes[0].tab}>
           <div className="mb-3">
@@ -56,7 +57,7 @@ export default function TransferPanel() {
               line1={t('transferPanel.newContact')}
               line2={t('transferPanel.newContactHint')}
               representativeIcon="person-add"
-              onEventClick={handleCreateContact}
+              onClick={handleCreateContact}
             />
           </div>
           <ContactList />

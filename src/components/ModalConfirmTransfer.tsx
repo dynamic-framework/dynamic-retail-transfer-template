@@ -1,11 +1,15 @@
-/* eslint-disable max-len */
 /* eslint-disable react/jsx-props-no-spreading */
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   DModal,
+  DModalHeader,
+  DModalBody,
+  DModalFooter,
   DButton,
   useFormatCurrency,
 } from '@dynamic-framework/ui-react';
+
 import type { ModalProps } from '@dynamic-framework/ui-react';
 
 import { useAppSelector } from '../store/hooks';
@@ -26,7 +30,7 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
   const { values: [amountUsedFormatted] } = useFormatCurrency(amountUsed, 0.12);
   const { callback: transfer, loading } = useTransfer();
 
-  const handleTransfer = async () => {
+  const handleTransfer = useCallback(async () => {
     if (!originAccount) {
       return;
     }
@@ -49,51 +53,54 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
       );
     }
     closeModal();
-  };
+  }, [amountUsed, closeModal, originAccount, selectedAccount, selectedContact, transfer]);
+
   return (
     <DModal
       name="modalConfirmPayment"
-      showCloseButton
       isCentered
       isStatic
-      innerClass="d-block"
-      onEventClose={() => closeModal()}
+      className="d-block"
     >
-      <div slot="header">
+      <DModalHeader
+        showCloseButton
+        onClose={() => closeModal()}
+      >
         <h4 className="fw-bold">
           {t('modal.transfer.title', { amount: amountUsedFormatted })}
         </h4>
-      </div>
-      <div slot="body">
+      </DModalHeader>
+      <DModalBody>
         <div className="bg-gray-soft mx-4 mb-4 p-3 rounded-1">
           <p>
             {t('modal.transfer.text', {
               name: selectedContact?.name || selectedAccount?.name,
               bank: selectedContact?.bank || selectedAccount?.type,
-              mask: selectedContact?.accountNumber.slice(-3) || selectedAccount?.accountNumber.slice(-3),
+              mask: selectedContact?.accountNumber.slice(-3)
+                || selectedAccount?.accountNumber.slice(-3),
               accountFrom: `${originAccount?.name || ''} ${originAccount?.accountNumber.slice(-3) || '***'}`,
             })}
           </p>
         </div>
-      </div>
-      <div slot="footer">
+      </DModalBody>
+      <DModalFooter>
         <DButton
-          class="d-grid"
+          className="d-grid"
           text={t('button.cancel')}
           theme="secondary"
           variant="outline"
           isPill
-          onEventClick={() => closeModal()}
+          onClick={() => closeModal()}
         />
         <DButton
-          class="d-grid"
+          className="d-grid"
           text={t('button.transfer')}
           theme="primary"
           isPill
-          onEventClick={() => handleTransfer()}
+          onClick={() => handleTransfer()}
           isLoading={loading}
         />
-      </div>
+      </DModalFooter>
     </DModal>
   );
 }
