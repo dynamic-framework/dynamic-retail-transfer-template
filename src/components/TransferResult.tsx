@@ -3,9 +3,6 @@ import {
   DButton,
   DIcon,
   useFormatCurrency,
-  useScreenshotDownload,
-  useScreenshotWebShare,
-  liquidParser,
 } from '@dynamic-framework/ui-react';
 import { DateTime } from 'luxon';
 import { useTranslation } from 'react-i18next';
@@ -20,6 +17,9 @@ import {
 import errorHandler from '../utils/errorHandler';
 
 import type { Transaction } from '../services/interface';
+import { DASHBOARD_PATH, SITE_URL } from '../config/widgetConfig';
+import useScreenshotWebShare from '../hooks/useScreenshotWebShare';
+import useScreenshotDownload from '../hooks/useScreenshotDownload';
 
 export default function TransferResult() {
   const amountUsed = useAppSelector(getAmountUsed);
@@ -36,7 +36,7 @@ export default function TransferResult() {
   const transferDone = useMemo(() => result.status === 'completed', [result.status]);
 
   const gotToAccounts = useCallback(() => {
-    window.location.href = `${liquidParser.parse('{{site.url}}')}/${liquidParser.parse('{{vars.dashboard-path}}')}`;
+    window.location.href = `${SITE_URL}/${DASHBOARD_PATH}`;
   }, []);
 
   return (
