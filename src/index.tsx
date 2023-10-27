@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import {
   DToastContainer,
-  LiquidContextProvider,
+  DContextProvider,
   ModalContextProvider,
 } from '@dynamic-framework/ui-react';
 
@@ -17,15 +17,13 @@ import reportWebVitals from './reportWebVitals';
 import store from './store/store';
 import ModalConfirmTransfer from './components/ModalConfirmTransfer';
 
-if (process.env.NODE_ENV === 'development') {
-  require('@dynamic-framework/ui-react/dist/css/dynamic-ui.css');
-}
-require('./styles/base.scss');
+import '@dynamic-framework/ui-react/dist/css/dynamic-ui.css';
+import './styles/base.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('transfer') as Element);
 root.render(
   <React.StrictMode>
-    <LiquidContextProvider>
+    <DContextProvider>
       <Provider store={store}>
         <ModalContextProvider
           portalName="modalPortal"
@@ -41,7 +39,7 @@ root.render(
           />
         </ModalContextProvider>
       </Provider>
-    </LiquidContextProvider>
+    </DContextProvider>
   </React.StrictMode>,
 );
 
