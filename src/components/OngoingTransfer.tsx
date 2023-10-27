@@ -115,7 +115,7 @@ export default function OngoingTransfer() {
         label={t('ongoingTransfer.addMessage')}
         placeholder={t('ongoingTransfer.addMessagePlaceholder')}
         value={transferMessage}
-        onChange={(event) => setTransferMessage(event.currentTarget.value)}
+        onChange={(value) => setTransferMessage(value)}
       />
       <DQuickActionSwitch
         isDisabled

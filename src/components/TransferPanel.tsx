@@ -5,7 +5,7 @@ import {
   DTabs,
 } from '@dynamic-framework/ui-react';
 import { useTranslation } from 'react-i18next';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getSelectedTransferType, getTransferTypes } from '../store/selectors';
@@ -25,10 +25,16 @@ export default function TransferPanel() {
   const { t } = useTranslation();
   const transferTypes = useAppSelector(getTransferTypes);
   const selectedTransferType = useAppSelector(getSelectedTransferType);
+  const [contactSearchQuery, setContactSearchQuery] = useState<string | undefined>(undefined);
   const currentTab = useMemo(
     () => selectedTransferType ?? transferTypes[0].tab,
     [selectedTransferType, transferTypes],
   );
+
+  const handleSearchContact = useCallback((value: string | undefined) => {
+    setContactSearchQuery(value);
+    dispatch(setContactsQuery(value || ''));
+  }, [dispatch]);
 
   const handleCreateContact = useCallback(() => {
     dispatch(setView('newContact'));
@@ -42,9 +48,10 @@ export default function TransferPanel() {
     <div className="px-3 py-4 rounded shadow-sm bg-white d-flex flex-column gap-3">
       <h6 className="px-2 py-1 fw-bold text-gray-500">{t('transferPanel.transferTo')}</h6>
       <DInputSearch
+        value={contactSearchQuery}
         id="searchContacts"
         placeholder={t('transferPanel.searchPlaceholder')}
-        onChange={(event) => dispatch(setContactsQuery(event.currentTarget.value))}
+        onChange={handleSearchContact}
       />
       <DTabs
         options={transferTypes}
