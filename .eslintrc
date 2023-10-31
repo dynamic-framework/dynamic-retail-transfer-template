@@ -7,26 +7,61 @@
     "plugin:react/jsx-runtime"
   ],
   "parserOptions": {
-    "project": ["**/tsconfig.json"],
+    "project": [
+      "**/tsconfig.json"
+    ],
     "EXPERIMENTAL_useSourceOfProjectReferenceRedirect": true
   },
   "rules": {
     "react/require-default-props": "off",
-    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
-    "react/jsx-curly-spacing": ["error",  { "when": "never", "attributes": { "allowMultiline": false }, "children": true }],
-    "import/prefer-default-export": "off"
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": [
+          "state"
+        ]
+      }
+    ],
+    "react/jsx-curly-spacing": [
+      "error",
+      {
+        "when": "never",
+        "attributes": {
+          "allowMultiline": false
+        },
+        "children": true
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "webpack.config.js"
+        ]
+      }
+    ]
   },
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
       "extends": [
         "airbnb-typescript",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking"
       ],
       "rules": {
-        "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }],
-        "@typescript-eslint/no-floating-promises": "off"
+        "@typescript-eslint/no-floating-promises": "off",
+        "@typescript-eslint/no-misused-promises": [
+          "error",
+          {
+            "checksVoidReturn": false
+          }
+        ]
       }
     }
   ],
