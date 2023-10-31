@@ -1,12 +1,12 @@
-import { Formik } from 'formik';
 import {
   DButton,
-  DFormikInput,
-  DFormikInputSelect,
+  DInput,
+  DInputSelect,
 } from '@dynamic-framework/ui-react';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-
 import { useTranslation } from 'react-i18next';
+
 import useBanksEffect from '../services/hooks/useBanksEffect';
 import useCreateContact from '../services/hooks/useCreateContact';
 import { useAppDispatch } from '../store/hooks';
@@ -26,6 +26,7 @@ export default function CreateContact() {
 
   const { loading: loadingBanks, banks } = useBanksEffect();
   const { callback: createContact } = useCreateContact();
+
   return (
     <Formik
       initialValues={{
@@ -49,24 +50,33 @@ export default function CreateContact() {
     >
       {(
         {
+          values,
+          errors,
+          setFieldValue,
           handleSubmit,
         },
       ) => (
         <form onSubmit={handleSubmit}>
           <div className="d-flex flex-column gap-3 px-3 py-4 rounded mb-3 bg-white shadow-sm">
-            <DFormikInput
+            <DInput
               id="name"
               name="name"
               label={t('createContact.name')}
               placeholder={t('createContact.namePlaceholder')}
+              value={values.name}
+              invalid={!!errors.name}
+              onChange={(value) => setFieldValue('name', value)}
             />
-            <DFormikInput
+            <DInput
               id="targetDNI"
               name="targetDNI"
               label={t('createContact.dni')}
               placeholder={t('createContact.dniPlaceholder')}
+              value={values.targetDNI}
+              invalid={!!errors.targetDNI}
+              onChange={(value) => setFieldValue('targetDNI', value)}
             />
-            <DFormikInputSelect<Bank>
+            <DInputSelect<Bank>
               id="targetBank"
               name="targetBank"
               label={t('createContact.bank')}
@@ -74,14 +84,19 @@ export default function CreateContact() {
               labelExtractor={(option: Bank) => option.name}
               valueExtractor={(option: Bank) => option.id}
               isLoading={loadingBanks}
+              selectedOption={values.targetBank}
+              onChange={(value) => setFieldValue('targetBank', value)}
             />
-            <DFormikInput
+            <DInput
               id="accountNumber"
               name="accountNumber"
               label={t('createContact.accountNumber')}
               placeholder={t('createContact.accountNumberPlaceholder')}
+              value={values.accountNumber}
+              invalid={!!errors.accountNumber}
+              onChange={(value) => setFieldValue('accountNumber', value)}
             />
-            <DFormikInput
+            <DInput
               id="aliasAccount"
               name="aliasAccount"
               label={t('createContact.alias')}
