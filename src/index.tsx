@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -17,8 +16,11 @@ import reportWebVitals from './reportWebVitals';
 import store from './store/store';
 import ModalConfirmTransfer from './components/ModalConfirmTransfer';
 
-import '@dynamic-framework/ui-react/dist/css/dynamic-ui.css';
-import './styles/base.scss';
+if (process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line global-require
+  require('@dynamic-framework/ui-react/dist/css/dynamic-ui.css');
+}
+require('./styles/base.scss');
 
 const root = ReactDOM.createRoot(document.getElementById('transfer') as Element);
 root.render(
