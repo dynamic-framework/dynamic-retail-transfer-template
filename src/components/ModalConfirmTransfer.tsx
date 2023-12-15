@@ -58,8 +58,8 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
   return (
     <DModal
       name="modalConfirmPayment"
-      isCentered
-      isStatic
+      centered
+      staticBackdrop
       className="d-block"
     >
       <DModalHeader
@@ -89,16 +89,16 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
           text={t('button.cancel')}
           theme="secondary"
           variant="outline"
-          isPill
+          pill
           onClick={() => closeModal()}
         />
         <DButton
           className="d-grid"
           text={t('button.transfer')}
           theme="primary"
-          isPill
+          pill
           onClick={() => handleTransfer()}
-          isLoading={loading}
+          loading={loading}
         />
       </DModalFooter>
     </DModal>

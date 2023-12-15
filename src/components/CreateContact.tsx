@@ -83,8 +83,8 @@ export default function CreateContact() {
               options={banks}
               labelExtractor={(option: Bank) => option.name}
               valueExtractor={(option: Bank) => option.id}
-              isLoading={loadingBanks}
-              selectedOption={values.targetBank}
+              loading={loadingBanks}
+              value={values.targetBank?.id}
               onChange={(value) => setFieldValue('targetBank', value)}
             />
             <DInput
@@ -106,7 +106,7 @@ export default function CreateContact() {
               className="align-self-center"
               id="saveContact"
               text={t('button.save')}
-              isPill
+              pill
               theme="primary"
               type="submit"
             />
