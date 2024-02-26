@@ -6,8 +6,9 @@ import { Provider } from 'react-redux';
 import {
   DToastContainer,
   DContextProvider,
-  ModalContextProvider,
+  DModalContextProvider,
 } from '@dynamic-framework/ui-react';
+import { SITE_LANG, VARS_CURRENCY } from './config/widgetConfig';
 
 import './config/liquidConfig';
 import './config/i18nConfig';
@@ -23,9 +24,12 @@ import './styles/base.scss';
 const root = ReactDOM.createRoot(document.getElementById('transfer') as Element);
 root.render(
   <React.StrictMode>
-    <DContextProvider>
+    <DContextProvider
+      language={SITE_LANG}
+      currency={VARS_CURRENCY}
+    >
       <Provider store={store}>
-        <ModalContextProvider
+        <DModalContextProvider
           portalName="modalPortal"
           availableModals={{
             confirmTransfer: ModalConfirmTransfer,
@@ -37,7 +41,7 @@ root.render(
               '--toastify-toast-width': 'auto',
             }}
           />
-        </ModalContextProvider>
+        </DModalContextProvider>
       </Provider>
     </DContextProvider>
   </React.StrictMode>,
