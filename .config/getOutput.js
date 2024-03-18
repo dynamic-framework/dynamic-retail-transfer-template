@@ -17,5 +17,6 @@ module.exports = (isProduction = false) => {
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
     assetModuleFilename: '[name].[hash][ext]',
+    crossOriginLoading: false,
   };
 }

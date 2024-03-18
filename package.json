@@ -1,9 +1,9 @@
 {
   "name": "@dynamic-framework/dynamic-retail-transfer-template",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
-    "@dynamic-framework/ui-react": "^1.12.1",
+    "@dynamic-framework/ui-react": "^1.16.1",
     "@reduxjs/toolkit": "^1.8.4",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
@@ -82,6 +82,7 @@
     "stylelint": "stylelint \"src/**/*.{css,scss}\" --rd",
     "push": "npm run build && npx @modyo/cli@latest push --publish",
     "push:debug": "npm run build && DEBUG=* npx @modyo/cli@latest push --publish",
+    "preview": "npm run start && npx @modyo/cli@latest preview",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
   },

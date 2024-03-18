@@ -8,7 +8,6 @@ import {
   DContextProvider,
   DModalContextProvider,
 } from '@dynamic-framework/ui-react';
-import { SITE_LANG, VARS_CURRENCY } from './config/widgetConfig';
 
 import './config/liquidConfig';
 import './config/i18nConfig';
@@ -24,10 +23,7 @@ import './styles/base.scss';
 const root = ReactDOM.createRoot(document.getElementById('transfer') as Element);
 root.render(
   <React.StrictMode>
-    <DContextProvider
-      language={SITE_LANG}
-      currency={VARS_CURRENCY}
-    >
+    <DContextProvider>
       <Provider store={store}>
         <DModalContextProvider
           portalName="modalPortal"
