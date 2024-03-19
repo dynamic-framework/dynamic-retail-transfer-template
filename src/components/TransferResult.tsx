@@ -61,7 +61,7 @@ export default function TransferResult() {
           </div>
           {transferDone && (
             <>
-              <div className="d-flex flex-column gap-1 text-center px-4 py-2 bg-indigo-soft rounded-1">
+              <div className="d-flex flex-column gap-1 text-center px-4 py-2 bg-secondary-soft rounded-1">
                 <span className="text-gray fw-bold fs-3">{amountUsedFormatted}</span>
                 <p className="sp mb-0">
                   {t('result.moneyPaid')}
@@ -86,7 +86,7 @@ export default function TransferResult() {
           )}
           {!transferDone && (
             <>
-              <div className="d-flex flex-column gap-1 text-center px-4 py-2 bg-indigo-soft rounded-1">
+              <div className="d-flex flex-column gap-1 text-center px-4 py-2 bg-secondary-soft rounded-1">
                 <p className="mb-0">
                   {t('result.transferErrorMessage')}
                 </p>
