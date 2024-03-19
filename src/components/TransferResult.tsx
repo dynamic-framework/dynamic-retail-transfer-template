@@ -149,14 +149,12 @@ export default function TransferResult() {
             text={t('button.back')}
             theme="secondary"
             variant="outline"
-            pill
           />
           )}
           <DButton
             className={!transferDone ? 'flex-1 d-grid' : ''}
             text={t(transferDone ? 'button.back' : 'button.retry')}
             theme="primary"
-            pill
             onClick={gotToAccounts}
           />
         </div>

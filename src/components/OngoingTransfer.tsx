@@ -127,7 +127,6 @@ export default function OngoingTransfer() {
         className="d-flex align-self-center"
         {...!canTransfer && { state: 'disabled' }}
         text={t('button.transfer')}
-        pill
         onClick={() => {
           dispatch(setMessage(transferMessage));
           dispatch(setAmountUsed(amount));

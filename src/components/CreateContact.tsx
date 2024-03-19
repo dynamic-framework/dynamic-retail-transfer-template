@@ -106,7 +106,6 @@ export default function CreateContact() {
               className="align-self-center"
               id="saveContact"
               text={t('button.save')}
-              pill
               theme="primary"
               type="submit"
             />
