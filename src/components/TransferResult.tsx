@@ -40,7 +40,7 @@ export default function TransferResult() {
   }, []);
 
   return (
-    <div className="bg-white rounded shadow-sm p-4">
+    <div className="bg-white rounded shadow-sm p-6">
       <div className="d-flex flex-column align-items-center gap-6">
         <div
           className="d-flex flex-column gap-6 bg-white rounded w-100"
@@ -61,14 +61,14 @@ export default function TransferResult() {
           </div>
           {transferDone && (
             <>
-              <div className="d-flex flex-column gap-1 text-center px-3 py-2 bg-indigo-soft rounded-1">
+              <div className="d-flex flex-column gap-1 text-center px-4 py-2 bg-indigo-soft rounded-1">
                 <span className="text-gray fw-bold fs-3">{amountUsedFormatted}</span>
                 <p className="sp">
                   {t('result.moneyPaid')}
                 </p>
               </div>
               <hr className="m-0" />
-              <div className="d-flex flex-column px-3 gap-2">
+              <div className="d-flex flex-column px-4 gap-2">
                 <div className="row">
                   <div className="col-6 text-light-emphasis">{t('result.transferTo')}</div>
                   <div className="col-6 text-end">{selectedContact?.name || selectedAccount?.name}</div>
@@ -86,13 +86,13 @@ export default function TransferResult() {
           )}
           {!transferDone && (
             <>
-              <div className="d-flex flex-column gap-1 text-center px-3 py-2 bg-indigo-soft rounded-1">
+              <div className="d-flex flex-column gap-1 text-center px-4 py-2 bg-indigo-soft rounded-1">
                 <p>
                   {t('result.transferErrorMessage')}
                 </p>
               </div>
               <hr className="m-0" />
-              <div className="d-flex flex-column px-3 gap-2">
+              <div className="d-flex flex-column px-4 gap-2">
                 <div className="row">
                   <div className="col-6 text-light-emphasis">{t('result.transferTo')}</div>
                   <div className="col-6 text-end">{selectedContact?.name || selectedAccount?.name}</div>

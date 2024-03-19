@@ -71,7 +71,7 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
         </h4>
       </DModalHeader>
       <DModalBody className="pt-0">
-        <div className="bg-gray-soft p-3 rounded-1">
+        <div className="bg-gray-soft p-4 rounded-1">
           <p>
             {t('modal.transfer.text', {
               name: selectedContact?.name || selectedAccount?.name,

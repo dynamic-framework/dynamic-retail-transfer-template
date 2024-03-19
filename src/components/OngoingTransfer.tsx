@@ -61,7 +61,7 @@ export default function OngoingTransfer() {
   }, [dispatch, originAccount, accountsOrigin]);
 
   return (
-    <div className="bg-white rounded shadow-sm p-3 d-flex flex-column gap-4">
+    <div className="bg-white rounded shadow-sm p-4 d-flex flex-column gap-4">
       <DInputSelect<Account>
         label={t('ongoingTransfer.from')}
         id="selectAccountFrom"
