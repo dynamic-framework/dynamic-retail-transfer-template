@@ -1,3 +1,5 @@
+import { DContextProvider } from '@dynamic-framework/ui-react';
+import { ComponentProps } from 'react';
 import liquidParser from '../utils/liquidParser';
 
 export const SITE_LANG = liquidParser.parse('{{site.language}}');
@@ -14,3 +16,8 @@ export const VARS_CURRENCY = {
 
 // PATHs
 export const DASHBOARD_PATH = liquidParser.parse('{{vars.dashboard-path}}');
+
+export const CONTEXT_CONFIG = {
+  language: SITE_LANG,
+  currency: VARS_CURRENCY,
+} satisfies Partial<ComponentProps<typeof DContextProvider>>;

@@ -71,8 +71,8 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
         </h4>
       </DModalHeader>
       <DModalBody className="pt-0">
-        <div className="bg-gray-soft p-3 rounded-1">
-          <p>
+        <div className="bg-gray-soft p-4 rounded-1">
+          <p className="mb-0">
             {t('modal.transfer.text', {
               name: selectedContact?.name || selectedAccount?.name,
               bank: selectedContact?.bank || selectedAccount?.type,
@@ -89,14 +89,12 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
           text={t('button.cancel')}
           theme="secondary"
           variant="outline"
-          pill
           onClick={() => closeModal()}
         />
         <DButton
           className="d-grid"
           text={t('button.transfer')}
           theme="primary"
-          pill
           onClick={() => handleTransfer()}
           loading={loading}
         />
