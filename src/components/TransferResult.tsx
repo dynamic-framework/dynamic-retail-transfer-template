@@ -41,9 +41,9 @@ export default function TransferResult() {
 
   return (
     <div className="bg-white rounded shadow-sm p-4">
-      <div className="d-flex flex-column align-items-center gap-4">
+      <div className="d-flex flex-column align-items-center gap-6">
         <div
-          className="d-flex flex-column gap-4 bg-white rounded w-100"
+          className="d-flex flex-column gap-6 bg-white rounded w-100"
           ref={(el) => {
             shareRef.current = el;
             downloadRef.current = el;
@@ -104,7 +104,7 @@ export default function TransferResult() {
               </div>
             </>
           )}
-          <div className="d-flex gap-3 align-items-center justify-content-center">
+          <div className="d-flex gap-4 align-items-center justify-content-center">
             <DIcon
               theme="secondary"
               icon="shield-check"
@@ -142,7 +142,7 @@ export default function TransferResult() {
             />
           </div>
         </div>
-        <div className="d-flex justify-content-center align-items-center gap-4 w-100">
+        <div className="d-flex justify-content-center align-items-center gap-6 w-100">
           {!transferDone && (
           <DButton
             className="flex-1 d-grid"
