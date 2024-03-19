@@ -57,7 +57,7 @@ export default function CreateContact() {
         },
       ) => (
         <form onSubmit={handleSubmit}>
-          <div className="d-flex flex-column gap-4 px-3 py-4 rounded mb-3 bg-white shadow-sm">
+          <div className="d-flex flex-column gap-4 px-3 py-4 rounded mb-4 bg-white shadow-sm">
             <DInput
               id="name"
               name="name"

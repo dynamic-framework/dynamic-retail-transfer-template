@@ -59,7 +59,7 @@ export default function TransferPanel() {
         onChange={(type) => handleTransferSelector(type.tab)}
       >
         <DTabContent tab={transferTypes[0].tab}>
-          <div className="mb-3">
+          <div className="mb-4">
             <DQuickActionButton
               line1={t('transferPanel.newContact')}
               line2={t('transferPanel.newContactHint')}

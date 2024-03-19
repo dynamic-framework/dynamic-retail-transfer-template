@@ -35,7 +35,7 @@ export default function ContactList() {
           <ContactListItem contact={contact} key={contact.id} />
         ))}
         {!regularContacts.length && (
-          <small className="text-center mb-3">
+          <small className="text-center mb-4">
             {t('contactList.emptyRegulars')}
           </small>
         )}
