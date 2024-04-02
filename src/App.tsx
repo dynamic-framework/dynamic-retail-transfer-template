@@ -5,16 +5,13 @@ import Gateway from './components/Gateway';
 
 import { useAppSelector } from './store/hooks';
 import { getView } from './store/selectors';
-import { SITE_LANG, VARS_CURRENCY } from './config/widgetConfig';
+import { CONTEXT_CONFIG } from './config/widgetConfig';
 
 export default function App() {
   const { setContext } = useDContext();
 
   useEffect(() => {
-    setContext({
-      language: SITE_LANG,
-      currency: VARS_CURRENCY,
-    });
+    setContext(CONTEXT_CONFIG);
   }, [setContext]);
 
   const view = useAppSelector(getView);
