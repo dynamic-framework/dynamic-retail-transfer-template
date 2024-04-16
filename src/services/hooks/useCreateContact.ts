@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { useToast } from '@dynamic-framework/ui-react';
+import { useDToast } from '@dynamic-framework/ui-react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from '../../store/hooks';
@@ -8,7 +8,7 @@ import errorHandler from '../../utils/errorHandler';
 import { Contact } from '../interface';
 
 export default function useCreateContact() {
-  const { toast } = useToast();
+  const { toast } = useDToast();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();

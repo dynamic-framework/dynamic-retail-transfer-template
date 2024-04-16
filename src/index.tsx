@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import {
   DToastContainer,
   DContextProvider,
-  DModalContextProvider,
 } from '@dynamic-framework/ui-react';
 
 import './config/liquidConfig';
@@ -23,23 +22,21 @@ import './styles/base.scss';
 const root = ReactDOM.createRoot(document.getElementById('transfer') as Element);
 root.render(
   <React.StrictMode>
-    <DContextProvider>
-      <Provider store={store}>
-        <DModalContextProvider
-          portalName="modalPortal"
-          availableModals={{
-            confirmTransfer: ModalConfirmTransfer,
+    <Provider store={store}>
+      <DContextProvider
+        portalName="modalPortal"
+        availablePortals={{
+          confirmTransfer: ModalConfirmTransfer,
+        }}
+      >
+        <App />
+        <DToastContainer
+          style={{
+            '--toastify-toast-width': 'auto',
           }}
-        >
-          <App />
-          <DToastContainer
-            style={{
-              '--toastify-toast-width': 'auto',
-            }}
-          />
-        </DModalContextProvider>
-      </Provider>
-    </DContextProvider>
+        />
+      </DContextProvider>
+    </Provider>
   </React.StrictMode>,
 );
 
