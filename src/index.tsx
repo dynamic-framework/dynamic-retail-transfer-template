@@ -24,9 +24,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <DContextProvider
-        portalName="modalPortal"
+        portalName="portal"
         availablePortals={{
-          confirmTransfer: ModalConfirmTransfer,
+          confirmTransferModal: ModalConfirmTransfer,
         }}
       >
         <App />

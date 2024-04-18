@@ -64,7 +64,7 @@ export default function ModalConfirmTransfer() {
     >
       <DModalHeader
         showCloseButton
-        onClose={() => closePortal()}
+        onClose={closePortal}
       >
         <h4 className="fw-bold">
           {t('modal.transfer.title', { amount: amountUsedFormatted })}
@@ -89,7 +89,7 @@ export default function ModalConfirmTransfer() {
           text={t('button.cancel')}
           theme="secondary"
           variant="outline"
-          onClick={() => closePortal()}
+          onClick={closePortal}
         />
         <DButton
           className="d-grid"
