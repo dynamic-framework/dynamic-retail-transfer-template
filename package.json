@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "private": true,
   "dependencies": {
-    "@dynamic-framework/ui-react": "^1.18.0",
+    "@dynamic-framework/ui-react": "^1.19.0",
     "@reduxjs/toolkit": "^1.8.4",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
@@ -99,6 +99,6 @@
     ]
   },
   "engines": {
-    "node": ">=18.18"
+    "node": ">=20.12"
   }
 }

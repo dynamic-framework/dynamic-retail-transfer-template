@@ -16,12 +16,14 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Setup Node.js 16.x
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
+          registry-url: https://npm.pkg.github.com/
+          scope: '@modyo-dynamic'
       - name: Install @modyo/cli
-        run: npm install -g "@modyo/cli@^3.1.27"
+        run: npm install -g "@modyo/cli@latest"
       - name: Install dependencies
         run: npm install
         env:
@@ -31,14 +33,14 @@ jobs:
         env:
           MODYO_DISABLE_LIQUID_REGEX: ${{ secrets.DISABLE_LIQUID_REGEX }}
           MODYO_BUILD_DIRECTORY: ${{ secrets.BUILD_DIRECTORY }}
-      - name: Push to modyo site EN
+      - name: Push to modyo site
         run: npm run push "$MODYO_WIDGET_NAME"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This gets generated automatically
           MODYO_ACCOUNT_URL: ${{secrets.ACCOUNT_URL}}
           MODYO_VERSION: ${{secrets.VERSION}}
           MODYO_TOKEN: ${{secrets.TOKEN}}
-          MODYO_SITE_ID: ${{secrets.STAGE_SITE_ID_EN}}
+          MODYO_SITE_ID: ${{secrets.STAGE_SITE_ID}}
           MODYO_WIDGET_NAME: ${{secrets.WIDGET_NAME}}
           MODYO_BUILD_DIRECTORY: ${{secrets.BUILD_DIRECTORY}}
           MODYO_DISABLE_LIQUID_REGEX: ${{secrets.DISABLE_LIQUID_REGEX}}

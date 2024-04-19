@@ -8,7 +8,7 @@ import {
   DInputSelect,
   DQuickActionButton,
   DQuickActionSwitch,
-  useDModalContext,
+  useDPortalContext,
 } from '@dynamic-framework/ui-react';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -31,7 +31,7 @@ import type { Account } from '../services/interface';
 
 export default function OngoingTransfer() {
   const { t } = useTranslation();
-  const { openModal } = useDModalContext();
+  const { openPortal } = useDPortalContext();
   const dispatch = useAppDispatch();
   const [transferMessage, setTransferMessage] = useState<string | undefined>();
 
@@ -130,7 +130,7 @@ export default function OngoingTransfer() {
         onClick={() => {
           dispatch(setMessage(transferMessage));
           dispatch(setAmountUsed(amount));
-          openModal('confirmTransfer', undefined);
+          openPortal('confirmTransferModal', undefined);
         }}
       />
     </div>
