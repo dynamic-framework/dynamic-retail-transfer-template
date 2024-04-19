@@ -8,7 +8,7 @@ import {
   DInputSelect,
   DQuickActionButton,
   DQuickActionSwitch,
-  useModalContext,
+  useDPortalContext,
 } from '@dynamic-framework/ui-react';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -31,7 +31,7 @@ import type { Account } from '../services/interface';
 
 export default function OngoingTransfer() {
   const { t } = useTranslation();
-  const { openModal } = useModalContext();
+  const { openPortal } = useDPortalContext();
   const dispatch = useAppDispatch();
   const [transferMessage, setTransferMessage] = useState<string | undefined>();
 
@@ -61,7 +61,7 @@ export default function OngoingTransfer() {
   }, [dispatch, originAccount, accountsOrigin]);
 
   return (
-    <div className="bg-white rounded shadow-sm p-3 d-flex flex-column gap-3">
+    <div className="bg-white rounded shadow-sm p-4 d-flex flex-column gap-4">
       <DInputSelect<Account>
         label={t('ongoingTransfer.from')}
         id="selectAccountFrom"
@@ -118,7 +118,7 @@ export default function OngoingTransfer() {
         onChange={(value) => setTransferMessage(value)}
       />
       <DQuickActionSwitch
-        isDisabled
+        disabled
         label={t('collapse.schedule')}
         hint={t('collapse.scheduleHint')}
         id="scheduleTransfer"
@@ -127,11 +127,10 @@ export default function OngoingTransfer() {
         className="d-flex align-self-center"
         {...!canTransfer && { state: 'disabled' }}
         text={t('button.transfer')}
-        isPill
         onClick={() => {
           dispatch(setMessage(transferMessage));
           dispatch(setAmountUsed(amount));
-          openModal('confirmTransfer');
+          openPortal('confirmTransferModal', undefined);
         }}
       />
     </div>

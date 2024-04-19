@@ -1,9 +1,9 @@
 {
   "name": "@dynamic-framework/dynamic-retail-transfer-template",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
-    "@dynamic-framework/ui-react": "^1.9.1",
+    "@dynamic-framework/ui-react": "^1.19.0",
     "@reduxjs/toolkit": "^1.8.4",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
@@ -50,17 +50,20 @@
     "file-loader": "^6.2.0",
     "glob": "^10.3.10",
     "html-webpack-plugin": "^5.5.3",
+    "husky": "^8.0.3",
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "lint-staged": "^15.0.2",
     "mini-css-extract-plugin": "^2.7.6",
     "postcss": "^8.4.31",
     "postcss-loader": "^7.3.3",
     "sass": "~1.69.4",
     "sass-loader": "^13.3.2",
     "shx": "^0.3.4",
-    "stylelint": "^15.11.0",
     "style-loader": "^3.3.3",
+    "stylelint": "^15.11.0",
+    "stylelint-config-twbs-bootstrap": "^11.0.1",
     "terser-webpack-plugin": "^5.3.9",
     "ts-jest": "^29.1.1",
     "typescript": "^5.2.2",
@@ -76,8 +79,12 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests --watch",
     "eslint": "eslint src/**/*{.ts,.tsx}",
+    "stylelint": "stylelint \"src/**/*.{css,scss}\" --rd",
     "push": "npm run build && npx @modyo/cli@latest push --publish",
-    "push:debug": "npm run build && DEBUG=* npx @modyo/cli@latest push --publish"
+    "push:debug": "npm run build && DEBUG=* npx @modyo/cli@latest push --publish",
+    "preview": "npm run start && npx @modyo/cli@latest preview",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "browserslist": {
     "production": [
@@ -92,6 +99,6 @@
     ]
   },
   "engines": {
-    "node": ">=18.18"
+    "node": ">=20.12"
   }
 }

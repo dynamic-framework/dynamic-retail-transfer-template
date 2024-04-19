@@ -1,4 +1,4 @@
-import { createDraftSafeSelector } from '@reduxjs/toolkit';
+import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from './store';
 import { Contact } from '../services/interface';
@@ -6,82 +6,82 @@ import getAccountValue from '../services/utils/getAccountValue';
 
 const getState = (state: RootState) => state.widget;
 
-export const getAccounts = createDraftSafeSelector(
+export const getAccounts = createSelector(
   getState,
   (widget) => widget.accounts,
 );
 
-export const getContacts = createDraftSafeSelector(
+export const getContacts = createSelector(
   getState,
   (widget) => widget.contacts,
 );
 
-export const getView = createDraftSafeSelector(
+export const getView = createSelector(
   getState,
   (widget) => widget.view,
 );
 
-export const getSelectedContact = createDraftSafeSelector(
+export const getSelectedContact = createSelector(
   getState,
   (widget) => widget.selectedContact,
 );
 
-export const getSelectedAccount = createDraftSafeSelector(
+export const getSelectedAccount = createSelector(
   getState,
   (widget) => widget.selectedAccount,
 );
 
-export const getAmountUsed = createDraftSafeSelector(
+export const getAmountUsed = createSelector(
   getState,
   (widget) => widget.amountUsed ?? 0,
 );
 
-export const getMessage = createDraftSafeSelector(
+export const getMessage = createSelector(
   getState,
   (widget) => widget.message,
 );
 
-export const getOriginAccount = createDraftSafeSelector(
+export const getOriginAccount = createSelector(
   getState,
   (widget) => widget.originAccount,
 );
 
-export const getOriginAccountAmount = createDraftSafeSelector(
+export const getOriginAccountAmount = createSelector(
   getOriginAccount,
   (account) => (account ? getAccountValue(account) : 0),
 );
 
-export const getResult = createDraftSafeSelector(
+export const getResult = createSelector(
   getState,
   (widget) => widget.result,
 );
 
-export const getIsTransferred = createDraftSafeSelector(
+export const getIsTransferred = createSelector(
   getState,
   (widget) => widget.isTransferred,
 );
 
-export const getBanks = createDraftSafeSelector(
+export const getBanks = createSelector(
   getState,
   (widget) => widget.banks,
 );
 
-export const getContactsQuery = createDraftSafeSelector(
+export const getContactsQuery = createSelector(
   getState,
   (widget) => widget.contactsQuery,
 );
 
-export const getTransferTypes = createDraftSafeSelector(
+export const getTransferTypes = createSelector(
   getState,
   (widget) => widget.transferTypes,
 );
 
-export const getSelectedTransferType = createDraftSafeSelector(
+export const getSelectedTransferType = createSelector(
   getState,
   (widget) => widget.selectedTransferType,
 );
 
-export const getContactsFiltered = createDraftSafeSelector(
+export const getContactsFiltered = createSelector(
   getContacts,
   getContactsQuery,
   (contacts, contactsQuery) => {
@@ -96,17 +96,17 @@ export const getContactsFiltered = createDraftSafeSelector(
   },
 );
 
-export const getFavoriteContacts = createDraftSafeSelector(
+export const getFavoriteContacts = createSelector(
   getContactsFiltered,
   (contacts) => contacts.filter((contact) => contact.isFavorite),
 );
 
-export const getRegularContacts = createDraftSafeSelector(
+export const getRegularContacts = createSelector(
   getContactsFiltered,
   (contacts) => contacts.filter((contact) => !contact.isFavorite),
 );
 
-export const getIsLoadingAccounts = createDraftSafeSelector(
+export const getIsLoadingAccounts = createSelector(
   getState,
   (widget) => widget.isLoadingAccounts,
 );

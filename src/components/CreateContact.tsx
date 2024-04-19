@@ -57,7 +57,7 @@ export default function CreateContact() {
         },
       ) => (
         <form onSubmit={handleSubmit}>
-          <div className="d-flex flex-column gap-3 px-3 py-4 rounded mb-3 bg-white shadow-sm">
+          <div className="d-flex flex-column gap-4 px-4 py-6 rounded mb-4 bg-white shadow-sm">
             <DInput
               id="name"
               name="name"
@@ -83,8 +83,8 @@ export default function CreateContact() {
               options={banks}
               labelExtractor={(option: Bank) => option.name}
               valueExtractor={(option: Bank) => option.id}
-              isLoading={loadingBanks}
-              selectedOption={values.targetBank}
+              loading={loadingBanks}
+              value={values.targetBank?.id}
               onChange={(value) => setFieldValue('targetBank', value)}
             />
             <DInput
@@ -106,7 +106,6 @@ export default function CreateContact() {
               className="align-self-center"
               id="saveContact"
               text={t('button.save')}
-              isPill
               theme="primary"
               type="submit"
             />

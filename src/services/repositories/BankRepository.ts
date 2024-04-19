@@ -1,6 +1,6 @@
 import type { GenericAbortSignal } from 'axios';
 
-import ApiClient from '../ApiClient';
+import ApiClient from '../clients/apiClient';
 import { Bank } from '../interface';
 
 export async function list(config: { abortSignal: GenericAbortSignal }) {

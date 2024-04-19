@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { useModalContext } from '@dynamic-framework/ui-react';
+import { useDPortalContext } from '@dynamic-framework/ui-react';
 
 export default function useOnScheduleClick(originProductAmount: number, amount?: number) {
-  const { openModal } = useModalContext();
+  const { openPortal } = useDPortalContext();
   const [isScheduled, setIsScheduled] = useState(false);
 
   const onScheduleClick = () => {
@@ -11,7 +11,7 @@ export default function useOnScheduleClick(originProductAmount: number, amount?:
       !isScheduled
         && (amount && (amount > 0 && amount <= originProductAmount))
     ) {
-      openModal('schedule', {
+      openPortal('schedule', {
         payload: {
           onAccept: setIsScheduled,
           amount,

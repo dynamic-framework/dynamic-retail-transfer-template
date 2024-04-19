@@ -8,9 +8,8 @@ import {
   DModalFooter,
   DButton,
   useFormatCurrency,
+  useDPortalContext,
 } from '@dynamic-framework/ui-react';
-
-import type { ModalProps } from '@dynamic-framework/ui-react';
 
 import { useAppSelector } from '../store/hooks';
 import {
@@ -21,8 +20,9 @@ import {
 } from '../store/selectors';
 import useTransfer from '../services/hooks/useTransfer';
 
-export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
+export default function ModalConfirmTransfer() {
   const { t } = useTranslation();
+  const { closePortal } = useDPortalContext();
   const amountUsed = useAppSelector(getAmountUsed);
   const selectedContact = useAppSelector(getSelectedContact);
   const selectedAccount = useAppSelector(getSelectedAccount);
@@ -52,27 +52,27 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
         },
       );
     }
-    closeModal();
-  }, [amountUsed, closeModal, originAccount, selectedAccount, selectedContact, transfer]);
+    closePortal();
+  }, [amountUsed, closePortal, originAccount, selectedAccount, selectedContact, transfer]);
 
   return (
     <DModal
       name="modalConfirmPayment"
-      isCentered
-      isStatic
+      centered
+      staticBackdrop
       className="d-block"
     >
       <DModalHeader
         showCloseButton
-        onClose={() => closeModal()}
+        onClose={closePortal}
       >
         <h4 className="fw-bold">
           {t('modal.transfer.title', { amount: amountUsedFormatted })}
         </h4>
       </DModalHeader>
-      <DModalBody>
-        <div className="bg-gray-soft mx-4 mb-4 p-3 rounded-1">
-          <p>
+      <DModalBody className="pt-0">
+        <div className="bg-gray-soft p-4 rounded-1">
+          <p className="mb-0">
             {t('modal.transfer.text', {
               name: selectedContact?.name || selectedAccount?.name,
               bank: selectedContact?.bank || selectedAccount?.type,
@@ -89,16 +89,14 @@ export default function ModalConfirmTransfer({ closeModal }: ModalProps) {
           text={t('button.cancel')}
           theme="secondary"
           variant="outline"
-          isPill
-          onClick={() => closeModal()}
+          onClick={closePortal}
         />
         <DButton
           className="d-grid"
           text={t('button.transfer')}
           theme="primary"
-          isPill
           onClick={() => handleTransfer()}
-          isLoading={loading}
+          loading={loading}
         />
       </DModalFooter>
     </DModal>
