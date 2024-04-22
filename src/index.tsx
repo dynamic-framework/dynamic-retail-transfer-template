@@ -28,7 +28,7 @@ root.render(
       <DContextProvider
         portalName="portal"
         availablePortals={{
-          confirmTransferModal: ModalConfirmTransfer,
+          modalConfirmTransfer: ModalConfirmTransfer,
         }}
       >
         <App />
