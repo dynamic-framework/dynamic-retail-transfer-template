@@ -130,7 +130,7 @@ export default function OngoingTransfer() {
         onClick={() => {
           dispatch(setMessage(transferMessage));
           dispatch(setAmountUsed(amount));
-          openPortal('confirmTransferModal', undefined);
+          openPortal('modalConfirmTransfer', undefined);
         }}
       />
     </div>
