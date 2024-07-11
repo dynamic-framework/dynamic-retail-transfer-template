@@ -28,7 +28,11 @@ module.exports = (env, argv) => {
         '.modyo.cloud'
       ],
       client: {
-        webSocketURL: 'ws://127.0.0.1:8080/ws',
+        webSocketURL: {
+          hostname: '127.0.0.1',
+          pathname: '/ws',
+          protocol: 'ws'
+        },
       },
     },
     target: ['browserslist'],
