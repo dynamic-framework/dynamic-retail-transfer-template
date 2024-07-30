@@ -30,11 +30,7 @@ root.render(
         }}
       >
         <App />
-        <DToastContainer
-          style={{
-            '--toastify-toast-width': 'auto',
-          }}
-        />
+        <DToastContainer />
       </DContextProvider>
     </Provider>
   </React.StrictMode>,

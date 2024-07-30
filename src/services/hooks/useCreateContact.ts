@@ -18,7 +18,13 @@ export default function useCreateContact() {
       setLoading(true);
       dispatch(addContact(contact));
       setLoading(false);
-      toast(t('alert.newContactMessage'), { type: 'success' });
+      toast(
+        {
+          title: t('alert.newContactMessage'),
+          theme: 'success',
+        },
+        { duration: 5000 },
+      );
       return contact;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
