@@ -3,8 +3,8 @@ import { useCallback, useState } from 'react';
 import { useAppDispatch } from '../../store/hooks';
 import { setIsTransferred, setResult } from '../../store/slice';
 import errorHandler from '../../utils/errorHandler';
-import { TransferRepository } from '../repositories';
 import { Transfer } from '../interface';
+import { TransferRepository } from '../repositories';
 
 export default function useTransfer() {
   const [loading, setLoading] = useState(false);

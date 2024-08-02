@@ -1,12 +1,16 @@
-import { useCallback, useMemo } from 'react';
 import {
   DButton,
   DIcon,
   useFormatCurrency,
 } from '@dynamic-framework/ui-react';
 import { DateTime } from 'luxon';
+import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { DASHBOARD_PATH, SITE_URL } from '../config/widgetConfig';
+import useScreenshotDownload from '../hooks/useScreenshotDownload';
+import useScreenshotWebShare from '../hooks/useScreenshotWebShare';
+import type { Transaction } from '../services/interface';
 import { useAppSelector } from '../store/hooks';
 import {
   getAmountUsed,
@@ -15,11 +19,6 @@ import {
   getSelectedAccount,
 } from '../store/selectors';
 import errorHandler from '../utils/errorHandler';
-
-import type { Transaction } from '../services/interface';
-import { DASHBOARD_PATH, SITE_URL } from '../config/widgetConfig';
-import useScreenshotWebShare from '../hooks/useScreenshotWebShare';
-import useScreenshotDownload from '../hooks/useScreenshotDownload';
 
 export default function TransferResult() {
   const amountUsed = useAppSelector(getAmountUsed);

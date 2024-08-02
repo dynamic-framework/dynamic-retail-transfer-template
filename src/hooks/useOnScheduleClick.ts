@@ -1,6 +1,5 @@
-import { useState } from 'react';
-
 import { useDPortalContext } from '@dynamic-framework/ui-react';
+import { useState } from 'react';
 
 export default function useOnScheduleClick(originProductAmount: number, amount?: number) {
   const { openPortal } = useDPortalContext();

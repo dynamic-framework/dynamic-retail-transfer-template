@@ -1,12 +1,12 @@
 import { DQuickActionButton } from '@dynamic-framework/ui-react';
 import { useCallback } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { setSelectedAccount } from '../store/slice';
-import SkeletonList from './SkeletonList';
-import { getAccounts, getIsLoadingAccounts } from '../store/selectors';
-
 import type { Account } from '../services/interface';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { getAccounts, getIsLoadingAccounts } from '../store/selectors';
+import { setSelectedAccount } from '../store/slice';
+
+import SkeletonList from './SkeletonList';
 
 export default function AccountList() {
   const dispatch = useAppDispatch();

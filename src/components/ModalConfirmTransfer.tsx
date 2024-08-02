@@ -1,6 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
 import {
   DModal,
   DModalHeader,
@@ -10,7 +8,10 @@ import {
   useFormatCurrency,
   useDPortalContext,
 } from '@dynamic-framework/ui-react';
+import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
+import useTransfer from '../services/hooks/useTransfer';
 import { useAppSelector } from '../store/hooks';
 import {
   getOriginAccount,
@@ -18,7 +19,6 @@ import {
   getSelectedContact,
   getSelectedAccount,
 } from '../store/selectors';
-import useTransfer from '../services/hooks/useTransfer';
 
 export default function ModalConfirmTransfer() {
   const { t } = useTranslation();

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { ContactRepository } from '../repositories';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getContacts, getFavoriteContacts, getRegularContacts } from '../../store/selectors';
 import { setContacts } from '../../store/slice';
 import errorHandler from '../../utils/errorHandler';
+import { ContactRepository } from '../repositories';
 
 export default function useContacts() {
   const [loading, setLoading] = useState(false);

@@ -1,20 +1,19 @@
 /* eslint-disable global-require */
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
-
 import {
   DToastContainer,
   DContextProvider,
 } from '@dynamic-framework/ui-react';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 
 import './config/liquidConfig';
 import './config/i18nConfig';
 
 import App from './App';
+import ModalConfirmTransfer from './components/ModalConfirmTransfer';
 import reportWebVitals from './reportWebVitals';
 import store from './store/store';
-import ModalConfirmTransfer from './components/ModalConfirmTransfer';
 
 import '@dynamic-framework/ui-react/dist/css/dynamic-ui.css';
 import './styles/base.scss';
