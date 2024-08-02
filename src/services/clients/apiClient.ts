@@ -1,9 +1,8 @@
 import axios, { AxiosError } from 'axios';
 
 import liquidParser from '../../utils/liquidParser';
-import ApiError from '../utils/ApiError';
-
 import type { ApiErrorItem } from '../api-interface';
+import ApiError from '../utils/ApiError';
 
 const apiClient = axios.create({
   baseURL: liquidParser.parse('{{vars.api-path}}'),

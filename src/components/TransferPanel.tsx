@@ -4,9 +4,10 @@ import {
   DTabContent,
   DTabs,
 } from '@dynamic-framework/ui-react';
-import { useTranslation } from 'react-i18next';
 import { useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
+import useAccountsEffect from '../services/hooks/useAccountsEffect';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getSelectedTransferType, getTransferTypes } from '../store/selectors';
 import {
@@ -14,9 +15,9 @@ import {
   setContactsQuery,
   setSelectedTransferType,
 } from '../store/slice';
-import ContactList from './ContactList';
+
 import AccountList from './AccountList';
-import useAccountsEffect from '../services/hooks/useAccountsEffect';
+import ContactList from './ContactList';
 
 export default function TransferPanel() {
   useAccountsEffect();

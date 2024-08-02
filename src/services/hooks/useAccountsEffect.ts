@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../store/hooks';
 import { setOriginAccount, setIsLoadingAccounts, setAccounts } from '../../store/slice';
 import errorHandler from '../../utils/errorHandler';
 import { AccountRepository } from '../repositories';
+import ApiError from '../utils/ApiError';
 import getAccountIdQueryString from '../utils/getAccountIdQueryString';
 
 export default function useAccountsEffect() {
@@ -23,6 +24,8 @@ export default function useAccountsEffect() {
         dispatch(setAccounts(data.filter(({ id }) => id !== origin?.id)));
         dispatch(setIsLoadingAccounts(false));
       } catch (error) {
+        if ((error as ApiError).name === 'CanceledError') return;
+
         errorHandler(error);
       }
     })();

@@ -1,11 +1,11 @@
 import { useDContext } from '@dynamic-framework/ui-react';
 import { useEffect } from 'react';
+
 import CreateContact from './components/CreateContact';
 import Gateway from './components/Gateway';
-
+import { CONTEXT_CONFIG } from './config/widgetConfig';
 import { useAppSelector } from './store/hooks';
 import { getView } from './store/selectors';
-import { CONTEXT_CONFIG } from './config/widgetConfig';
 
 export default function App() {
   const { setContext } = useDContext();

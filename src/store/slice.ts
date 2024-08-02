@@ -1,8 +1,8 @@
+import { DTabOption } from '@dynamic-framework/ui-react';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-
-import { DTabOption } from '@dynamic-framework/ui-react';
 import { t } from 'i18next';
+
 import {
   Account,
   Bank,

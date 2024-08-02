@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { ContactRepository } from '../repositories';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getContacts, getFavoriteContacts, getRegularContacts } from '../../store/selectors';
 import { setContacts } from '../../store/slice';
 import errorHandler from '../../utils/errorHandler';
+import { ContactRepository } from '../repositories';
+import ApiError from '../utils/ApiError';
 
 export default function useContacts() {
   const [loading, setLoading] = useState(false);
@@ -23,6 +24,8 @@ export default function useContacts() {
         setLoading(false);
         dispatch(setContacts(response));
       } catch (error) {
+        if ((error as ApiError).name === 'CanceledError') return;
+
         errorHandler(error);
       }
     })();

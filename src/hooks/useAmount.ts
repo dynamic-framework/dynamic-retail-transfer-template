@@ -1,11 +1,10 @@
+import { useFormatCurrency } from '@dynamic-framework/ui-react';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useFormatCurrency } from '@dynamic-framework/ui-react';
-
+import getAccountAmountQueryString from '../services/utils/getAccountAmountQueryString';
 import { useAppSelector } from '../store/hooks';
 import { getOriginAccountAmount } from '../store/selectors';
-import getAccountAmountQueryString from '../services/utils/getAccountAmountQueryString';
 
 export default function useAmount() {
   const { t } = useTranslation();

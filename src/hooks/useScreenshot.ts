@@ -1,5 +1,5 @@
-import { useRef, useCallback } from 'react';
 import html2canvas from 'html2canvas';
+import { useRef, useCallback } from 'react';
 
 export default function useScreenshot() {
   const clipRef = useRef<HTMLDivElement | null>(null);

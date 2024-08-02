@@ -4,15 +4,14 @@ import {
   DInputSelect,
 } from '@dynamic-framework/ui-react';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import * as Yup from 'yup';
 
 import useBanksEffect from '../services/hooks/useBanksEffect';
 import useCreateContact from '../services/hooks/useCreateContact';
+import type { Bank, Contact } from '../services/interface';
 import { useAppDispatch } from '../store/hooks';
 import { setSelectedContact, setView } from '../store/slice';
-
-import type { Bank, Contact } from '../services/interface';
 
 const NewContactSchema = Yup.object().shape({
   name: Yup.string().required(),

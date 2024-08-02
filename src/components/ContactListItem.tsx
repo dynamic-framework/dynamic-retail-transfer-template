@@ -1,10 +1,9 @@
-import { useCallback } from 'react';
 import { DQuickActionButton } from '@dynamic-framework/ui-react';
-
-import { useAppDispatch } from '../store/hooks';
-import { setSelectedContact } from '../store/slice';
+import { useCallback } from 'react';
 
 import type { Contact } from '../services/interface';
+import { useAppDispatch } from '../store/hooks';
+import { setSelectedContact } from '../store/slice';
 
 type Props = {
   contact: Contact;

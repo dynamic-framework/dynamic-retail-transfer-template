@@ -1,4 +1,5 @@
 import liquidParser from '../utils/liquidParser';
+
 import liquidConfig from './liquid.json';
 
 liquidParser.init(

@@ -1,5 +1,6 @@
 import { DContextProvider } from '@dynamic-framework/ui-react';
 import { ComponentProps } from 'react';
+
 import liquidParser from '../utils/liquidParser';
 
 export const SITE_LANG = liquidParser.parse('{{site.language}}');
