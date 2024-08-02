@@ -6,7 +6,9 @@
   "reportNeedlessDisables": true,
   "overrides": [
     {
-      "files": "**/*.scss",
+      "files": [
+        "**/*.scss"
+      ],
       "rules": {
         "declaration-property-value-disallowed-list": {
           "border": "none",
