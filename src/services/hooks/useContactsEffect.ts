@@ -5,6 +5,7 @@ import { getContacts, getFavoriteContacts, getRegularContacts } from '../../stor
 import { setContacts } from '../../store/slice';
 import errorHandler from '../../utils/errorHandler';
 import { ContactRepository } from '../repositories';
+import ApiError from '../utils/ApiError';
 
 export default function useContacts() {
   const [loading, setLoading] = useState(false);
@@ -23,6 +24,8 @@ export default function useContacts() {
         setLoading(false);
         dispatch(setContacts(response));
       } catch (error) {
+        if ((error as ApiError).name === 'CanceledError') return;
+
         errorHandler(error);
       }
     })();

@@ -21,9 +21,7 @@ export default function useTransfer() {
       dispatch(setResult(result));
       dispatch(setIsTransferred(true));
       setLoading(false);
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
+    } catch (error) {
       setLoading(false);
       errorHandler(error);
       throw error;

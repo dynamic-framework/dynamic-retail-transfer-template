@@ -26,8 +26,7 @@ export default function useCreateContact() {
         { duration: 5000 },
       );
       return contact;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
+    } catch (error) {
       setLoading(false);
       errorHandler(error);
       throw error;
