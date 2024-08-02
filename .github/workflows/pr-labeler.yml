@@ -15,7 +15,7 @@ jobs:
     name: Labeling Job
     runs-on: ubuntu-latest
     steps:
-      - uses: TimonVS/pr-labeler-action@v3
+      - uses: TimonVS/pr-labeler-action@v5
         with:
           configuration-path: .github/labeler.yml # optional, .github/pr-labeler.yml is the default value
         env:
