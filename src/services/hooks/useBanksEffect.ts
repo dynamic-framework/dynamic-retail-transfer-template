@@ -5,6 +5,7 @@ import { getBanks } from '../../store/selectors';
 import { setBanks } from '../../store/slice';
 import errorHandler from '../../utils/errorHandler';
 import { BankRepository } from '../repositories';
+import ApiError from '../utils/ApiError';
 
 export default function useBanksEffect() {
   const [loading, setLoading] = useState(false);
@@ -21,6 +22,8 @@ export default function useBanksEffect() {
         dispatch(setBanks(data));
         setLoading(false);
       } catch (error) {
+        if ((error as ApiError).name === 'CanceledError') return;
+
         errorHandler(error);
       }
     })();

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import useContacts from '../services/hooks/useContactsEffect';
+
 import ContactListItem from './ContactListItem';
 import SkeletonList from './SkeletonList';
 

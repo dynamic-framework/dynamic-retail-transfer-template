@@ -6,9 +6,10 @@ import {
   getSelectedContact,
   getSelectedAccount,
 } from '../store/selectors';
+
+import OngoingTransfer from './OngoingTransfer';
 import TransferPanel from './TransferPanel';
 import TransferResult from './TransferResult';
-import OngoingTransfer from './OngoingTransfer';
 
 export default function Gateway() {
   const selectedContact = useAppSelector(getSelectedContact);

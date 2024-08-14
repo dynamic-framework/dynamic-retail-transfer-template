@@ -1,6 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import {
   DButton,
   DInput,
@@ -10,7 +8,11 @@ import {
   DQuickActionSwitch,
   useDPortalContext,
 } from '@dynamic-framework/ui-react';
+import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
+import useAmount from '../hooks/useAmount';
+import type { Account } from '../services/interface';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
   getSelectedContact,
@@ -25,9 +27,6 @@ import {
   setSelectedAccount,
   setOriginAccount,
 } from '../store/slice';
-import useAmount from '../hooks/useAmount';
-
-import type { Account } from '../services/interface';
 
 export default function OngoingTransfer() {
   const { t } = useTranslation();
