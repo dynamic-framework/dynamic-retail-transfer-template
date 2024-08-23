@@ -1,0 +1,11 @@
+name: Use Build Catalog
+
+on:
+  push:
+    branches:
+      - build/dynamic-catalog
+
+jobs:
+  use-build-catalog:
+    uses: dynamic-framework/.github/.github/workflows/build-catalog.yml@main
+    secrets: inherit
