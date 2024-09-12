@@ -92,7 +92,6 @@ export default function OngoingTransfer() {
               className="w-100"
               line1={selectedContact.name}
               line2={`${selectedContact.bank} ${selectedContact.accountNumber.slice(-3)}`}
-              representativeImage={selectedContact.image}
               actionLinkText={t('ongoingTransfer.change')}
               onClick={() => dispatch(setSelectedContact(undefined))}
             />

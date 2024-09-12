@@ -12,10 +12,8 @@ export default function App() {
   }, [setContext]);
 
   return (
-    <div className="row">
-      <div className="offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <Gateway />
-      </div>
+    <div className="mx-auto col-xl-6">
+      <Gateway />
     </div>
   );
 }
