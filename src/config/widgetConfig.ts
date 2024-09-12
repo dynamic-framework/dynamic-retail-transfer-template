@@ -17,6 +17,7 @@ export const VARS_CURRENCY = {
 
 // PATHs
 export const DASHBOARD_PATH = liquidParser.parse('{{vars.dashboard-path}}');
+export const NEW_CONTACT_PATH = liquidParser.parse('{{vars.new-contact-path}}');
 
 export const CONTEXT_CONFIG = {
   language: SITE_LANG,
