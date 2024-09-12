@@ -39,12 +39,12 @@ export type WidgetState = {
   selectedContact?: Contact;
   transferTypes: Array<DTabOption>;
   selectedTransferType? : string;
+  view: string;
   amountUsed?: number;
   message?: string;
   result?: Transaction;
   isTransferred?: boolean;
   banks: Array<Bank>;
-  scheduledTransaction: Date | null;
 
   isLoadingAccounts: boolean;
 };
@@ -53,7 +53,7 @@ const initialState = {
   accounts: [],
   contacts: [],
   contactsQuery: '',
-  scheduledTransaction: null,
+  view: 'transfer',
   transferTypes: [
     { label: t('transferPanel.contact'), tab: 'contact' },
     { label: t('transferPanel.betweenAccounts'), tab: 'accounts' },
@@ -85,6 +85,9 @@ const slice = createSlice({
     setSelectedAccount(state, action: PayloadAction<Account | undefined>) {
       state.selectedAccount = action.payload;
     },
+    setView(state, action: PayloadAction<string>) {
+      state.view = action.payload;
+    },
     setAmountUsed(state, action: PayloadAction<number | undefined>) {
       state.amountUsed = action.payload;
     },
@@ -106,6 +109,7 @@ const slice = createSlice({
     setSelectedTransferType(state, action: PayloadAction<string>) {
       state.selectedTransferType = action.payload;
     },
+
     setIsLoadingAccounts(state, action: PayloadAction<boolean>) {
       state.isLoadingAccounts = action.payload;
     },
@@ -124,6 +128,7 @@ export const {
   setOriginAccount,
   setSelectedContact,
   addContact,
+  setView,
   setAmountUsed,
   setMessage,
   setResult,
@@ -131,6 +136,5 @@ export const {
   setBanks,
   setSelectedTransferType,
   setIsLoadingAccounts,
-  setScheduledTransaction,
 } = slice.actions;
 export default slice.reducer;
