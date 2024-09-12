@@ -39,7 +39,6 @@ export type WidgetState = {
   selectedContact?: Contact;
   transferTypes: Array<DTabOption>;
   selectedTransferType? : string;
-  view: string;
   amountUsed?: number;
   message?: string;
   result?: Transaction;
@@ -53,7 +52,6 @@ const initialState = {
   accounts: [],
   contacts: [],
   contactsQuery: '',
-  view: 'transfer',
   transferTypes: [
     { label: t('transferPanel.contact'), tab: 'contact' },
     { label: t('transferPanel.betweenAccounts'), tab: 'accounts' },
@@ -84,9 +82,6 @@ const slice = createSlice({
     },
     setSelectedAccount(state, action: PayloadAction<Account | undefined>) {
       state.selectedAccount = action.payload;
-    },
-    setView(state, action: PayloadAction<string>) {
-      state.view = action.payload;
     },
     setAmountUsed(state, action: PayloadAction<number | undefined>) {
       state.amountUsed = action.payload;
@@ -125,7 +120,6 @@ export const {
   setOriginAccount,
   setSelectedContact,
   addContact,
-  setView,
   setAmountUsed,
   setMessage,
   setResult,

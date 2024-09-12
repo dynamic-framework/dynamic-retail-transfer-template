@@ -17,11 +17,6 @@ export const getContacts = createSelector(
   (widget) => widget.contacts,
 );
 
-export const getView = createSelector(
-  getState,
-  (widget) => widget.view,
-);
-
 export const getSelectedContact = createSelector(
   getState,
   (widget) => widget.selectedContact,

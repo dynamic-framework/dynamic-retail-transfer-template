@@ -13,4 +13,12 @@
       --bs-quick-action-button-border-bottom: 0;
     }
   }
+  .quick-action-button,
+  .new-contact-link {
+    background: transparent;
+    &:hover {
+      text-decoration: none;
+      background: var(--bs-gray-50);
+    }
+  }
 }

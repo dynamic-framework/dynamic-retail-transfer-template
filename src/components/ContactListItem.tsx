@@ -1,9 +1,12 @@
-import { DQuickActionButton } from '@dynamic-framework/ui-react';
+import { DButtonIcon } from '@dynamic-framework/ui-react';
+import classNames from 'classnames';
 import { useCallback } from 'react';
 
 import type { Contact } from '../services/interface';
 import { useAppDispatch } from '../store/hooks';
 import { setSelectedContact } from '../store/slice';
+
+import Avatar from './Avatar';
 
 type Props = {
   contact: Contact;
@@ -17,12 +20,27 @@ export default function ContactListItem({ contact }: Props) {
   }, [contact, dispatch]);
 
   return (
-    <DQuickActionButton
-      line1={contact.name}
-      line2={`${contact.bank} ${contact.accountNumber.slice(-3)}`}
-      representativeImage={contact.image}
+    <button
+      type="button"
+      className={classNames(
+        'd-flex gap-2 align-items-center justify-content-between w-100 p-2',
+        ' border-0 text-start border-bottom border-gray-100 quick-action-button',
+      )}
       onClick={handleSelectContact}
-      secondaryActionIcon={contact.isFavorite ? 'star-fill' : 'star'}
-    />
+    >
+      <div className="d-flex gap-2 align-items-center">
+        <Avatar title={contact.name} />
+        <div>
+          <p className="mb-0 fw-bold">{contact.name}</p>
+          <small className="text-gray-500">{contact.accountNumber}</small>
+        </div>
+      </div>
+      <DButtonIcon
+        theme="secondary"
+        size="lg"
+        variant="link"
+        icon={contact.isFavorite ? 'star-fill' : 'star'}
+      />
+    </button>
   );
 }

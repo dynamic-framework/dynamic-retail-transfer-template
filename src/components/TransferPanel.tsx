@@ -1,17 +1,17 @@
 import {
+  DIcon,
   DInputSearch,
-  DQuickActionButton,
   DTabContent,
   DTabs,
 } from '@dynamic-framework/ui-react';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { NEW_CONTACT_PATH } from '../config/widgetConfig';
 import useAccountsEffect from '../services/hooks/useAccountsEffect';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getSelectedTransferType, getTransferTypes } from '../store/selectors';
 import {
-  setView,
   setContactsQuery,
   setSelectedTransferType,
 } from '../store/slice';
@@ -37,10 +37,6 @@ export default function TransferPanel() {
     dispatch(setContactsQuery(value || ''));
   }, [dispatch]);
 
-  const handleCreateContact = useCallback(() => {
-    dispatch(setView('newContact'));
-  }, [dispatch]);
-
   const handleTransferSelector = useCallback((option: string) => {
     dispatch(setSelectedTransferType(option));
   }, [dispatch]);
@@ -61,12 +57,16 @@ export default function TransferPanel() {
       >
         <DTabContent tab={transferTypes[0].tab}>
           <div className="mb-4">
-            <DQuickActionButton
-              line1={t('transferPanel.newContact')}
-              line2={t('transferPanel.newContactHint')}
-              representativeIcon="person-add"
-              onClick={handleCreateContact}
-            />
+            <a
+              href={NEW_CONTACT_PATH}
+              className="d-flex gap-4 border border-gray-100 rounded p-4 text-black new-contact-link"
+            >
+              <DIcon icon="person-add" size="40px" className="text-secondary-500" />
+              <div>
+                <strong>{t('transferPanel.newContact')}</strong>
+                <small className="text-gray-500 d-block">{t('transferPanel.newContactHint')}</small>
+              </div>
+            </a>
           </div>
           <ContactList />
         </DTabContent>
