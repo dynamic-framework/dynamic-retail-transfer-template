@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getAccounts, getIsLoadingAccounts } from '../store/selectors';
 import { setSelectedAccount } from '../store/slice';
 
-import SkeletonList from './SkeletonList';
+import LoaderList from './LoaderList';
 
 export default function AccountList() {
   const dispatch = useAppDispatch();
@@ -18,7 +18,7 @@ export default function AccountList() {
   }, [dispatch]);
 
   if (isLoadingAccounts) {
-    return <SkeletonList />;
+    return <LoaderList />;
   }
   return (
     <div className="d-flex flex-column accounts">
