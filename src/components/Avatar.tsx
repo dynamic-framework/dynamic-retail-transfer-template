@@ -9,6 +9,7 @@ function titleResult(title: string | undefined) {
   if (!title) {
     return null;
   }
+  
   const nameParts = title.trim().split(/\s+/);
   const initials = nameParts.map((part) => part.charAt(0)).join('').toUpperCase();
   return initials;
