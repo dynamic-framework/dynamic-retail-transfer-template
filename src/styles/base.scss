@@ -2,23 +2,12 @@
 
 .transfer-template,
 .d-portal {
-
-  .contacts,
-  .favorite-contacts,
-  .accounts {
-    .d-quick-action-button {
-      --bs-quick-action-button-border-radius: 0;
-      --bs-quick-action-button-border-right: 0;
-      --bs-quick-action-button-border-left: 0;
-      --bs-quick-action-button-border-bottom: 0;
-    }
-  }
   .quick-action-button,
   .new-contact-link {
     background: transparent;
     &:hover {
       text-decoration: none;
-      background: var(--bs-gray-50);
+      background: var(--#{$prefix}gray-50);
     }
   }
 }
