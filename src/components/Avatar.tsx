@@ -11,8 +11,7 @@ function titleResult(title: string | undefined) {
   }
   
   const nameParts = title.trim().split(/\s+/);
-  const initials = nameParts.map((part) => part.charAt(0)).join('').toUpperCase();
-  return initials;
+  return nameParts.map((part) => part.charAt(0)).join('').toUpperCase();
 }
 
 export default function Avatar({ title, size = 'md' }: Props) {
