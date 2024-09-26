@@ -1,12 +1,11 @@
-import { DButtonIcon } from '@dynamic-framework/ui-react';
+import { DAvatar, DButtonIcon } from '@dynamic-framework/ui-react';
 import classNames from 'classnames';
 import { useCallback } from 'react';
 
 import type { Contact } from '../services/interface';
 import { useAppDispatch } from '../store/hooks';
 import { setSelectedContact } from '../store/slice';
-
-import Avatar from './Avatar';
+import { getInitials } from '../utils/getInitials';
 
 type Props = {
   contact: Contact;
@@ -29,7 +28,7 @@ export default function ContactListItem({ contact }: Props) {
       onClick={handleSelectContact}
     >
       <div className="d-flex gap-2 align-items-center">
-        <Avatar title={contact.name} />
+        <DAvatar title={getInitials(contact.name)} />
         <div>
           <p className="mb-0 fw-bold">{contact.name}</p>
           <small className="text-gray-500">{contact.accountNumber}</small>
