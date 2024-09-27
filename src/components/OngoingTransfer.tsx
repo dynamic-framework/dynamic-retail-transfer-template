@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import {
   DButton,
+  DDatePicker,
   DInput,
   DInputCurrency,
   DInputSelect,
@@ -19,6 +20,7 @@ import {
   getSelectedAccount,
   getOriginAccount,
   getAccounts,
+  getScheduledTransfer,
 } from '../store/selectors';
 import {
   setAmountUsed,
@@ -26,10 +28,12 @@ import {
   setSelectedContact,
   setSelectedAccount,
   setOriginAccount,
+  setScheduledTransaction,
 } from '../store/slice';
 
 export default function OngoingTransfer() {
   const { t } = useTranslation();
+  const [isScheduled, setIsScheduled] = useState(false);
   const { openPortal } = useDPortalContext();
   const dispatch = useAppDispatch();
   const [transferMessage, setTransferMessage] = useState<string | undefined>();
@@ -38,6 +42,7 @@ export default function OngoingTransfer() {
   const originAccount = useAppSelector(getOriginAccount);
   const selectedContact = useAppSelector(getSelectedContact);
   const selectedAccount = useAppSelector(getSelectedAccount) as Account;
+  const scheduledTransfer = useAppSelector(getScheduledTransfer);
   const accountsOrigin = useMemo(() => {
     if (selectedAccount) {
       return accounts.filter(({ id }) => id !== selectedAccount.id);
@@ -116,11 +121,30 @@ export default function OngoingTransfer() {
         onChange={(value) => setTransferMessage(value)}
       />
       <DQuickActionSwitch
-        disabled
         label={t('collapse.schedule')}
         hint={t('collapse.scheduleHint')}
         id="scheduleTransfer"
+        checked={isScheduled}
+        onClick={() => {
+          setIsScheduled((prev) => !prev);
+          dispatch(setScheduledTransaction(null));
+        }}
       />
+      {isScheduled && (
+        <DDatePicker
+          date={scheduledTransfer?.toISOString()}
+          iconHeaderNextMonth="chevron-right"
+          iconHeaderPrevMonth="chevron-left"
+          minDate={new Date()}
+          placeholderText={t('ongoingTransfer.selectDate')}
+          maxDate={new Date(new Date().setMonth(new Date().getMonth() + 12))}
+          iconInput="calendar"
+          inputAriaLabel="Calendar"
+          onChange={(date) => {
+            dispatch(setScheduledTransaction(date));
+          }}
+        />
+      )}
       <DButton
         className="d-flex align-self-center"
         {...!canTransfer && { state: 'disabled' }}

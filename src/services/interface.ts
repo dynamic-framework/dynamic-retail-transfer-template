@@ -35,6 +35,7 @@ export type Transfer = {
   fromAccountId: string;
   toAccountId: string;
   amount: number;
+  scheduledAt?: string | null;
 };
 
 export type Transaction = {

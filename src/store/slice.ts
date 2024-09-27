@@ -44,6 +44,7 @@ export type WidgetState = {
   result?: Transaction;
   isTransferred?: boolean;
   banks: Array<Bank>;
+  scheduledTransaction: Date | null;
 
   isLoadingAccounts: boolean;
 };
@@ -52,6 +53,7 @@ const initialState = {
   accounts: [],
   contacts: [],
   contactsQuery: '',
+  scheduledTransaction: null,
   transferTypes: [
     { label: t('transferPanel.contact'), tab: 'contact' },
     { label: t('transferPanel.betweenAccounts'), tab: 'accounts' },
@@ -104,9 +106,11 @@ const slice = createSlice({
     setSelectedTransferType(state, action: PayloadAction<string>) {
       state.selectedTransferType = action.payload;
     },
-
     setIsLoadingAccounts(state, action: PayloadAction<boolean>) {
       state.isLoadingAccounts = action.payload;
+    },
+    setScheduledTransaction(state, action: PayloadAction<Date | null>) {
+      state.scheduledTransaction = action.payload;
     },
   },
 });
@@ -127,5 +131,6 @@ export const {
   setBanks,
   setSelectedTransferType,
   setIsLoadingAccounts,
+  setScheduledTransaction,
 } = slice.actions;
 export default slice.reducer;

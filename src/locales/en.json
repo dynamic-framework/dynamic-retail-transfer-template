@@ -30,6 +30,7 @@
     "aliasPlaceholder": "(Optional)"
   },
   "ongoingTransfer": {
+    "selectDate": "Select a date",
     "title": "Transfer funds to",
     "change": "Change",
     "from": "From",
@@ -112,8 +113,9 @@
   },
   "result": {
     "transferSuccess": "Transfer successful",
+    "scheduledTransferSuccess": "Scheduled transfer for <strong>{date}</strong>",
     "transferFailed": "Transfer failure",
-    "transferErrorMessage": "No pudimos realizar la transferencia debido a problemas de comunicación con el banco del destinatario.",
+    "transferErrorMessage": "We were unable to complete the transfer due to communication issues with the recipient's bank.",
     "errorSolution": "Please {solution}",
     "moneyPaid": "Money transferred",
     "transferTo": "Transfer to",

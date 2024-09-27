@@ -1,132 +1,133 @@
 {
   "title": {
-    "transfer": "Transferencias",
-    "createContact": "Crear destinatario"
+    "transfer": "Transfer funds",
+    "createContact": "Create contact"
   },
   "transferPanel": {
-    "transferTo": "Transferir dinero a",
-    "searchPlaceholder": "Buscar",
-    "contact": "Destinatario",
-    "betweenAccounts": "Entre productos",
-    "byPhone": "Teléfono",
-    "newContact": "Nuevo destinatario",
-    "newContactHint": "O para transferir 1 sola vez"
+    "transferTo": "Transfer funds to",
+    "searchPlaceholder": "Search",
+    "contact": "Contact",
+    "betweenAccounts": "Between accounts",
+    "byPhone": "By phone number",
+    "newContact": "Create new contact",
+    "newContactHint": "Or create a one-time transfer"
   },
   "contactList": {
-    "favorites": "Favoritos",
-    "others": "Otros destinatarios",
-    "emptyFavorites": "No tienes contactos favoritos",
-    "emptyRegulars": "Todos tus contactos están en favoritos"
+    "favorites": "Favorites",
+    "others": "Other recipient",
+    "emptyFavorites": "You don't have favorite contacts",
+    "emptyRegulars": "You don't have regular contacts"
   },
   "createContact": {
-    "name": "Nombre",
-    "namePlaceholder": "Nombre del titular de cuenta",
-    "dni": "Documento de indentificación",
-    "dniPlaceholder": "DNI de destinatario",
-    "bank": "Banco",
-    "accountNumber": "Número de cuenta",
-    "accountNumberPlaceholder": "(Sólo números)",
+    "name": "Name",
+    "namePlaceholder": "Account holder's name",
+    "dni": "Identification",
+    "dniPlaceholder": "Contact's ID number",
+    "bank": "Bank",
+    "accountNumber": "Account Number",
+    "accountNumberPlaceholder": "(Numbers only)",
     "alias": "Alias",
-    "aliasPlaceholder": "(Opcional)"
+    "aliasPlaceholder": "(Optional)"
   },
   "ongoingTransfer": {
-    "title": "Transferir dinero a",
-    "change": "Cambiar",
-    "from": "Desde",
-    "amount": "Monto",
+    "selectDate": "Select a date",
+    "title": "Transfer funds to",
+    "change": "Change",
+    "from": "From",
+    "amount": "Amount",
     "amountPlaceholder": "$ 0",
-    "addMessage": "Mensaje (opcional)",
-    "addMessagePlaceholder": "Max. 180 caracteres",
-    "transactionFee": "Costo de operación"
+    "addMessage": "Add a message",
+    "addMessagePlaceholder": "Max. 180 characters",
+    "transactionFee": "Transaction fee"
   },
   "collapse": {
-    "options": "Programar transacción",
-    "schedule": "Agendar",
-    "scheduleHint": "La transferencia será instantánea y no se auto-repetirá",
-    "lessOptions": "No programar",
-    "recurring": "Por recurrencia",
-    "yesLabel": "Si",
+    "lessOptions": "Less Options",
+    "schedule": "Schedule",
+    "scheduleHint": "The transfer will be instantaneous and will not auto-repeat.",
+    "recurring": "Recurring",
+    "yesLabel": "Yes",
     "noLabel": "No",
-    "noScheduleLabel": "Este pago se realizará automáticamente una sola vez en la fecha configurada ",
-    "noRecurrentLabel": "Este pago sólo se realizará hasta la fecha configurada"
+    "noScheduleLabel": "This is a one time payment",
+    "noRecurrentLabel": "This payment will not repeat"
   },
   "alert": {
-    "notPay": "No tienes pagos pendientes por realizar",
-    "wrong": "Oops! Algo salió mal",
-    "newContactMessage": "Se ha guardado tu nuevo destinatario"
+    "notPay": "You have nothing to pay yet",
+    "wrong": "Oops! Something Went Wrong",
+    "newContactMessage": "Your new contact has been saved"
   },
   "modal": {
     "transfer": {
-      "title": "¿Transferir {amount}?",
-      "text": "Estás transfiriendo a {name} - {bank} {mask} desde tu {accountFrom}",
-      "transactionCost": "Esta transacción tiene un costo de operación de: <strong>{charge}</strong>",
-      "timeTransfer": "El destinatario lo vera en su cuenta dentro de los próximos <strong>3 días.</strong>"
+      "title": "Transfer {amount}?",
+      "text": "You are sending money to {name} - {bank} {mask} from your {accountFrom}",
+      "transactionCost": "The transaction fee is: <strong>{charge}</strong>",
+      "timeTransfer": "The payment will be received within the next <strong>3 Business Days.</strong>"
     },
     "recurring": {
-      "title": "Configurar recurrencia",
-      "repeat": "Repetir ",
-      "on": "Los dias",
-      "weekly": "Semanalmente",
-      "monthly": "Mensualmente",
-      "custom": "Personalizar",
-      "ends": "Finalizar",
-      "oneYear": "1 Año",
-      "date": " Fecha",
-      "occurrences": "Ocurrencias",
-      "yes": "Sí",
+      "title": "Recurring",
+      "repeat": "Repeat",
+      "on": "On",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "custom": "Custom",
+      "ends": "Ends",
+      "oneYear": "1 Year",
+      "date": "Date",
+      "occurrences": "Occurrences",
+      "yes": "Yes",
       "no": "No",
-      "saturday": "D",
-      "monday": "L",
-      "tuesday": "M",
-      "wednesday": "X",
-      "thursday": "J",
-      "friday": "V",
+      "saturday": "S",
+      "monday": "M",
+      "tuesday": "T",
+      "wednesday": "W",
+      "thursday": "T",
+      "friday": "F",
       "sunday": "S",
-      "every-1": "Cada mes",
-      "every-2": "Cada 2 meses",
-      "every-3": "Cada 3 meses",
-      "every-6": "Cada 6 meses",
-      "every-12": "Cada 12 meses"
+      "every-1": "Every month",
+      "every-2": "Every other month",
+      "every-3": "Every 3 months",
+      "every-6": "Every 6 months",
+      "every-12": "Every 12 months"
     }
   },
   "hint": {
-    "available": "{amount} disponible",
-    "withAmount": "{amount} después de la transferencia"
+    "available": "{amount} available",
+    "withAmount": "{amount} remaining after transfer"
   },
   "button": {
-    "transfer": "Transferir",
-    "cancel": "Cancelar",
-    "back": "Volver a productos",
-    "confirm": "Continuar",
-    "retry": "Reintentar",
-    "continue": "Continuar",
-    "save": "Guardar",
-    "share": "Compartir",
-    "download": "Descargar"
+    "transfer": "Transfer",
+    "cancel": "Cancel",
+    "back": "Back to products",
+    "confirm": "Confirm",
+    "retry": "Retry",
+    "continue": "Continue",
+    "save": "Save",
+    "share": "Share",
+    "download": "Download"
   },
   "transfer": {
-    "title": "Transferencia rápida a",
-    "change": "Cambiar",
-    "from": "Desde",
-    "total": "Monto",
-    "actionSingle": "Transferir"
+    "title": "Quick Transfer To",
+    "change": "Change",
+    "from": "From",
+    "total": "Total",
+    "actionSingle": "Transfer"
   },
   "result": {
-    "transferSuccess": "Transferencia exitosa",
-    "transferFailed": "Transferencia fallida",
-    "transferErrorMessage": "We couldn’t complete your transfer due to {message}",
+    "transferSuccess": "Transfer successful",
+    "scheduledTransferSuccess": "Scheduled transfer for <strong>{date}</strong>",
+    "transferFailed": "Transfer failure",
+    "transferErrorMessage": "No pudimos realizar la transferencia debido a problemas de comunicación con el banco del destinatario.",
     "errorSolution": "Please {solution}",
-    "moneyPaid": "Monto transferido",
-    "transferTo": "Transferencia a",
-    "transactionId": "ID de la transacción",
-    "timeDate": "Fecha/hora del pago",
+    "moneyPaid": "Money transferred",
+    "transferTo": "Transfer to",
+    "transactionId": "Transaction ID",
+    "timeDate": "Time & Date",
     "terms": {
-      "text": "Todas tus transacciones se realizan de manera rápida y segura.",
-      "link": "Términos y condiciones."
+      "text": "All your transactions are safe and fast.",
+      "link": "Terms & Conditions."
     }
   },
   "updateFavorite": {
-    "success": "El favorito ha sido actualizado",
-    "error": "No se pudo actualizar el contacto favorito"
+    "success": "Favorite contacts have been updated",
+    "error": "Unable to update favorite contact"
   }
 }

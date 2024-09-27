@@ -18,6 +18,7 @@ import {
   getAmountUsed,
   getSelectedContact,
   getSelectedAccount,
+  getScheduledTransfer,
 } from '../store/selectors';
 
 export default function ModalConfirmTransfer() {
@@ -27,6 +28,7 @@ export default function ModalConfirmTransfer() {
   const selectedContact = useAppSelector(getSelectedContact);
   const selectedAccount = useAppSelector(getSelectedAccount);
   const originAccount = useAppSelector(getOriginAccount);
+  const scheduledAt = useAppSelector(getScheduledTransfer);
   const { values: [amountUsedFormatted] } = useFormatCurrency(amountUsed, 0.12);
   const { callback: transfer, loading } = useTransfer();
 
@@ -40,6 +42,7 @@ export default function ModalConfirmTransfer() {
           toAccountId: selectedContact.id,
           fromAccountId: originAccount.id,
           amount: amountUsed,
+          scheduledAt: scheduledAt ? scheduledAt.toISOString() : null,
         },
       );
     }
@@ -49,11 +52,20 @@ export default function ModalConfirmTransfer() {
           toAccountId: selectedAccount.id,
           fromAccountId: originAccount.id,
           amount: amountUsed,
+          scheduledAt: scheduledAt ? scheduledAt.toISOString() : null,
         },
       );
     }
     closePortal();
-  }, [amountUsed, closePortal, originAccount, selectedAccount, selectedContact, transfer]);
+  }, [
+    amountUsed,
+    closePortal,
+    originAccount,
+    selectedAccount,
+    selectedContact,
+    scheduledAt,
+    transfer,
+  ]);
 
   return (
     <DModal

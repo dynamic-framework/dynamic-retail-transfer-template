@@ -15,6 +15,8 @@ export const VARS_CURRENCY = {
   decimal: liquidParser.parse('{{vars.currency-decimal}}'),
 };
 
+export const VARS_FORMAT_DATE = liquidParser.parse('{{vars.format-date}}');
+
 // PATHs
 export const DASHBOARD_PATH = liquidParser.parse('{{vars.dashboard-path}}');
 export const NEW_CONTACT_PATH = liquidParser.parse('{{vars.new-contact-path}}');

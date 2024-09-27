@@ -106,3 +106,8 @@ export const getIsLoadingAccounts = createSelector(
   getState,
   (widget) => widget.isLoadingAccounts,
 );
+
+export const getScheduledTransfer = createSelector(
+  getState,
+  (widget) => widget.scheduledTransaction,
+);
