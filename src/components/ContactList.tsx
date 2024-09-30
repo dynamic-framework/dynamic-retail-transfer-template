@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import useContacts from '../services/hooks/useContactsEffect';
 
 import ContactListItem from './ContactListItem';
-import SkeletonList from './SkeletonList';
+import LoaderList from './LoaderList';
 
 export default function ContactList() {
   const { t } = useTranslation();
@@ -15,7 +15,7 @@ export default function ContactList() {
   } = useContacts();
 
   if (loading) {
-    return <SkeletonList />;
+    return <LoaderList />;
   }
   return (
     <>
