@@ -16,14 +16,15 @@
       background: var(--bs-gray-50);
     }
   }
+
   .accounts {
     .d-quick-action-button {
       --bs-quick-action-button-representative-image-size: 2rem;
       --bs-quick-action-button-padding: .5rem;
-      --bs-quick-action-button-border-radius: 0;
-      --bs-quick-action-button-border-right: 0;
-      --bs-quick-action-button-border-left: 0;
-      --bs-quick-action-button-border-bottom: 0;
+      --#{$prefix}quick-action-button-border-radius: 0;
+      --#{$prefix}quick-action-button-border-right: 0;
+      --#{$prefix}quick-action-button-border-left: 0;
+      --#{$prefix}quick-action-button-border-bottom: 0;
     }
   }
 }
