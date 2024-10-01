@@ -2,15 +2,20 @@
 
 .transfer-template,
 .d-portal {
+  @include media-breakpoint-down(md) {
+    .modal-body .d-input-pin {
+      --#{$prefix}input-pin-form-control-size: var(--#{$prefix}ref-spacer-10);
+    }
+  }
 
   .contacts,
   .favorite-contacts,
   .accounts {
     .d-quick-action-button {
-      --bs-quick-action-button-border-radius: 0;
-      --bs-quick-action-button-border-right: 0;
-      --bs-quick-action-button-border-left: 0;
-      --bs-quick-action-button-border-bottom: 0;
+      --#{$prefix}quick-action-button-border-radius: 0;
+      --#{$prefix}quick-action-button-border-right: 0;
+      --#{$prefix}quick-action-button-border-left: 0;
+      --#{$prefix}quick-action-button-border-bottom: 0;
     }
   }
 }
