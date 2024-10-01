@@ -4,16 +4,18 @@ import {
   DTabContent,
   DTabs,
 } from '@dynamic-framework/ui-react';
-import { useCallback, useMemo, useState } from 'react';
+import {
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { NEW_CONTACT_PATH } from '../config/widgetConfig';
 import useAccountsEffect from '../services/hooks/useAccountsEffect';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { getSelectedTransferType, getTransferTypes } from '../store/selectors';
+import { useAppDispatch } from '../store/hooks';
 import {
   setContactsQuery,
-  setSelectedTransferType,
 } from '../store/slice';
 
 import AccountList from './AccountList';
@@ -21,24 +23,20 @@ import ContactList from './ContactList';
 
 export default function TransferPanel() {
   useAccountsEffect();
-
-  const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const transferTypes = useAppSelector(getTransferTypes);
-  const selectedTransferType = useAppSelector(getSelectedTransferType);
+  const dispatch = useAppDispatch();
+
+  const TRANSFER_TABS = useMemo(() => [
+    { label: t('transferPanel.contact'), tab: 'contact' },
+    { label: t('transferPanel.betweenAccounts'), tab: 'accounts' },
+  ], [t]);
+
   const [contactSearchQuery, setContactSearchQuery] = useState<string | undefined>(undefined);
-  const currentTab = useMemo(
-    () => selectedTransferType ?? transferTypes[0].tab,
-    [selectedTransferType, transferTypes],
-  );
+  const [currentTab, setCurrentTab] = useState(TRANSFER_TABS[0].tab);
 
   const handleSearchContact = useCallback((value: string | undefined) => {
     setContactSearchQuery(value);
     dispatch(setContactsQuery(value || ''));
-  }, [dispatch]);
-
-  const handleTransferSelector = useCallback((option: string) => {
-    dispatch(setSelectedTransferType(option));
   }, [dispatch]);
 
   return (
@@ -51,17 +49,21 @@ export default function TransferPanel() {
         onChange={handleSearchContact}
       />
       <DTabs
-        options={transferTypes}
+        options={TRANSFER_TABS}
         defaultSelected={currentTab}
-        onChange={(type) => handleTransferSelector(type.tab)}
+        onChange={(type) => setCurrentTab(type.tab)}
       >
-        <DTabContent tab={transferTypes[0].tab}>
+        <DTabContent tab={TRANSFER_TABS[0].tab}>
           <div className="mb-4">
             <a
               href={NEW_CONTACT_PATH}
               className="d-flex gap-4 border border-gray-100 rounded p-4 text-black new-contact-link"
             >
-              <DIcon icon="person-add" size="40px" className="text-secondary-500" />
+              <DIcon
+                icon="person-add"
+                size="40px"
+                className="text-secondary-500"
+              />
               <div>
                 <strong>{t('transferPanel.newContact')}</strong>
                 <small className="text-gray-500 d-block">{t('transferPanel.newContactHint')}</small>
@@ -70,7 +72,7 @@ export default function TransferPanel() {
           </div>
           <ContactList />
         </DTabContent>
-        <DTabContent tab={transferTypes[1].tab}>
+        <DTabContent tab={TRANSFER_TABS[1].tab}>
           <AccountList />
         </DTabContent>
       </DTabs>

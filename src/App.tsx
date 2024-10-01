@@ -1,11 +1,27 @@
 import { useDContext } from '@dynamic-framework/ui-react';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
-import Gateway from './components/Gateway';
-import { CONTEXT_CONFIG } from './config/widgetConfig';
+import OngoingTransfer from './components/OngoingTransfer';
+import TransferPanel from './components/TransferPanel';
+import TransferResult from './components/TransferResult';
+import { CONTEXT_CONFIG, VIEW } from './config/widgetConfig';
+import { useAppSelector } from './store/hooks';
+import { getCurrentView } from './store/selectors';
+
+const VIEWS = {
+  [VIEW.init]: TransferPanel,
+  [VIEW.details]: OngoingTransfer,
+  [VIEW.voucher]: TransferResult,
+};
 
 export default function App() {
   const { setContext } = useDContext();
+  const view = useAppSelector(getCurrentView);
+
+  const CurrentView = useMemo(
+    () => VIEWS[view],
+    [view],
+  );
 
   useEffect(() => {
     setContext(CONTEXT_CONFIG);
@@ -13,7 +29,7 @@ export default function App() {
 
   return (
     <div className="mx-auto col-xl-6">
-      <Gateway />
+      <CurrentView />
     </div>
   );
 }

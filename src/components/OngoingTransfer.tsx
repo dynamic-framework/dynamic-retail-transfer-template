@@ -8,7 +8,12 @@ import {
   DQuickActionSwitch,
   useDPortalContext,
 } from '@dynamic-framework/ui-react';
-import { useEffect, useMemo, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 
 import useAmount from '../hooks/useAmount';
@@ -26,13 +31,14 @@ import {
   setSelectedContact,
   setSelectedAccount,
   setOriginAccount,
+  setCurrentView,
 } from '../store/slice';
 
 export default function OngoingTransfer() {
   const { t } = useTranslation();
   const { openPortal } = useDPortalContext();
   const dispatch = useAppDispatch();
-  const [transferMessage, setTransferMessage] = useState<string | undefined>();
+  const [transferMessage, setTransferMessage] = useState<string>('');
 
   const accounts = useAppSelector(getAccounts);
   const originAccount = useAppSelector(getOriginAccount);
@@ -53,6 +59,12 @@ export default function OngoingTransfer() {
     canTransfer,
   } = useAmount();
 
+  const handleChangeDestiny = useCallback(() => {
+    dispatch(setSelectedContact(undefined));
+    dispatch(setSelectedAccount(undefined));
+    dispatch(setCurrentView('init'));
+  }, [dispatch]);
+
   useEffect(() => {
     if (originAccount === undefined) {
       dispatch(setOriginAccount(accountsOrigin[0]));
@@ -68,7 +80,7 @@ export default function OngoingTransfer() {
           selectedOption: originAccount,
         }}
         valueExtractor={({ accountNumber }: Account) => accountNumber}
-        labelExtractor={({ name, accountNumber }: Account) => `${name} ••• ${accountNumber.slice(-3)}`}
+        labelExtractor={({ name, accountNumber }: Account) => `${name} *** ${accountNumber.slice(-3)}`}
         options={accountsOrigin}
         onChange={(account) => (
           dispatch(setOriginAccount(account))
@@ -93,17 +105,17 @@ export default function OngoingTransfer() {
               line1={selectedContact.name}
               line2={`${selectedContact.bank} ${selectedContact.accountNumber.slice(-3)}`}
               actionLinkText={t('ongoingTransfer.change')}
-              onClick={() => dispatch(setSelectedContact(undefined))}
+              onClick={handleChangeDestiny}
             />
           )}
           {selectedAccount && (
             <DQuickActionButton
               className="w-100"
               line1={selectedAccount.name}
-              line2={`••• ${selectedAccount.accountNumber.slice(-3)}`}
+              line2={`*** ${selectedAccount.accountNumber.slice(-3)}`}
               representativeIcon="heart-fill"
               actionLinkText={t('ongoingTransfer.change')}
-              onClick={() => dispatch(setSelectedAccount(undefined))}
+              onClick={handleChangeDestiny}
             />
           )}
         </div>
