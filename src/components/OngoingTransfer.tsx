@@ -118,7 +118,6 @@ export default function OngoingTransfer() {
               className="w-100"
               line1={selectedAccount.name}
               line2={`*** ${selectedAccount.accountNumber.slice(-3)}`}
-              representativeIcon="heart-fill"
               actionLinkText={t('ongoingTransfer.change')}
               onClick={handleChangeDestiny}
             />
