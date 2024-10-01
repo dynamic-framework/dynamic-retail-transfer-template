@@ -2,6 +2,12 @@
 
 .transfer-template,
 .d-portal {
+  @include media-breakpoint-down(md) {
+    .modal-body .d-input-pin {
+      --#{$prefix}input-pin-form-control-size: var(--#{$prefix}ref-spacer-10);
+    }
+  }
+
   .quick-action-button,
   .new-contact-link {
     background: transparent;

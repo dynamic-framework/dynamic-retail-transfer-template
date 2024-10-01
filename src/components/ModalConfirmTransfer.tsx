@@ -7,8 +7,9 @@ import {
   DButton,
   useFormatCurrency,
   useDPortalContext,
+  DInputPin,
 } from '@dynamic-framework/ui-react';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import useTransfer from '../services/hooks/useTransfer';
@@ -21,9 +22,12 @@ import {
   getScheduledTransfer,
 } from '../store/selectors';
 
+const PIN_LENGTH = 6;
+
 export default function ModalConfirmTransfer() {
   const { t } = useTranslation();
   const { closePortal } = useDPortalContext();
+
   const amountUsed = useAppSelector(getAmountUsed);
   const selectedContact = useAppSelector(getSelectedContact);
   const selectedAccount = useAppSelector(getSelectedAccount);
@@ -32,10 +36,21 @@ export default function ModalConfirmTransfer() {
   const { values: [amountUsedFormatted] } = useFormatCurrency(amountUsed, 0.12);
   const { callback: transfer, loading } = useTransfer();
 
+  const [pin, setPin] = useState('');
+  const [invalidPin, setInvalidPin] = useState(false);
+
   const handleTransfer = useCallback(async () => {
+    if (pin.length < PIN_LENGTH) {
+      setInvalidPin(true);
+      return;
+    }
+
+    setInvalidPin(false);
+
     if (!originAccount) {
       return;
     }
+
     if (selectedContact) {
       await transfer(
         {
@@ -46,6 +61,7 @@ export default function ModalConfirmTransfer() {
         },
       );
     }
+
     if (selectedAccount) {
       await transfer(
         {
@@ -56,14 +72,15 @@ export default function ModalConfirmTransfer() {
         },
       );
     }
+
     closePortal();
-  }, [
-    amountUsed,
+  }, [amountUsed,
     closePortal,
     originAccount,
+    pin.length,
     selectedAccount,
     selectedContact,
-    scheduledAt,
+   scheduledAt,
     transfer,
   ]);
 
@@ -72,7 +89,6 @@ export default function ModalConfirmTransfer() {
       name="modalConfirmPayment"
       centered
       staticBackdrop
-      className="d-block"
     >
       <DModalHeader
         showCloseButton
@@ -93,6 +109,12 @@ export default function ModalConfirmTransfer() {
               accountFrom: `${originAccount?.name || ''} ${originAccount?.accountNumber.slice(-3) || '***'}`,
             })}
           </p>
+          <DInputPin
+            className="mt-4"
+            characters={PIN_LENGTH}
+            onChange={(e) => setPin(e)}
+            invalid={invalidPin && pin.length < PIN_LENGTH}
+          />
         </div>
       </DModalBody>
       <DModalFooter>
