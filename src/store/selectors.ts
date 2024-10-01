@@ -12,6 +12,11 @@ export const getAccounts = createSelector(
   (widget) => widget.accounts,
 );
 
+export const getCurrentView = createSelector(
+  getState,
+  (widget) => widget.currentView,
+);
+
 export const getContacts = createSelector(
   getState,
   (widget) => widget.contacts,
@@ -25,6 +30,12 @@ export const getSelectedContact = createSelector(
 export const getSelectedAccount = createSelector(
   getState,
   (widget) => widget.selectedAccount,
+);
+
+export const getSelectedDestiny = createSelector(
+  getSelectedContact,
+  getSelectedAccount,
+  (selectedContact, selectedAccount) => selectedContact || selectedAccount,
 );
 
 export const getAmountUsed = createSelector(
@@ -52,29 +63,9 @@ export const getResult = createSelector(
   (widget) => widget.result,
 );
 
-export const getIsTransferred = createSelector(
-  getState,
-  (widget) => widget.isTransferred,
-);
-
-export const getBanks = createSelector(
-  getState,
-  (widget) => widget.banks,
-);
-
 export const getContactsQuery = createSelector(
   getState,
   (widget) => widget.contactsQuery,
-);
-
-export const getTransferTypes = createSelector(
-  getState,
-  (widget) => widget.transferTypes,
-);
-
-export const getSelectedTransferType = createSelector(
-  getState,
-  (widget) => widget.selectedTransferType,
 );
 
 export const getContactsFiltered = createSelector(

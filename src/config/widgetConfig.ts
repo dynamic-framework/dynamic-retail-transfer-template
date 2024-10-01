@@ -15,6 +15,15 @@ export const VARS_CURRENCY = {
   decimal: liquidParser.parse('{{vars.currency-decimal}}'),
 };
 
+// Views
+export const VIEW = {
+  init: 'init',
+  details: 'details',
+  voucher: 'voucher',
+};
+
+export type View = keyof typeof VIEW;
+
 export const VARS_FORMAT_DATE = liquidParser.parse('{{vars.format-date}}');
 
 // PATHs
