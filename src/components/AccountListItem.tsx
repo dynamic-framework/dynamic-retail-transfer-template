@@ -1,23 +1,23 @@
-import { DAvatar, DButtonIcon } from '@dynamic-framework/ui-react';
+import { DAvatar } from '@dynamic-framework/ui-react';
 import classNames from 'classnames';
 import { useCallback } from 'react';
 
-import type { Account, Contact } from '../services/interface';
+import type { Account } from '../services/interface';
 import { useAppDispatch } from '../store/hooks';
-import { setCurrentView, setSelectedContact } from '../store/slice';
+import { setCurrentView, setSelectedAccount } from '../store/slice';
 import { getInitials } from '../utils/getInitials';
 
 type Props = {
-  contact: Contact | Account;
+  account: Account;
 };
 
-export default function ContactListItem({ contact }: Props) {
+export default function AccountListItem({ account }: Props) {
   const dispatch = useAppDispatch();
 
   const handleSelectContact = useCallback(() => {
-    dispatch(setSelectedContact(contact));
+    dispatch(setSelectedAccount(account));
     dispatch(setCurrentView('details'));
-  }, [contact, dispatch]);
+  }, [account, dispatch]);
 
   return (
     <button
@@ -29,18 +29,12 @@ export default function ContactListItem({ contact }: Props) {
       )}
     >
       <div className="d-flex gap-2 align-items-center">
-        <DAvatar title={getInitials(contact.name)} />
+        <DAvatar title={getInitials(account.name)} />
         <div>
-          <p className="mb-0 fw-bold">{contact.name}</p>
-          <small className="text-gray-500">{contact.accountNumber}</small>
+          <p className="mb-0 fw-bold">{account.name}</p>
+          <small className="text-gray-500">{account.accountNumber}</small>
         </div>
       </div>
-      <DButtonIcon
-        theme="secondary"
-        size="lg"
-        variant="link"
-        icon={contact.isFavorite ? 'star-fill' : 'star'}
-      />
     </button>
   );
 }
