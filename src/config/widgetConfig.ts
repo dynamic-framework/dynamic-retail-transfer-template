@@ -15,8 +15,18 @@ export const VARS_CURRENCY = {
   decimal: liquidParser.parse('{{vars.currency-decimal}}'),
 };
 
+// Views
+export const VIEW = {
+  init: 'init',
+  details: 'details',
+  voucher: 'voucher',
+};
+
+export type View = keyof typeof VIEW;
+
 // PATHs
 export const DASHBOARD_PATH = liquidParser.parse('{{vars.dashboard-path}}');
+export const NEW_CONTACT_PATH = liquidParser.parse('{{vars.new-contact-path}}');
 
 export const CONTEXT_CONFIG = {
   language: SITE_LANG,

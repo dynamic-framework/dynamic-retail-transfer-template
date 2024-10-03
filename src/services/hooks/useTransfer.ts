@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { useAppDispatch } from '../../store/hooks';
-import { setIsTransferred, setResult } from '../../store/slice';
+import { setCurrentView, setResult } from '../../store/slice';
 import errorHandler from '../../utils/errorHandler';
 import { Transfer } from '../interface';
 import { TransferRepository } from '../repositories';
@@ -19,7 +19,7 @@ export default function useTransfer() {
         { abortSignal: abortController.signal },
       );
       dispatch(setResult(result));
-      dispatch(setIsTransferred(true));
+      dispatch(setCurrentView('voucher'));
       setLoading(false);
     } catch (error) {
       setLoading(false);

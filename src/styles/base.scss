@@ -8,14 +8,12 @@
     }
   }
 
-  .contacts,
-  .favorite-contacts,
-  .accounts {
-    .d-quick-action-button {
-      --#{$prefix}quick-action-button-border-radius: 0;
-      --#{$prefix}quick-action-button-border-right: 0;
-      --#{$prefix}quick-action-button-border-left: 0;
-      --#{$prefix}quick-action-button-border-bottom: 0;
+  .quick-action-button,
+  .new-contact-link {
+    background: transparent;
+    &:hover {
+      text-decoration: none;
+      background: var(--#{$prefix}gray-50);
     }
   }
 }

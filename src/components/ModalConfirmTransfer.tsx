@@ -94,7 +94,7 @@ export default function ModalConfirmTransfer() {
           {t('modal.transfer.title', { amount: amountUsedFormatted })}
         </h4>
       </DModalHeader>
-      <DModalBody className="pt-0">
+      <DModalBody>
         <div className="bg-gray-soft p-4 rounded-1">
           <p className="mb-0">
             {t('modal.transfer.text', {

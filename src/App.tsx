@@ -1,27 +1,35 @@
 import { useDContext } from '@dynamic-framework/ui-react';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
-import CreateContact from './components/CreateContact';
-import Gateway from './components/Gateway';
-import { CONTEXT_CONFIG } from './config/widgetConfig';
+import OngoingTransfer from './components/OngoingTransfer';
+import TransferPanel from './components/TransferPanel';
+import TransferResult from './components/TransferResult';
+import { CONTEXT_CONFIG, VIEW } from './config/widgetConfig';
 import { useAppSelector } from './store/hooks';
-import { getView } from './store/selectors';
+import { getCurrentView } from './store/selectors';
+
+const VIEWS = {
+  [VIEW.init]: TransferPanel,
+  [VIEW.details]: OngoingTransfer,
+  [VIEW.voucher]: TransferResult,
+};
 
 export default function App() {
   const { setContext } = useDContext();
+  const view = useAppSelector(getCurrentView);
+
+  const CurrentView = useMemo(
+    () => VIEWS[view],
+    [view],
+  );
 
   useEffect(() => {
     setContext(CONTEXT_CONFIG);
   }, [setContext]);
 
-  const view = useAppSelector(getView);
-
   return (
-    <div className="row">
-      <div className="offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        {view === 'transfer' && <Gateway />}
-        {view === 'newContact' && <CreateContact />}
-      </div>
+    <div className="mx-auto col-xl-6">
+      <CurrentView />
     </div>
   );
 }
