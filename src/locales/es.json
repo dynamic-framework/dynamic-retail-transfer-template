@@ -117,7 +117,7 @@
     "transferFailed": "Transfer failure",
     "transferErrorMessage": "No pudimos realizar la transferencia debido a problemas de comunicación con el banco del destinatario.",
     "errorSolution": "Please {solution}",
-    "moneyPaid": "Money transferred",
+    "moneyPaid": "Money to transfer",
     "transferTo": "Transfer to",
     "transactionId": "Transaction ID",
     "timeDate": "Time & Date",

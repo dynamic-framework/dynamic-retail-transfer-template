@@ -57,7 +57,7 @@ export default function ModalConfirmTransfer() {
           toAccountId: selectedContact.id,
           fromAccountId: originAccount.id,
           amount: amountUsed,
-          scheduledAt: scheduledAt ? scheduledAt.toISOString() : null,
+          scheduledAt,
         },
       );
     }
@@ -68,7 +68,7 @@ export default function ModalConfirmTransfer() {
           toAccountId: selectedAccount.id,
           fromAccountId: originAccount.id,
           amount: amountUsed,
-          scheduledAt: scheduledAt ? scheduledAt.toISOString() : null,
+          scheduledAt,
         },
       );
     }

@@ -42,6 +42,9 @@ export type WidgetState = {
   amountUsed?: number;
   message?: string;
   result?: Transaction;
+  banks: Array<Bank>;
+  isTransferred?: boolean;
+  scheduledTransaction: string | null;
   isLoadingAccounts: boolean;
 };
 
@@ -96,7 +99,7 @@ const slice = createSlice({
     setIsLoadingAccounts(state, action: PayloadAction<boolean>) {
       state.isLoadingAccounts = action.payload;
     },
-    setScheduledTransaction(state, action: PayloadAction<Date | null>) {
+    setScheduledTransaction(state, action: PayloadAction<string | null>) {
       state.scheduledTransaction = action.payload;
     },
   },

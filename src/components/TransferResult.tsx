@@ -77,7 +77,7 @@ export default function TransferResult() {
                     <Trans
                       i18nKey="result.scheduledTransferSuccess"
                       values={{
-                        date: DateTime.fromISO(scheduled.toISOString()).toFormat(VARS_FORMAT_DATE),
+                        date: DateTime.fromISO(scheduled).toFormat(VARS_FORMAT_DATE),
                       }}
                     />
                   </span>
