@@ -33,6 +33,7 @@ export default function ModalConfirmTransfer() {
   const selectedAccount = useAppSelector(getSelectedAccount);
   const originAccount = useAppSelector(getOriginAccount);
   const scheduledAt = useAppSelector(getScheduledTransfer);
+
   const { values: [amountUsedFormatted] } = useFormatCurrency(amountUsed, 0.12);
   const { callback: transfer, loading } = useTransfer();
 
@@ -80,7 +81,7 @@ export default function ModalConfirmTransfer() {
     pin.length,
     selectedAccount,
     selectedContact,
-   scheduledAt,
+    scheduledAt,
     transfer,
   ]);
 
