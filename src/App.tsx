@@ -19,8 +19,8 @@ export default function App() {
   const view = useAppSelector(getCurrentView);
 
   const CurrentView = useMemo(
-      () => VIEWS[view],
-      [view],
+    () => VIEWS[view],
+    [view],
   );
 
   useEffect(() => {
@@ -28,8 +28,8 @@ export default function App() {
   }, [setContext]);
 
   return (
-      <div className="mx-auto col-xl-6">
-        <CurrentView />
-      </div>
+    <div className="mx-auto col-xl-6">
+      <CurrentView />
+    </div>
   );
 }

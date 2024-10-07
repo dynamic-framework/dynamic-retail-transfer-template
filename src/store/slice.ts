@@ -4,6 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { View } from '../config/widgetConfig';
 import {
   Account,
+  Bank,
   Contact,
   Transaction,
 } from '../services/interface';
@@ -36,9 +37,6 @@ export type WidgetState = {
   selectedAccount?: Account;
   originAccount?: Account;
   selectedContact?: Contact;
-  transferTypes: Array<DTabOption>;
-  selectedTransferType? : string;
-  view: string;
   amountUsed?: number;
   message?: string;
   result?: Transaction;
@@ -53,9 +51,8 @@ const initialState = {
   contacts: [],
   currentView: 'init',
   contactsQuery: '',
-  view: 'transfer',
+  scheduledTransaction: null,
   banks: [],
-
   isLoadingAccounts: false,
 } as WidgetState;
 
@@ -80,9 +77,6 @@ const slice = createSlice({
     },
     setSelectedAccount(state, action: PayloadAction<Account | undefined>) {
       state.selectedAccount = action.payload;
-    },
-    setView(state, action: PayloadAction<string>) {
-      state.view = action.payload;
     },
     setAmountUsed(state, action: PayloadAction<number | undefined>) {
       state.amountUsed = action.payload;
@@ -113,10 +107,10 @@ export const {
   setSelectedAccount,
   setOriginAccount,
   setSelectedContact,
-  setView,
   setAmountUsed,
   setMessage,
   setResult,
   setIsLoadingAccounts,
+  setScheduledTransaction,
 } = slice.actions;
 export default slice.reducer;
