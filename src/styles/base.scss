@@ -13,7 +13,7 @@
     background: transparent;
     &:hover {
       text-decoration: none;
-      background: var(--bs-gray-50);
+      background: var(--#{$prefix}gray-50);
     }
   }
 }
