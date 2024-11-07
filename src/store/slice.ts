@@ -42,7 +42,7 @@ export type WidgetState = {
   result?: Transaction;
   banks: Array<Bank>;
   isTransferred?: boolean;
-  scheduledTransaction: string | null;
+  scheduledTransaction?: string;
   isLoadingAccounts: boolean;
 };
 
@@ -51,7 +51,6 @@ const initialState = {
   contacts: [],
   currentView: 'init',
   contactsQuery: '',
-  scheduledTransaction: null,
   banks: [],
   isLoadingAccounts: false,
 } as WidgetState;
