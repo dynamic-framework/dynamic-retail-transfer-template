@@ -65,13 +65,10 @@ export default function TransferResult() {
               {scheduled && (
                 <div className="p-4 rounded-1 d-flex gap-4 align-items-center justify-content-center">
                   <DIcon
-                    className="bg-success-500 rounded-pill p-2 d-flex items-center text-white"
+                    theme="success"
+                    hasCircle
                     icon="calendar"
-                    style={{
-                      width: '2rem',
-                      height: '2rem',
-                    }}
-                    size=".75rem"
+                    size="1rem"
                   />
                   <span>
                     <Trans
