@@ -5,9 +5,9 @@ import {
 } from '@dynamic-framework/ui-react';
 import { DateTime } from 'luxon';
 import { useCallback, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
-import { DASHBOARD_PATH, SITE_URL } from '../config/widgetConfig';
+import { DASHBOARD_PATH, SITE_URL, VARS_FORMAT_DATE } from '../config/widgetConfig';
 import useScreenshotDownload from '../hooks/useScreenshotDownload';
 import useScreenshotWebShare from '../hooks/useScreenshotWebShare';
 import type { Transaction } from '../services/interface';
@@ -17,6 +17,7 @@ import {
   getResult,
   getSelectedContact,
   getSelectedAccount,
+  getScheduledTransfer,
 } from '../store/selectors';
 import errorHandler from '../utils/errorHandler';
 
@@ -27,6 +28,7 @@ export default function TransferResult() {
   const selectedAccount = useAppSelector(getSelectedAccount);
   const { shareRef, share } = useScreenshotWebShare();
   const { downloadRef, download } = useScreenshotDownload();
+  const scheduled = useAppSelector(getScheduledTransfer);
 
   const { values: [amountUsedFormatted] } = useFormatCurrency(amountUsed);
 
@@ -60,6 +62,24 @@ export default function TransferResult() {
           </div>
           {transferDone && (
             <>
+              {scheduled && (
+                <div className="p-4 rounded-1 d-flex gap-4 align-items-center justify-content-center">
+                  <DIcon
+                    theme="success"
+                    hasCircle
+                    icon="calendar"
+                    size="1rem"
+                  />
+                  <span>
+                    <Trans
+                      i18nKey="result.scheduledTransferSuccess"
+                      values={{
+                        date: DateTime.fromISO(scheduled).toFormat(VARS_FORMAT_DATE),
+                      }}
+                    />
+                  </span>
+                </div>
+              )}
               <div className="d-flex flex-column gap-1 text-center px-4 py-2 bg-secondary-soft rounded-1">
                 <span className="text-gray fw-bold fs-3">{amountUsedFormatted}</span>
                 <p className="sp mb-0">

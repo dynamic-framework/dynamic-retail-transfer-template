@@ -10,6 +10,7 @@
     "currency-decimal": ",",
     "dashboard-path": "#",
     "new-contact-path": "#",
+    "format-date": "dd/MM/yyyy",
     "api-path": "https://stoplight.io/mocks/modyo/dynamic/204091081"
   }
 }

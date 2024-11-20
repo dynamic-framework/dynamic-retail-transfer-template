@@ -4,6 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { View } from '../config/widgetConfig';
 import {
   Account,
+  Bank,
   Contact,
   Transaction,
 } from '../services/interface';
@@ -39,6 +40,9 @@ export type WidgetState = {
   amountUsed?: number;
   message?: string;
   result?: Transaction;
+  banks: Array<Bank>;
+  isTransferred?: boolean;
+  scheduledTransaction?: string;
   isLoadingAccounts: boolean;
 };
 
@@ -47,6 +51,7 @@ const initialState = {
   contacts: [],
   currentView: 'init',
   contactsQuery: '',
+  banks: [],
   isLoadingAccounts: false,
 } as WidgetState;
 
@@ -87,6 +92,9 @@ const slice = createSlice({
     setIsLoadingAccounts(state, action: PayloadAction<boolean>) {
       state.isLoadingAccounts = action.payload;
     },
+    setScheduledTransaction(state, action: PayloadAction<string | null>) {
+      state.scheduledTransaction = action.payload;
+    },
   },
 });
 
@@ -102,5 +110,6 @@ export const {
   setMessage,
   setResult,
   setIsLoadingAccounts,
+  setScheduledTransaction,
 } = slice.actions;
 export default slice.reducer;

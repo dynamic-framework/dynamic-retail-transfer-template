@@ -19,6 +19,7 @@ import {
   getAmountUsed,
   getSelectedContact,
   getSelectedAccount,
+  getScheduledTransfer,
 } from '../store/selectors';
 
 const PIN_LENGTH = 6;
@@ -31,6 +32,7 @@ export default function ModalConfirmTransfer() {
   const selectedContact = useAppSelector(getSelectedContact);
   const selectedAccount = useAppSelector(getSelectedAccount);
   const originAccount = useAppSelector(getOriginAccount);
+  const scheduledAt = useAppSelector(getScheduledTransfer);
 
   const { values: [amountUsedFormatted] } = useFormatCurrency(amountUsed, 0.12);
   const { callback: transfer, loading } = useTransfer();
@@ -56,6 +58,7 @@ export default function ModalConfirmTransfer() {
           toAccountId: selectedContact.id,
           fromAccountId: originAccount.id,
           amount: amountUsed,
+          scheduledAt,
         },
       );
     }
@@ -66,6 +69,7 @@ export default function ModalConfirmTransfer() {
           toAccountId: selectedAccount.id,
           fromAccountId: originAccount.id,
           amount: amountUsed,
+          scheduledAt,
         },
       );
     }
@@ -77,6 +81,7 @@ export default function ModalConfirmTransfer() {
     pin.length,
     selectedAccount,
     selectedContact,
+    scheduledAt,
     transfer,
   ]);
 
