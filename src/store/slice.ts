@@ -42,7 +42,7 @@ export type WidgetState = {
   result?: Transaction;
   banks: Array<Bank>;
   isTransferred?: boolean;
-  scheduledTransaction?: string;
+  scheduledTransaction?: string | null;
   isLoadingAccounts: boolean;
 };
 
