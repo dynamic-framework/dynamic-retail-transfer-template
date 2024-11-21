@@ -16,7 +16,9 @@ export default function useAccountsEffect() {
     (async () => {
       dispatch(setIsLoadingAccounts(true));
       try {
-        const data = await AccountRepository.list({ abortSignal: abortController.signal });
+        const data = await AccountRepository.list({
+          config: { abortSignal: abortController.signal },
+        });
         const accountQueryId = getAccountIdQueryString();
         const originAccount = data.find(({ id }) => accountQueryId === id);
         const origin = accountQueryId && originAccount ? originAccount : undefined;

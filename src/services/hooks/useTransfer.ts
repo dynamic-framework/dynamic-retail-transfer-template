@@ -14,10 +14,10 @@ export default function useTransfer() {
     const abortController = new AbortController();
     setLoading(true);
     try {
-      const result = await TransferRepository.transfer(
-        transfer,
-        { abortSignal: abortController.signal },
-      );
+      const result = await TransferRepository.transfer({
+        transferItem: transfer,
+        config: { abortSignal: abortController.signal },
+      });
       dispatch(setResult(result));
       dispatch(setCurrentView('voucher'));
       setLoading(false);
