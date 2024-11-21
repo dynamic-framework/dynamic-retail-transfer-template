@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import {
-  DModal,
   useFormatCurrency,
   useDPortalContext,
   DAlert,
@@ -18,7 +17,7 @@ import {
   getScheduledTransfer,
 } from '../store/selectors';
 
-import Otp from './Otp/components/Otp';
+import OtpModal from './Otp/OtpModal';
 
 export default function ModalConfirmTransfer() {
   const { t } = useTranslation();
@@ -71,37 +70,20 @@ export default function ModalConfirmTransfer() {
   ]);
 
   return (
-    <DModal
-      name="modalConfirmPayment"
-      centered
-      staticBackdrop
+    <OtpModal
+      action={handleTransfer}
+      isLoading={loading}
+      title={t('modal.transfer.title', { amount: amountUsedFormatted })}
     >
-      <DModal.Header
-        showCloseButton
-        onClose={closePortal}
-      >
-        <h4 className="fw-bold">
-          {t('modal.transfer.title', { amount: amountUsedFormatted })}
-        </h4>
-      </DModal.Header>
-      <DModal.Body>
-        <div className="bg-gray-soft p-4 rounded-1">
-          <Otp
-            isLoading={loading}
-            action={handleTransfer}
-          >
-            <DAlert theme="info">
-              {t('modal.transfer.text', {
-                name: selectedContact?.name || selectedAccount?.name,
-                bank: selectedContact?.bank || selectedAccount?.type,
-                mask: selectedContact?.accountNumber.slice(-3)
-                  || selectedAccount?.accountNumber.slice(-3),
-                accountFrom: `${originAccount?.name || ''} ${originAccount?.accountNumber.slice(-3) || '***'}`,
-              })}
-            </DAlert>
-          </Otp>
-        </div>
-      </DModal.Body>
-    </DModal>
+      <DAlert theme="info">
+        {t('modal.transfer.text', {
+          name: selectedContact?.name || selectedAccount?.name,
+          bank: selectedContact?.bank || selectedAccount?.type,
+          mask: selectedContact?.accountNumber.slice(-3)
+            || selectedAccount?.accountNumber.slice(-3),
+          accountFrom: `${originAccount?.name || ''} ${originAccount?.accountNumber.slice(-3) || '***'}`,
+        })}
+      </DAlert>
+    </OtpModal>
   );
 }
