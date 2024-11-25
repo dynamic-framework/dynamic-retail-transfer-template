@@ -1,20 +1,21 @@
-import type { GenericAbortSignal } from 'axios';
-
 import ApiClient from '../clients/apiClient';
 import { Transaction, Transfer } from '../interface';
 
+import { RepositoryParams } from './repository';
+
 export async function transfer(
-  transferItem: Transfer,
-  config: { abortSignal: GenericAbortSignal },
+  params: RepositoryParams<{
+    transferData: Transfer
+  }>,
 ) {
   const { data } = await ApiClient.request<Transaction>({
     url: 'transfer',
     method: 'POST',
-    signal: config.abortSignal,
+    signal: params.config?.abortSignal,
     headers: {
       Prefer: 'code=200',
     },
-    data: transferItem,
+    data: params.transferData,
   });
 
   return data;
