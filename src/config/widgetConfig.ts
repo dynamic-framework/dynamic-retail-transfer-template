@@ -16,13 +16,13 @@ export const VARS_CURRENCY = {
 };
 
 // Views
-export const VIEW = {
+export const STEP = {
   init: 'init',
   details: 'details',
   voucher: 'voucher',
 };
 
-export type View = keyof typeof VIEW;
+export type Step = keyof typeof STEP;
 
 export const VARS_FORMAT_DATE = liquidParser.parse('{{vars.format-date}}');
 

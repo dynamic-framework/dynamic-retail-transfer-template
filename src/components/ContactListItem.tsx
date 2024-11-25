@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 
 import type { Contact } from '../services/interface';
 import { useAppDispatch } from '../store/hooks';
-import { setCurrentView, setSelectedContact } from '../store/slice';
+import { setCurrentStep, setSelectedContact } from '../store/slice';
 
 type Props = {
   contact: Contact;
@@ -15,7 +15,7 @@ export default function ContactListItem({ contact }: Props) {
 
   const handleSelectContact = useCallback(() => {
     dispatch(setSelectedContact(contact));
-    dispatch(setCurrentView('details'));
+    dispatch(setCurrentStep('details'));
   }, [contact, dispatch]);
 
   return (

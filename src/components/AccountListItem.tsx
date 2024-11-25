@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 
 import type { DepositAccount } from '../services/interface';
 import { useAppDispatch } from '../store/hooks';
-import { setCurrentView, setSelectedAccount } from '../store/slice';
+import { setCurrentStep, setSelectedAccount } from '../store/slice';
 
 type Props = {
   depositAccount: DepositAccount;
@@ -15,7 +15,7 @@ export default function AccountListItem({ depositAccount }: Props) {
 
   const handleSelectContact = useCallback(() => {
     dispatch(setSelectedAccount(depositAccount));
-    dispatch(setCurrentView('details'));
+    dispatch(setCurrentStep('details'));
   }, [depositAccount, dispatch]);
 
   return (

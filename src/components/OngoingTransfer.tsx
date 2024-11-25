@@ -34,7 +34,7 @@ import {
   setSelectedAccount,
   setOriginAccount,
   setScheduledTransaction,
-  setCurrentView,
+  setCurrentStep,
 } from '../store/slice';
 
 export default function OngoingTransfer() {
@@ -67,7 +67,7 @@ export default function OngoingTransfer() {
   const handleChangeDestiny = useCallback(() => {
     dispatch(setSelectedContact(undefined));
     dispatch(setSelectedAccount(undefined));
-    dispatch(setCurrentView('init'));
+    dispatch(setCurrentStep('init'));
   }, [dispatch]);
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { View } from '../config/widgetConfig';
+import { Step } from '../config/widgetConfig';
 import {
   Bank,
   Contact,
@@ -30,7 +30,7 @@ export type EndRepeat = {
 };
 
 export type WidgetState = {
-  currentView: View;
+  currentStep: Step;
   accounts: Array<DepositAccount>;
   contacts: Array<Contact>;
   contactsQuery: string;
@@ -49,7 +49,7 @@ export type WidgetState = {
 const initialState = {
   accounts: [],
   contacts: [],
-  currentView: 'init',
+  currentStep: 'init',
   contactsQuery: '',
   banks: [],
   isLoadingAccounts: false,
@@ -59,8 +59,8 @@ const slice = createSlice({
   name: 'widget',
   initialState,
   reducers: {
-    setCurrentView(state, action: PayloadAction<View>) {
-      state.currentView = action.payload;
+    setCurrentStep(state, action: PayloadAction<Step>) {
+      state.currentStep = action.payload;
     },
     setAccounts(state, action: PayloadAction<Array<DepositAccount>>) {
       state.accounts = action.payload;
@@ -100,7 +100,7 @@ const slice = createSlice({
 
 export const {
   setAccounts,
-  setCurrentView,
+  setCurrentStep,
   setContacts,
   setContactsQuery,
   setSelectedAccount,

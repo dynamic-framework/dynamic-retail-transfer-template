@@ -11,9 +11,9 @@ export const getAccounts = createSelector(
   (widget) => widget.accounts,
 );
 
-export const getCurrentView = createSelector(
+export const getCurrentStep = createSelector(
   getState,
-  (widget) => widget.currentView,
+  (widget) => widget.currentStep,
 );
 
 export const getContacts = createSelector(
