@@ -1,8 +1,7 @@
-import { useFormatCurrency } from '@dynamic-framework/ui-react';
+import { getQueryString, useFormatCurrency } from '@dynamic-framework/ui-react';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import getAccountAmountQueryString from '../services/utils/getAccountAmountQueryString';
 import { useAppSelector } from '../store/hooks';
 import { getOriginAccountAmount } from '../store/selectors';
 
@@ -11,7 +10,7 @@ export default function useAmount() {
   const { format } = useFormatCurrency();
   const originAccountAmount = useAppSelector(getOriginAccountAmount);
 
-  const amountFromUrl = getAccountAmountQueryString();
+  const amountFromUrl = Number(getQueryString('amount'));
 
   const [amount, setAmount] = useState<number | undefined>(amountFromUrl);
 

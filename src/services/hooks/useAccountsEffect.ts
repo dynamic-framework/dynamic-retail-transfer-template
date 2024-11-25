@@ -1,3 +1,4 @@
+import { getQueryString } from '@dynamic-framework/ui-react';
 import { useEffect } from 'react';
 
 import { useAppDispatch } from '../../store/hooks';
@@ -5,7 +6,6 @@ import { setOriginAccount, setIsLoadingAccounts, setAccounts } from '../../store
 import errorHandler from '../../utils/errorHandler';
 import { AccountRepository } from '../repositories';
 import ApiError from '../utils/ApiError';
-import getAccountIdQueryString from '../utils/getAccountIdQueryString';
 
 export default function useAccountsEffect() {
   const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ export default function useAccountsEffect() {
       dispatch(setIsLoadingAccounts(true));
       try {
         const data = await AccountRepository.list({ abortSignal: abortController.signal });
-        const accountQueryId = getAccountIdQueryString();
+        const accountQueryId = getQueryString('from_account');
         const originAccount = data.find(({ id }) => accountQueryId === id);
         const origin = accountQueryId && originAccount ? originAccount : undefined;
         dispatch(setOriginAccount(origin));
