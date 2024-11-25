@@ -11,11 +11,12 @@ export default function AccountList() {
   if (isLoadingAccounts) {
     return <LoaderList />;
   }
+
   return (
     <div className="d-flex flex-column accounts">
       {accountsToTransfer.map((account) => (
         <AccountListItem
-          account={account}
+          depositAccount={account}
           key={account.id}
         />
       ))}

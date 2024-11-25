@@ -18,7 +18,7 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import useAmount from '../hooks/useAmount';
-import type { Account } from '../services/interface';
+import { DepositAccount } from '../services/interface';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
   getSelectedContact,
@@ -47,7 +47,7 @@ export default function OngoingTransfer() {
   const accounts = useAppSelector(getAccounts);
   const originAccount = useAppSelector(getOriginAccount);
   const selectedContact = useAppSelector(getSelectedContact);
-  const selectedAccount = useAppSelector(getSelectedAccount) as Account;
+  const selectedAccount = useAppSelector(getSelectedAccount);
   const scheduledTransfer = useAppSelector(getScheduledTransfer);
   const accountsOrigin = useMemo(() => {
     if (selectedAccount) {
@@ -78,14 +78,14 @@ export default function OngoingTransfer() {
 
   return (
     <div className="d-flex flex-column gap-4">
-      <DInputSelect<Account>
+      <DInputSelect<DepositAccount>
         label={t('ongoingTransfer.from')}
         id="selectAccountFrom"
         {...(originAccount) && {
           selectedOption: originAccount,
         }}
-        valueExtractor={({ accountNumber }: Account) => accountNumber}
-        labelExtractor={({ name, accountNumber }: Account) => `${name} *** ${accountNumber.slice(-3)}`}
+        valueExtractor={({ accountNumber }: DepositAccount) => accountNumber}
+        labelExtractor={({ name, accountNumber }: DepositAccount) => `${name} *** ${accountNumber.slice(-3)}`}
         options={accountsOrigin}
         onChange={(account) => (
           dispatch(setOriginAccount(account))

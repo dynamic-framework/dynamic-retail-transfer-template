@@ -7,7 +7,11 @@ import { DateTime } from 'luxon';
 import { useCallback, useMemo } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
-import { DASHBOARD_PATH, SITE_URL, VARS_FORMAT_DATE } from '../config/widgetConfig';
+import {
+  DASHBOARD_PATH,
+  SITE_URL,
+  VARS_FORMAT_DATE,
+} from '../config/widgetConfig';
 import useScreenshotDownload from '../hooks/useScreenshotDownload';
 import useScreenshotWebShare from '../hooks/useScreenshotWebShare';
 import type { Transaction } from '../services/interface';

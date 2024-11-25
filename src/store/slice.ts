@@ -3,9 +3,9 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { View } from '../config/widgetConfig';
 import {
-  Account,
   Bank,
   Contact,
+  DepositAccount,
   Transaction,
 } from '../services/interface';
 
@@ -31,11 +31,11 @@ export type EndRepeat = {
 
 export type WidgetState = {
   currentView: View;
-  accounts: Array<Account>;
+  accounts: Array<DepositAccount>;
   contacts: Array<Contact>;
   contactsQuery: string;
-  selectedAccount?: Account;
-  originAccount?: Account;
+  selectedAccount?: DepositAccount;
+  originAccount?: DepositAccount;
   selectedContact?: Contact;
   amountUsed?: number;
   message?: string;
@@ -62,10 +62,10 @@ const slice = createSlice({
     setCurrentView(state, action: PayloadAction<View>) {
       state.currentView = action.payload;
     },
-    setAccounts(state, action: PayloadAction<Array<Account>>) {
+    setAccounts(state, action: PayloadAction<Array<DepositAccount>>) {
       state.accounts = action.payload;
     },
-    setOriginAccount(state, action: PayloadAction<Account | undefined>) {
+    setOriginAccount(state, action: PayloadAction<DepositAccount | undefined>) {
       state.originAccount = action.payload;
     },
     setContacts(state, action: PayloadAction<Array<Contact>>) {
@@ -74,7 +74,7 @@ const slice = createSlice({
     setSelectedContact(state, action: PayloadAction<Contact | undefined>) {
       state.selectedContact = action.payload;
     },
-    setSelectedAccount(state, action: PayloadAction<Account | undefined>) {
+    setSelectedAccount(state, action: PayloadAction<DepositAccount | undefined>) {
       state.selectedAccount = action.payload;
     },
     setAmountUsed(state, action: PayloadAction<number | undefined>) {

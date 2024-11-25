@@ -1,7 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
 import { Contact } from '../services/interface';
-import getAccountValue from '../services/utils/getAccountValue';
 
 import { RootState } from './store';
 
@@ -55,7 +54,7 @@ export const getOriginAccount = createSelector(
 
 export const getOriginAccountAmount = createSelector(
   getOriginAccount,
-  (account) => (account ? getAccountValue(account) : 0),
+  (account) => account?.balanceAvailable || 0,
 );
 
 export const getResult = createSelector(
