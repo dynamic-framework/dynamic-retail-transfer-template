@@ -1,7 +1,6 @@
 import {
   DIcon,
   DInputSearch,
-  DTabContent,
   DTabs,
 } from '@dynamic-framework/ui-react';
 import {
@@ -53,7 +52,7 @@ export default function TransferPanel() {
         defaultSelected={currentTab}
         onChange={(type) => setCurrentTab(type.tab)}
       >
-        <DTabContent tab={TRANSFER_TABS[0].tab}>
+        <DTabs.Tab tab={TRANSFER_TABS[0].tab}>
           <div className="mb-4">
             <a
               href={NEW_CONTACT_PATH}
@@ -71,10 +70,10 @@ export default function TransferPanel() {
             </a>
           </div>
           <ContactList />
-        </DTabContent>
-        <DTabContent tab={TRANSFER_TABS[1].tab}>
+        </DTabs.Tab>
+        <DTabs.Tab tab={TRANSFER_TABS[1].tab}>
           <AccountList />
-        </DTabContent>
+        </DTabs.Tab>
       </DTabs>
     </div>
   );
