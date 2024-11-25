@@ -17,6 +17,7 @@ export default function ContactList() {
   if (loading) {
     return <LoaderList />;
   }
+
   return (
     <>
       <div className="d-flex flex-column favorite-contacts">
