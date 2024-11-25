@@ -39,7 +39,7 @@ export default function TransferPanel() {
   }, [dispatch]);
 
   return (
-    <div className="px-4 py-6 rounded shadow-sm bg-white d-flex flex-column gap-4">
+    <div className="d-flex flex-column gap-4">
       <h6 className="px-2 py-1 fw-bold text-gray-500">{t('transferPanel.transferTo')}</h6>
       <DInputSearch
         value={contactSearchQuery}

@@ -1,4 +1,4 @@
-import { useDContext } from '@dynamic-framework/ui-react';
+import { DCard, useDContext } from '@dynamic-framework/ui-react';
 import { useEffect, useMemo } from 'react';
 
 import OngoingTransfer from './components/OngoingTransfer';
@@ -29,7 +29,11 @@ export default function App() {
 
   return (
     <div className="mx-auto col-xl-6">
-      <CurrentView />
+      <DCard>
+        <DCard.Body>
+          <CurrentView />
+        </DCard.Body>
+      </DCard>
     </div>
   );
 }

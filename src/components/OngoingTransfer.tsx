@@ -77,7 +77,7 @@ export default function OngoingTransfer() {
   }, [dispatch, originAccount, accountsOrigin]);
 
   return (
-    <div className="bg-white rounded shadow-sm p-4 d-flex flex-column gap-4">
+    <div className="d-flex flex-column gap-4">
       <DInputSelect<Account>
         label={t('ongoingTransfer.from')}
         id="selectAccountFrom"
@@ -138,7 +138,7 @@ export default function OngoingTransfer() {
         checked={isScheduled}
         onClick={() => {
           setIsScheduled((prev) => !prev);
-          dispatch(setScheduledTransaction(null));
+          dispatch(setScheduledTransaction());
         }}
       />
       {isScheduled && (
@@ -147,7 +147,7 @@ export default function OngoingTransfer() {
           iconHeaderNextMonth="chevron-right"
           iconHeaderPrevMonth="chevron-left"
           minDate={new Date()}
-          placeholderText={t('ongoingTransfer.selectDate')}
+          placeholder={t('ongoingTransfer.selectDate')}
           maxDate={new Date(new Date().setMonth(new Date().getMonth() + 12))}
           iconInput="calendar"
           inputAriaLabel="Calendar"
