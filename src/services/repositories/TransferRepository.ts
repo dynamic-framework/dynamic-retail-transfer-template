@@ -9,7 +9,7 @@ export async function transfer(
   }>,
 ) {
   const { data } = await ApiClient.request<Transaction>({
-    url: 'transfer',
+    url: 'generics',
     method: 'POST',
     signal: params.config?.abortSignal,
     headers: {

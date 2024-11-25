@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { getContacts, getFavoriteContacts, getRegularContacts } from '../../store/selectors';
+import {
+  getContacts,
+  getFavoriteContacts,
+  getRegularContacts,
+} from '../../store/selectors';
 import { setContacts } from '../../store/slice';
 import errorHandler from '../../utils/errorHandler';
 import { ContactRepository } from '../repositories';
@@ -20,7 +24,11 @@ export default function useContacts() {
     (async () => {
       setLoading(true);
       try {
-        const response = await ContactRepository.list({ abortSignal: abortController.signal });
+        const response = await ContactRepository.list({
+          config: {
+            abortSignal: abortController.signal,
+          },
+        });
         setLoading(false);
         dispatch(setContacts(response));
       } catch (error) {
