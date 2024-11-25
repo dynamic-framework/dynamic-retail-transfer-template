@@ -92,7 +92,7 @@ const slice = createSlice({
     setIsLoadingAccounts(state, action: PayloadAction<boolean>) {
       state.isLoadingAccounts = action.payload;
     },
-    setScheduledTransaction(state, action: PayloadAction<string | null>) {
+    setScheduledTransaction(state, action: PayloadAction<string | undefined>) {
       state.scheduledTransaction = action.payload;
     },
   },
