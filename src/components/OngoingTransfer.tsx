@@ -40,7 +40,7 @@ export default function OngoingTransfer() {
   const [transferMessage, setTransferMessage] = useState<string>('');
 
   const originAccount = useAppSelector(getOriginAccount);
-  const transferFromAccounts = useAppSelector(getAccountsTransferFrom);
+  const accountsTransferFrom = useAppSelector(getAccountsTransferFrom);
 
   const scheduledTransfer = useAppSelector(getScheduledTransfer);
 
@@ -53,10 +53,10 @@ export default function OngoingTransfer() {
   } = useAmount();
 
   useEffect(() => {
-    if (originAccount === undefined) {
-      dispatch(setOriginAccount(transferFromAccounts[0]));
+    if (!originAccount) {
+      dispatch(setOriginAccount(accountsTransferFrom[0]));
     }
-  }, [dispatch, originAccount, transferFromAccounts]);
+  }, [dispatch, originAccount, accountsTransferFrom]);
 
   return (
     <div className="d-flex flex-column gap-4">
@@ -64,13 +64,11 @@ export default function OngoingTransfer() {
         label={t('ongoingTransfer.from')}
         getOptionLabel={({ name, accountNumber }: DepositAccount) => `${name} *** ${accountNumber.slice(-3)}`}
         getOptionValue={({ accountNumber }: DepositAccount) => accountNumber}
-        options={transferFromAccounts}
+        options={accountsTransferFrom}
         onChange={(account) => (
           dispatch(setOriginAccount(account as DepositAccount))
         )}
-        {...(originAccount) && {
-          selectedOption: originAccount,
-        }}
+        value={originAccount}
       />
       <DInputCurrency
         label={t('ongoingTransfer.amount')}

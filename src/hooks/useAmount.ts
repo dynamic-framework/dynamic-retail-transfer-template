@@ -11,7 +11,8 @@ export default function useAmount() {
   const originAccount = useAppSelector(getOriginAccount);
   const originAmount = originAccount?.balanceAvailable || 0;
 
-  const [amount, setAmount] = useState<number | undefined>(Number(getQueryString('amount')));
+  const queryStringAmount = useMemo(() => getQueryString('amount', { default: '0' }), []);
+  const [amount, setAmount] = useState<number | undefined>(Number(queryStringAmount));
 
   const hint = useMemo(() => {
     if (!originAmount || !amount) {
