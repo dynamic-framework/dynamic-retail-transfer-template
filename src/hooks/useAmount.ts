@@ -28,7 +28,7 @@ export default function useAmount() {
   }, [amount, format, t, originAmount]);
 
   const enableTransfer = useMemo(
-    () => !amount || amount <= originAmount,
+    () => (amount && amount <= originAmount),
     [amount, originAmount],
   );
 
