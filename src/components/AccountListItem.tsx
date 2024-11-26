@@ -5,7 +5,6 @@ import { useCallback } from 'react';
 import type { Account } from '../services/interface';
 import { useAppDispatch } from '../store/hooks';
 import { setCurrentView, setSelectedAccount } from '../store/slice';
-import { getInitials } from '../utils/getInitials';
 
 type Props = {
   account: Account;
@@ -29,7 +28,7 @@ export default function AccountListItem({ account }: Props) {
       )}
     >
       <div className="d-flex gap-2 align-items-center">
-        <DAvatar title={getInitials(account.name)} />
+        <DAvatar name={account.name} />
         <div>
           <p className="mb-0 fw-bold">{account.name}</p>
           <small className="text-gray-500">{account.accountNumber}</small>

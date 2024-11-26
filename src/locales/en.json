@@ -118,9 +118,10 @@
     "transferErrorMessage": "We were unable to complete the transfer due to communication issues with the recipient's bank.",
     "errorSolution": "Please {solution}",
     "moneyPaid": "Money to transfer",
-    "transferTo": "Transfer to",
-    "transactionId": "Transaction ID",
-    "timeDate": "Time & Date",
+    "transferTo": "Transfer to: {value}",
+    "transactionId": "Transaction ID: {value}",
+    "timeDate": "Time & Date: {value}",
+    "message": "Message: {value}",
     "terms": {
       "text": "All your transactions are safe and fast.",
       "link": "Terms & Conditions."
@@ -129,5 +130,21 @@
   "updateFavorite": {
     "success": "Favorite contacts have been updated",
     "error": "Unable to update favorite contact"
+  },
+  "otp": {
+    "problems": "<p>Problems with your digital token? <a>Contact us</a></p>",
+    "countdown": "<p>Didn't you get any code? Resend in {value}</p>",
+    "countdownResend": "<p>Didn't you get any code? <button></button></p>",
+    "resend": "Resend code"
+  },
+  "voucher": {
+    "message": "You will receive an invoice and a resume of your loan in the email associated with your account.",
+    "share": "Share",
+    "download": "Download",
+    "backToHome": "Back to Home",
+    "anotherOperation": "Another operation"
+  },
+  "errors": {
+    "selectAmount": "Select an amount"
   }
 }

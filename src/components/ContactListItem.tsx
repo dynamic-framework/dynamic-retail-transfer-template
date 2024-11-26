@@ -2,10 +2,10 @@ import { DAvatar, DButtonIcon } from '@dynamic-framework/ui-react';
 import classNames from 'classnames';
 import { useCallback } from 'react';
 
+import { VIEW } from '../config/widgetConfig';
 import type { Account, Contact } from '../services/interface';
 import { useAppDispatch } from '../store/hooks';
 import { setCurrentView, setSelectedContact } from '../store/slice';
-import { getInitials } from '../utils/getInitials';
 
 type Props = {
   contact: Contact | Account;
@@ -16,7 +16,7 @@ export default function ContactListItem({ contact }: Props) {
 
   const handleSelectContact = useCallback(() => {
     dispatch(setSelectedContact(contact));
-    dispatch(setCurrentView('details'));
+    dispatch(setCurrentView(VIEW.details));
   }, [contact, dispatch]);
 
   return (
@@ -29,7 +29,7 @@ export default function ContactListItem({ contact }: Props) {
       )}
     >
       <div className="d-flex gap-2 align-items-center">
-        <DAvatar title={getInitials(contact.name)} />
+        <DAvatar name={contact.name} />
         <div>
           <p className="mb-0 fw-bold">{contact.name}</p>
           <small className="text-gray-500">{contact.accountNumber}</small>

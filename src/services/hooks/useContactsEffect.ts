@@ -20,7 +20,9 @@ export default function useContacts() {
     (async () => {
       setLoading(true);
       try {
-        const response = await ContactRepository.list({ abortSignal: abortController.signal });
+        const response = await ContactRepository.list({
+          config: { abortSignal: abortController.signal },
+        });
         setLoading(false);
         dispatch(setContacts(response));
       } catch (error) {

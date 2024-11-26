@@ -1,15 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import {
-  DModal,
-  DModalHeader,
-  DModalBody,
-  DModalFooter,
-  DButton,
   useFormatCurrency,
   useDPortalContext,
-  DInputPin,
+  DAlert,
 } from '@dynamic-framework/ui-react';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import useTransfer from '../services/hooks/useTransfer';
@@ -22,7 +17,7 @@ import {
   getScheduledTransfer,
 } from '../store/selectors';
 
-const PIN_LENGTH = 6;
+import OtpModal from './Otp/OtpModal';
 
 export default function ModalConfirmTransfer() {
   const { t } = useTranslation();
@@ -37,17 +32,7 @@ export default function ModalConfirmTransfer() {
   const { values: [amountUsedFormatted] } = useFormatCurrency(amountUsed, 0.12);
   const { callback: transfer, loading } = useTransfer();
 
-  const [pin, setPin] = useState('');
-  const [invalidPin, setInvalidPin] = useState(false);
-
   const handleTransfer = useCallback(async () => {
-    if (pin.length < PIN_LENGTH) {
-      setInvalidPin(true);
-      return;
-    }
-
-    setInvalidPin(false);
-
     if (!originAccount) {
       return;
     }
@@ -78,7 +63,6 @@ export default function ModalConfirmTransfer() {
   }, [amountUsed,
     closePortal,
     originAccount,
-    pin.length,
     selectedAccount,
     selectedContact,
     scheduledAt,
@@ -86,54 +70,20 @@ export default function ModalConfirmTransfer() {
   ]);
 
   return (
-    <DModal
-      name="modalConfirmPayment"
-      centered
-      staticBackdrop
+    <OtpModal
+      action={handleTransfer}
+      isLoading={loading}
+      title={t('modal.transfer.title', { amount: amountUsedFormatted })}
     >
-      <DModalHeader
-        showCloseButton
-        onClose={closePortal}
-      >
-        <h4 className="fw-bold">
-          {t('modal.transfer.title', { amount: amountUsedFormatted })}
-        </h4>
-      </DModalHeader>
-      <DModalBody>
-        <div className="bg-gray-soft p-4 rounded-1">
-          <p className="mb-0">
-            {t('modal.transfer.text', {
-              name: selectedContact?.name || selectedAccount?.name,
-              bank: selectedContact?.bank || selectedAccount?.type,
-              mask: selectedContact?.accountNumber.slice(-3)
-                || selectedAccount?.accountNumber.slice(-3),
-              accountFrom: `${originAccount?.name || ''} ${originAccount?.accountNumber.slice(-3) || '***'}`,
-            })}
-          </p>
-          <DInputPin
-            className="mt-4"
-            characters={PIN_LENGTH}
-            onChange={(e) => setPin(e)}
-            invalid={invalidPin && pin.length < PIN_LENGTH}
-          />
-        </div>
-      </DModalBody>
-      <DModalFooter>
-        <DButton
-          className="d-grid"
-          text={t('button.cancel')}
-          theme="secondary"
-          variant="outline"
-          onClick={closePortal}
-        />
-        <DButton
-          className="d-grid"
-          text={t('button.transfer')}
-          theme="primary"
-          onClick={() => handleTransfer()}
-          loading={loading}
-        />
-      </DModalFooter>
-    </DModal>
+      <DAlert theme="info">
+        {t('modal.transfer.text', {
+          name: selectedContact?.name || selectedAccount?.name,
+          bank: selectedContact?.bank || selectedAccount?.type,
+          mask: selectedContact?.accountNumber.slice(-3)
+            || selectedAccount?.accountNumber.slice(-3),
+          accountFrom: `${originAccount?.name || ''} ${originAccount?.accountNumber.slice(-3) || '***'}`,
+        })}
+      </DAlert>
+    </OtpModal>
   );
 }

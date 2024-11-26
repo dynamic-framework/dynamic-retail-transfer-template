@@ -20,7 +20,7 @@ export const VIEW = {
   init: 'init',
   details: 'details',
   voucher: 'voucher',
-};
+} as const;
 
 export type View = keyof typeof VIEW;
 
