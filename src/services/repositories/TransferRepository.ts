@@ -9,7 +9,7 @@ export async function transfer(
   }>,
 ) {
   const { data } = await ApiClient.request<Transaction>({
-    url: 'mocks/generics',
+    url: 'generics',
     method: 'POST',
     data: params.transferData,
   });

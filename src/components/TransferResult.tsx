@@ -4,7 +4,7 @@ import {
   useFormatCurrency,
 } from '@dynamic-framework/ui-react';
 import { DateTime } from 'luxon';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
 import {
@@ -14,31 +14,29 @@ import {
 } from '../config/widgetConfig';
 import useScreenshotDownload from '../hooks/useScreenshotDownload';
 import useScreenshotWebShare from '../hooks/useScreenshotWebShare';
-import type { Transaction } from '../services/interface';
 import { useAppSelector } from '../store/hooks';
 import {
   getAmountUsed,
-  getResult,
   getSelectedContact,
   getSelectedAccount,
   getScheduledTransfer,
+  getIsTransfered,
 } from '../store/selectors';
 import errorHandler from '../utils/errorHandler';
 
 export default function TransferResult() {
-  const amountUsed = useAppSelector(getAmountUsed);
-  const result = useAppSelector(getResult) as Transaction;
-  const selectedContact = useAppSelector(getSelectedContact);
-  const selectedAccount = useAppSelector(getSelectedAccount);
-  const { shareRef, share } = useScreenshotWebShare();
-  const { downloadRef, download } = useScreenshotDownload();
-  const scheduled = useAppSelector(getScheduledTransfer);
-
-  const { values: [amountUsedFormatted] } = useFormatCurrency(amountUsed);
-
   const { t } = useTranslation();
 
-  const transferDone = useMemo(() => result.status === 'completed', [result.status]);
+  const amountUsed = useAppSelector(getAmountUsed);
+  const transferDone = useAppSelector(getIsTransfered);
+  const selectedContact = useAppSelector(getSelectedContact);
+  const selectedAccount = useAppSelector(getSelectedAccount);
+  const scheduled = useAppSelector(getScheduledTransfer);
+
+  const { shareRef, share } = useScreenshotWebShare();
+  const { downloadRef, download } = useScreenshotDownload();
+
+  const { values: [amountUsedFormatted] } = useFormatCurrency(amountUsed);
 
   const gotToAccounts = useCallback(() => {
     window.location.href = `${SITE_URL}/${DASHBOARD_PATH}`;
@@ -96,12 +94,8 @@ export default function TransferResult() {
                 <div className="col-6 text-end">{selectedContact?.name || selectedAccount?.name}</div>
               </div>
               <div className="row">
-                <div className="col-6 text-light-emphasis">{t('result.transactionId')}</div>
-                <div className="col-6 text-end">{result.id}</div>
-              </div>
-              <div className="row">
                 <div className="col-6 text-light-emphasis">{t('result.timeDate')}</div>
-                <div className="col-6 text-end">{DateTime.fromISO(result.date).toFormat('MM/dd/yy, hh:mm a')}</div>
+                <div className="col-6 text-end">{DateTime.fromJSDate(new Date()).toFormat(VARS_FORMAT_DATE)}</div>
               </div>
             </div>
           </>
@@ -121,7 +115,7 @@ export default function TransferResult() {
               </div>
               <div className="row">
                 <div className="col-6 text-light-emphasis">{t('result.timeDate')}</div>
-                <div className="col-6 text-end">{DateTime.fromISO(result.date).toFormat('MM/dd/yy, hh:mm a')}</div>
+                <div className="col-6 text-end">{DateTime.fromJSDate(new Date()).toFormat(VARS_FORMAT_DATE)}</div>
               </div>
             </div>
           </>

@@ -52,11 +52,6 @@ export const getOriginAccount = createSelector(
   (widget) => widget.originAccount,
 );
 
-export const getResult = createSelector(
-  getState,
-  (widget) => widget.result,
-);
-
 export const getContactsQuery = createSelector(
   getState,
   (widget) => widget.contactsQuery,
@@ -95,4 +90,9 @@ export const getIsLoadingAccounts = createSelector(
 export const getScheduledTransfer = createSelector(
   getState,
   (widget) => widget.scheduledTransaction,
+);
+
+export const getIsTransfered = createSelector(
+  getState,
+  (widget) => widget.isTransferred,
 );

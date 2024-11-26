@@ -6,7 +6,6 @@ import {
   Bank,
   Contact,
   DepositAccount,
-  Transaction,
 } from '../services/interface';
 
 export type OptionRepeatValue = {
@@ -39,7 +38,6 @@ export type WidgetState = {
   selectedContact?: Contact;
   amountUsed?: number;
   message?: string;
-  result?: Transaction;
   banks: Array<Bank>;
   isTransferred?: boolean;
   scheduledTransaction?: string;
@@ -83,9 +81,6 @@ const slice = createSlice({
     setMessage(state, action: PayloadAction<string | undefined>) {
       state.message = action.payload;
     },
-    setResult(state, action: PayloadAction<Transaction>) {
-      state.result = action.payload;
-    },
     setContactsQuery(state, action: PayloadAction<string>) {
       state.contactsQuery = action.payload;
     },
@@ -108,7 +103,6 @@ export const {
   setSelectedContact,
   setAmountUsed,
   setMessage,
-  setResult,
   setIsLoadingAccounts,
   setScheduledTransaction,
 } = slice.actions;
