@@ -3,7 +3,7 @@ import {
   DToastContainer,
   DContextProvider,
 } from '@dynamic-framework/ui-react';
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
@@ -20,7 +20,7 @@ import './styles/base.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('transfer') as Element);
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <Provider store={store}>
       <DContextProvider
         portalName="portal"
@@ -32,7 +32,7 @@ root.render(
         <DToastContainer />
       </DContextProvider>
     </Provider>
-  </React.StrictMode>,
+  </StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
