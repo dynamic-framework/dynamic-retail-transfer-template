@@ -4,15 +4,12 @@ import {
   DDatePicker,
   DInput,
   DInputCurrency,
-  DInputSelect,
-  DQuickActionButton,
   DQuickActionSwitch,
+  DSelect,
   useDPortalContext,
 } from '@dynamic-framework/ui-react';
 import {
-  useCallback,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -21,75 +18,59 @@ import useAmount from '../hooks/useAmount';
 import { DepositAccount } from '../services/interface';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
-  getSelectedContact,
-  getSelectedAccount,
   getOriginAccount,
-  getAccounts,
   getScheduledTransfer,
+  getAccountsTransferFrom,
 } from '../store/selectors';
 import {
   setAmountUsed,
   setMessage,
-  setSelectedContact,
-  setSelectedAccount,
   setOriginAccount,
   setScheduledTransaction,
-  setCurrentStep,
 } from '../store/slice';
+
+import TransferTo from './TransferTo';
 
 export default function OngoingTransfer() {
   const { t } = useTranslation();
-  const [isScheduled, setIsScheduled] = useState(false);
   const { openPortal } = useDPortalContext();
   const dispatch = useAppDispatch();
+
+  const [isScheduled, setIsScheduled] = useState(false);
   const [transferMessage, setTransferMessage] = useState<string>('');
 
-  const accounts = useAppSelector(getAccounts);
   const originAccount = useAppSelector(getOriginAccount);
-  const selectedContact = useAppSelector(getSelectedContact);
-  const selectedAccount = useAppSelector(getSelectedAccount);
+  const transferFromAccounts = useAppSelector(getAccountsTransferFrom);
+
   const scheduledTransfer = useAppSelector(getScheduledTransfer);
-  const accountsOrigin = useMemo(() => {
-    if (selectedAccount) {
-      return accounts.filter(({ id }) => id !== selectedAccount.id);
-    }
-    return accounts;
-  }, [accounts, selectedAccount]);
 
   const {
     amount,
     setAmount,
     hint,
-    originAccountAmount,
-    canTransfer,
+    originAmount,
+    enableTransfer,
   } = useAmount();
-
-  const handleChangeDestiny = useCallback(() => {
-    dispatch(setSelectedContact(undefined));
-    dispatch(setSelectedAccount(undefined));
-    dispatch(setCurrentStep('init'));
-  }, [dispatch]);
 
   useEffect(() => {
     if (originAccount === undefined) {
-      dispatch(setOriginAccount(accountsOrigin[0]));
+      dispatch(setOriginAccount(transferFromAccounts[0]));
     }
-  }, [dispatch, originAccount, accountsOrigin]);
+  }, [dispatch, originAccount, transferFromAccounts]);
 
   return (
     <div className="d-flex flex-column gap-4">
-      <DInputSelect<DepositAccount>
+      <DSelect
         label={t('ongoingTransfer.from')}
-        id="selectAccountFrom"
+        getOptionLabel={({ name, accountNumber }: DepositAccount) => `${name} *** ${accountNumber.slice(-3)}`}
+        getOptionValue={({ accountNumber }: DepositAccount) => accountNumber}
+        options={transferFromAccounts}
+        onChange={(account) => (
+          dispatch(setOriginAccount(account as DepositAccount))
+        )}
         {...(originAccount) && {
           selectedOption: originAccount,
         }}
-        valueExtractor={({ accountNumber }: DepositAccount) => accountNumber}
-        labelExtractor={({ name, accountNumber }: DepositAccount) => `${name} *** ${accountNumber.slice(-3)}`}
-        options={accountsOrigin}
-        onChange={(account) => (
-          dispatch(setOriginAccount(account))
-        )}
       />
       <DInputCurrency
         label={t('ongoingTransfer.amount')}
@@ -99,31 +80,9 @@ export default function OngoingTransfer() {
         value={amount}
         placeholder={t('ongoingTransfer.amountPlaceholder')}
         minValue={1}
-        maxValue={originAccountAmount}
+        maxValue={originAmount}
       />
-      <div className="d-flex flex-column gap-2">
-        <h6 className="fw-bold sp px-2 text-gray">{t('ongoingTransfer.title')}</h6>
-        <div>
-          {selectedContact && (
-            <DQuickActionButton
-              className="w-100"
-              line1={selectedContact.name}
-              line2={`${selectedContact.bank} ${selectedContact.accountNumber.slice(-3)}`}
-              actionLinkText={t('ongoingTransfer.change')}
-              onClick={handleChangeDestiny}
-            />
-          )}
-          {selectedAccount && (
-            <DQuickActionButton
-              className="w-100"
-              line1={selectedAccount.name}
-              line2={`*** ${selectedAccount.accountNumber.slice(-3)}`}
-              actionLinkText={t('ongoingTransfer.change')}
-              onClick={handleChangeDestiny}
-            />
-          )}
-        </div>
-      </div>
+      <TransferTo />
       <DInput
         id="optionalMessage"
         label={t('ongoingTransfer.addMessage')}
@@ -148,7 +107,6 @@ export default function OngoingTransfer() {
           iconHeaderPrevMonth="chevron-left"
           minDate={new Date()}
           placeholder={t('ongoingTransfer.selectDate')}
-          maxDate={new Date(new Date().setMonth(new Date().getMonth() + 12))}
           iconInput="calendar"
           inputAriaLabel="Calendar"
           onChange={(date) => {
@@ -158,8 +116,8 @@ export default function OngoingTransfer() {
       )}
       <DButton
         className="d-flex align-self-center"
-        {...!canTransfer && { state: 'disabled' }}
         text={t('button.transfer')}
+        {...!enableTransfer && { state: 'disabled' }}
         onClick={() => {
           dispatch(setMessage(transferMessage));
           dispatch(setAmountUsed(amount));

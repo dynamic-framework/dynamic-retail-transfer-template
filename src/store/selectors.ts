@@ -31,10 +31,15 @@ export const getSelectedAccount = createSelector(
   (widget) => widget.selectedAccount,
 );
 
-export const getSelectedDestiny = createSelector(
-  getSelectedContact,
+export const getAccountsTransferFrom = createSelector(
+  getAccounts,
   getSelectedAccount,
-  (selectedContact, selectedAccount) => selectedContact || selectedAccount,
+  (accounts, selectedAccount) => {
+    if (selectedAccount) {
+      return accounts.filter(({ id }) => id !== selectedAccount.id);
+    }
+    return accounts;
+  },
 );
 
 export const getAmountUsed = createSelector(
@@ -42,19 +47,9 @@ export const getAmountUsed = createSelector(
   (widget) => widget.amountUsed ?? 0,
 );
 
-export const getMessage = createSelector(
-  getState,
-  (widget) => widget.message,
-);
-
 export const getOriginAccount = createSelector(
   getState,
   (widget) => widget.originAccount,
-);
-
-export const getOriginAccountAmount = createSelector(
-  getOriginAccount,
-  (account) => account?.balanceAvailable || 0,
 );
 
 export const getResult = createSelector(

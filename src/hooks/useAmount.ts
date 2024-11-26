@@ -3,42 +3,39 @@ import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppSelector } from '../store/hooks';
-import { getOriginAccountAmount } from '../store/selectors';
+import { getOriginAccount } from '../store/selectors';
 
 export default function useAmount() {
   const { t } = useTranslation();
   const { format } = useFormatCurrency();
-  const originAccountAmount = useAppSelector(getOriginAccountAmount);
+  const originAccount = useAppSelector(getOriginAccount);
+  const originAmount = originAccount?.balanceAvailable || 0;
 
-  const amountFromUrl = Number(getQueryString('amount'));
-
-  const [amount, setAmount] = useState<number | undefined>(amountFromUrl);
+  const [amount, setAmount] = useState<number | undefined>(Number(getQueryString('amount')));
 
   const hint = useMemo(() => {
-    if (originAccountAmount === 0 || !amount) {
+    if (!originAmount || !amount) {
       return {
-        message: t('hint.available', { amount: format(originAccountAmount) }),
+        message: t('hint.available', { amount: format(originAmount) }),
         icon: 'info-circle',
       };
     }
     return {
-      message: t('hint.withAmount', { amount: format(originAccountAmount - (amount ?? 0)) }),
+      message: t('hint.withAmount', { amount: format(originAmount - (amount)) }),
       icon: 'info-circle',
     };
-  }, [amount, format, t, originAccountAmount]);
+  }, [amount, format, t, originAmount]);
 
-  const canTransfer = useMemo(() => {
-    if (amount === 0 || amount === undefined) {
-      return false;
-    }
-    return amount <= originAccountAmount;
-  }, [amount, originAccountAmount]);
+  const enableTransfer = useMemo(
+    () => !amount || amount <= originAmount,
+    [amount, originAmount],
+  );
 
   return {
     hint,
-    originAccountAmount,
+    originAmount,
     amount,
     setAmount,
-    canTransfer,
+    enableTransfer,
   };
 }
