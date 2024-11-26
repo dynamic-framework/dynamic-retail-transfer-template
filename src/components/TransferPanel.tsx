@@ -62,7 +62,7 @@ export default function TransferPanel() {
               >
                 <DIcon
                   icon="person-add"
-                  size="40px"
+                  size="var(--bs-ref-spacer-8)"
                   className="text-secondary-500"
                 />
                 <div>
