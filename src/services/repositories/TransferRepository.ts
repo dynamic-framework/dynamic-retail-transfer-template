@@ -9,12 +9,8 @@ export async function transfer(
   }>,
 ) {
   const { data } = await ApiClient.request<Transaction>({
-    url: 'generics',
+    url: 'mocks/generics',
     method: 'POST',
-    signal: params.config?.abortSignal,
-    headers: {
-      Prefer: 'code=200',
-    },
     data: params.transferData,
   });
 

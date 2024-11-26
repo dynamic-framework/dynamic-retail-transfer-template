@@ -52,30 +52,18 @@ export default function ModalConfirmTransfer() {
       return;
     }
 
-    if (selectedContact) {
-      await transfer(
-        {
-          toAccountId: selectedContact.id,
-          fromAccountId: originAccount.id,
-          amount: amountUsed,
-          scheduledAt,
-        },
-      );
-    }
-
-    if (selectedAccount) {
-      await transfer(
-        {
-          toAccountId: selectedAccount.id,
-          fromAccountId: originAccount.id,
-          amount: amountUsed,
-          scheduledAt,
-        },
-      );
-    }
+    await transfer(
+      {
+        toAccountId: selectedContact?.id || selectedAccount?.id,
+        fromAccountId: originAccount.id,
+        amount: amountUsed,
+        scheduledAt,
+      },
+    );
 
     closePortal();
-  }, [amountUsed,
+  }, [
+    amountUsed,
     closePortal,
     originAccount,
     pin.length,

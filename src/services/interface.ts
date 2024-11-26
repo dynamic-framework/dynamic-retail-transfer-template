@@ -14,7 +14,7 @@ export type DepositAccount = BaseAccount<AccountBaseType.Deposit> & {
 
 export type Transfer = {
   fromAccountId: string;
-  toAccountId: string;
+  toAccountId?: string;
   amount: number;
   scheduledAt?: string;
 };

@@ -11,14 +11,10 @@ export default function useTransfer() {
   const dispatch = useAppDispatch();
 
   const callback = useCallback(async (transfer: Transfer) => {
-    const abortController = new AbortController();
     setLoading(true);
     try {
       const result = await TransferRepository.transfer({
         transferData: transfer,
-        config: {
-          abortSignal: abortController.signal,
-        },
       });
 
       dispatch(setResult(result));
