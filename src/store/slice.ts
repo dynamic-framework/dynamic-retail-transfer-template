@@ -84,6 +84,9 @@ const slice = createSlice({
     setContactsQuery(state, action: PayloadAction<string>) {
       state.contactsQuery = action.payload;
     },
+    setIsTransferred(state, action: PayloadAction<boolean>) {
+      state.isTransferred = action.payload;
+    },
     setIsLoadingAccounts(state, action: PayloadAction<boolean>) {
       state.isLoadingAccounts = action.payload;
     },
@@ -103,6 +106,7 @@ export const {
   setSelectedContact,
   setAmountUsed,
   setMessage,
+  setIsTransferred,
   setIsLoadingAccounts,
   setScheduledTransaction,
 } = slice.actions;

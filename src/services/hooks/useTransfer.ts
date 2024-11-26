@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { useAppDispatch } from '../../store/hooks';
-import { setCurrentStep } from '../../store/slice';
+import { setCurrentStep, setIsTransferred } from '../../store/slice';
 import errorHandler from '../../utils/errorHandler';
 import { Transfer } from '../interface';
 import { TransferRepository } from '../repositories';
@@ -16,6 +16,7 @@ export default function useTransfer() {
       await TransferRepository.transfer({
         transferData: transfer,
       });
+      dispatch(setIsTransferred(true));
       dispatch(setCurrentStep('voucher'));
       setLoading(false);
     } catch (error) {
