@@ -17,7 +17,7 @@ import {
   getScheduledTransfer,
 } from '../store/selectors';
 
-import OtpModal from './otp/OtpModal';
+import OtpModal from './Otp/OtpModal';
 
 export default function ModalConfirmTransfer() {
   const { t } = useTranslation();
