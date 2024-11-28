@@ -15,12 +15,12 @@ export const VARS_CURRENCY = {
   decimal: liquidParser.parse('{{vars.currency-decimal}}'),
 };
 
-// Views
+// Steps
 export const STEP = {
   init: 'init',
   details: 'details',
   voucher: 'voucher',
-};
+} as const;
 
 export type Step = keyof typeof STEP;
 

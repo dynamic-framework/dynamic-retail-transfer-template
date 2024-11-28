@@ -1,4 +1,5 @@
 import {
+  DCard,
   DInputSearch,
   DTabs,
 } from '@dynamic-framework/ui-react';
@@ -30,26 +31,28 @@ export default function TransferPanel() {
   ], [t]);
 
   return (
-    <div className="d-flex flex-column gap-4">
-      <h6 className="px-2 py-1 fw-bold text-gray-500">{t('transferPanel.transferTo')}</h6>
-      <DInputSearch
-        value={contactQuery}
-        id="searchContacts"
-        placeholder={t('transferPanel.searchPlaceholder')}
-        onChange={(value) => dispatch(setContactsQuery(value))}
-      />
-      <DTabs
-        options={TRANSFER_TABS}
-        defaultSelected={TRANSFER_TABS[0].tab}
-      >
-        <DTabs.Tab tab={TRANSFER_TABS[0].tab}>
-          <NewContact />
-          <ContactList />
-        </DTabs.Tab>
-        <DTabs.Tab tab={TRANSFER_TABS[1].tab}>
-          <AccountList />
-        </DTabs.Tab>
-      </DTabs>
-    </div>
+    <DCard>
+      <DCard.Body className="d-flex flex-column gap-4">
+        <h6 className="px-2 py-1 fw-bold text-gray-500">{t('transferPanel.transferTo')}</h6>
+        <DInputSearch
+          value={contactQuery}
+          id="searchContacts"
+          placeholder={t('transferPanel.searchPlaceholder')}
+          onChange={(value) => dispatch(setContactsQuery(value))}
+        />
+        <DTabs
+          options={TRANSFER_TABS}
+          defaultSelected={TRANSFER_TABS[0].tab}
+        >
+          <DTabs.Tab tab={TRANSFER_TABS[0].tab}>
+            <NewContact />
+            <ContactList />
+          </DTabs.Tab>
+          <DTabs.Tab tab={TRANSFER_TABS[1].tab}>
+            <AccountList />
+          </DTabs.Tab>
+        </DTabs>
+      </DCard.Body>
+    </DCard>
   );
 }

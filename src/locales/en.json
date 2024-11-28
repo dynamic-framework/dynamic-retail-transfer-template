@@ -61,32 +61,6 @@
       "text": "You are sending money to {name} - {bank} {mask} from your {accountFrom}",
       "transactionCost": "The transaction fee is: <strong>{charge}</strong>",
       "timeTransfer": "The payment will be received within the next <strong>3 Business Days.</strong>"
-    },
-    "recurring": {
-      "title": "Recurring",
-      "repeat": "Repeat",
-      "on": "On",
-      "weekly": "Weekly",
-      "monthly": "Monthly",
-      "custom": "Custom",
-      "ends": "Ends",
-      "oneYear": "1 Year",
-      "date": "Date",
-      "occurrences": "Occurrences",
-      "yes": "Yes",
-      "no": "No",
-      "saturday": "S",
-      "monday": "M",
-      "tuesday": "T",
-      "wednesday": "W",
-      "thursday": "T",
-      "friday": "F",
-      "sunday": "S",
-      "every-1": "Every month",
-      "every-2": "Every other month",
-      "every-3": "Every 3 months",
-      "every-6": "Every 6 months",
-      "every-12": "Every 12 months"
     }
   },
   "hint": {
@@ -118,9 +92,10 @@
     "transferErrorMessage": "We were unable to complete the transfer due to communication issues with the recipient's bank.",
     "errorSolution": "Please {solution}",
     "moneyPaid": "Money to transfer",
-    "transferTo": "Transfer to",
-    "transactionId": "Transaction ID",
-    "timeDate": "Time & Date",
+    "transferTo": "Transfer to: {value}",
+    "transactionId": "Transaction ID: {value}",
+    "timeDate": "Time & Date: {value}",
+    "message": "Message: {value}",
     "terms": {
       "text": "All your transactions are safe and fast.",
       "link": "Terms & Conditions."
@@ -129,5 +104,23 @@
   "updateFavorite": {
     "success": "Favorite contacts have been updated",
     "error": "Unable to update favorite contact"
+  },
+  "otp": {
+    "problems": "<p>Problems with your digital token? <a>Contact us</a></p>",
+    "countdown": "<p>Didn't you get any code? Resend in {value}</p>",
+    "countdownResend": "<p>Didn't you get any code? <button></button></p>",
+    "resend": "Resend code"
+  },
+  "voucher": {
+    "message": "You will receive an invoice in the email associated with your account.",
+    "share": "Share",
+    "download": "Download",
+    "backToHome": "Back to Home",
+    "anotherOperation": "Another operation",
+    "details": "Transfer details",
+    "moneySent": "Money sent"
+  },
+  "errors": {
+    "selectAmount": "Select a valid amount"
   }
 }

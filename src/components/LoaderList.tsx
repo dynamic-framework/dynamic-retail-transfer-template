@@ -1,6 +1,6 @@
 export default function LoaderList() {
   return (
-    <div className="d-flex flex-column gap-2 placeholder-glow mt-6">
+    <div className="d-flex flex-column gap-2 placeholder-glow mt-9">
       <span
         className="placeholder rounded-2 mb-4 col-2"
         style={{

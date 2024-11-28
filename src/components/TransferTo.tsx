@@ -5,7 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getSelectedAccount, getSelectedContact } from '../store/selectors';
 import {
-  setCurrentStep, setSelectedAccount, setSelectedContact,
+  setCurrentStep,
+  setSelectedAccount,
+  setSelectedContact,
 } from '../store/slice';
 
 export default function TransferTo() {

@@ -10,7 +10,7 @@ export default function NewContact() {
     <div className="mb-4">
       <a
         href={NEW_CONTACT_PATH}
-        className="d-flex gap-4 border border-gray-100 rounded p-4 text-black new-contact-link"
+        className="d-flex gap-4 border border-gray-100 rounded p-4 text-black text-decoration-none"
       >
         <DIcon
           icon="person-add"
