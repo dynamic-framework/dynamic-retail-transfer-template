@@ -61,32 +61,6 @@
       "text": "You are sending money to {name} - {bank} {mask} from your {accountFrom}",
       "transactionCost": "The transaction fee is: <strong>{charge}</strong>",
       "timeTransfer": "The payment will be received within the next <strong>3 Business Days.</strong>"
-    },
-    "recurring": {
-      "title": "Recurring",
-      "repeat": "Repeat",
-      "on": "On",
-      "weekly": "Weekly",
-      "monthly": "Monthly",
-      "custom": "Custom",
-      "ends": "Ends",
-      "oneYear": "1 Year",
-      "date": "Date",
-      "occurrences": "Occurrences",
-      "yes": "Yes",
-      "no": "No",
-      "saturday": "S",
-      "monday": "M",
-      "tuesday": "T",
-      "wednesday": "W",
-      "thursday": "T",
-      "friday": "F",
-      "sunday": "S",
-      "every-1": "Every month",
-      "every-2": "Every other month",
-      "every-3": "Every 3 months",
-      "every-6": "Every 6 months",
-      "every-12": "Every 12 months"
     }
   },
   "hint": {
@@ -138,13 +112,14 @@
     "resend": "Resend code"
   },
   "voucher": {
-    "message": "You will receive an invoice and a resume of your loan in the email associated with your account.",
+    "message": "You will receive an invoice in the email associated with your account.",
     "share": "Share",
     "download": "Download",
     "backToHome": "Back to Home",
-    "anotherOperation": "Another operation"
+    "anotherOperation": "Another operation",
+    "details": "Transfer details"
   },
   "errors": {
-    "selectAmount": "Select an amount"
+    "selectAmount": "Select a valid amount"
   }
 }

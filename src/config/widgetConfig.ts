@@ -15,14 +15,14 @@ export const VARS_CURRENCY = {
   decimal: liquidParser.parse('{{vars.currency-decimal}}'),
 };
 
-// Views
-export const VIEW = {
-  init: 'init',
-  details: 'details',
-  voucher: 'voucher',
-} as const;
+// Steps
+export const STEP = [
+  'init',
+  'details',
+  'voucher',
+] as const;
 
-export type View = keyof typeof VIEW;
+export type Step = typeof STEP[number];
 
 export const VARS_FORMAT_DATE = liquidParser.parse('{{vars.format-date}}');
 

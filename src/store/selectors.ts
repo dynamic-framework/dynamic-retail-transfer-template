@@ -1,7 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
 import { Contact } from '../services/interface';
-import getAccountValue from '../services/utils/getAccountValue';
 
 import { RootState } from './store';
 
@@ -12,9 +11,9 @@ export const getAccounts = createSelector(
   (widget) => widget.accounts,
 );
 
-export const getCurrentView = createSelector(
+export const getCurrentStep = createSelector(
   getState,
-  (widget) => widget.currentView,
+  (widget) => widget.currentStep,
 );
 
 export const getContacts = createSelector(
@@ -32,10 +31,15 @@ export const getSelectedAccount = createSelector(
   (widget) => widget.selectedAccount,
 );
 
-export const getSelectedDestiny = createSelector(
-  getSelectedContact,
+export const getAccountsTransferFrom = createSelector(
+  getAccounts,
   getSelectedAccount,
-  (selectedContact, selectedAccount) => selectedContact || selectedAccount,
+  (accounts, selectedAccount) => {
+    if (selectedAccount) {
+      return accounts.filter(({ id }) => id !== selectedAccount.id);
+    }
+    return accounts;
+  },
 );
 
 export const getAmountUsed = createSelector(
@@ -43,24 +47,9 @@ export const getAmountUsed = createSelector(
   (widget) => widget.amountUsed ?? 0,
 );
 
-export const getMessage = createSelector(
-  getState,
-  (widget) => widget.message,
-);
-
 export const getOriginAccount = createSelector(
   getState,
   (widget) => widget.originAccount,
-);
-
-export const getOriginAccountAmount = createSelector(
-  getOriginAccount,
-  (account) => (account ? getAccountValue(account) : 0),
-);
-
-export const getResult = createSelector(
-  getState,
-  (widget) => widget.result,
 );
 
 export const getContactsQuery = createSelector(
@@ -101,4 +90,9 @@ export const getIsLoadingAccounts = createSelector(
 export const getScheduledTransfer = createSelector(
   getState,
   (widget) => widget.scheduledTransaction,
+);
+
+export const getIsTransfered = createSelector(
+  getState,
+  (widget) => widget.isTransferred,
 );

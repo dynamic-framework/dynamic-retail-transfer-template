@@ -1,4 +1,6 @@
-import { DButton, DCard, DIcon } from '@dynamic-framework/ui-react';
+import {
+  DButton, DCard, DIcon,
+} from '@dynamic-framework/ui-react';
 import classNames from 'classnames';
 import { PropsWithChildren, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -54,10 +56,10 @@ export default function Voucher(
             </div>
           </div>
           {amount && (
-            <div className="bg-secondary-soft p-2 rounded-2">
+            <div className="bg-secondary-soft p-2 rounded-2 text-center">
               <div
                 className={classNames(
-                  'text-center fw-bold fs-3',
+                  'fw-bold fs-3',
                   amountDetails ? 'mb-1' : 'm-0',
                 )}
               >
@@ -74,14 +76,14 @@ export default function Voucher(
           <div className="d-flex justify-content-center justify-content-sm-start gap-4">
             <DButton
               onClick={() => share().catch(errorHandler)}
-              iconEnd="share"
+              iconStart="share"
               text={t('voucher.share')}
               variant="link"
               size="sm"
             />
             <DButton
               onClick={() => download().catch(errorHandler)}
-              iconEnd="download"
+              iconStart="download"
               text={t('voucher.download')}
               variant="link"
               size="sm"

@@ -1,18 +1,15 @@
-import { ApiContact } from '../api-interface';
-import ApiClient from '../clients/apiClient';
+import { ApiContact, ApiResponsePaginatedWrapped } from '../api-interface';
+import apiClient from '../clients/apiClient';
 import contactMapper from '../mappers/contactMapper';
 
 import { RepositoryParams } from './repository';
 
 export async function list(params: RepositoryParams) {
-  const { data } = await ApiClient.request<ApiContact[]>({
-    url: 'contacts',
+  const { data } = await apiClient.request<ApiResponsePaginatedWrapped<ApiContact>>({
+    url: '/account-holder/contacts/deposit-accounts',
     method: 'GET',
     signal: params.config?.abortSignal,
-    headers: {
-      Prefer: 'code=200, example=All',
-    },
   });
 
-  return data.map((apiContact) => contactMapper(apiContact));
+  return data.content.map(contactMapper);
 }

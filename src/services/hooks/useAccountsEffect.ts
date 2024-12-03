@@ -1,11 +1,15 @@
+import { getQueryString } from '@dynamic-framework/ui-react';
 import { useEffect } from 'react';
 
 import { useAppDispatch } from '../../store/hooks';
-import { setOriginAccount, setIsLoadingAccounts, setAccounts } from '../../store/slice';
+import {
+  setOriginAccount,
+  setIsLoadingAccounts,
+  setAccounts,
+} from '../../store/slice';
 import errorHandler from '../../utils/errorHandler';
 import { AccountRepository } from '../repositories';
 import ApiError from '../utils/ApiError';
-import getAccountIdQueryString from '../utils/getAccountIdQueryString';
 
 export default function useAccountsEffect() {
   const dispatch = useAppDispatch();
@@ -16,14 +20,17 @@ export default function useAccountsEffect() {
     (async () => {
       dispatch(setIsLoadingAccounts(true));
       try {
-        const data = await AccountRepository.list({
-          config: { abortSignal: abortController.signal },
+        const { content } = await AccountRepository.list({
+          config: {
+            abortSignal: abortController.signal,
+          },
         });
-        const accountQueryId = getAccountIdQueryString();
-        const originAccount = data.find(({ id }) => accountQueryId === id);
-        const origin = accountQueryId && originAccount ? originAccount : undefined;
+
+        const accountQueryId = getQueryString('from_account');
+        const originAccount = content.find(({ id }) => accountQueryId === id);
+        const origin = originAccount || undefined;
         dispatch(setOriginAccount(origin));
-        dispatch(setAccounts(data.filter(({ id }) => id !== origin?.id)));
+        dispatch(setAccounts(content.filter(({ id }) => id !== origin?.id)));
         dispatch(setIsLoadingAccounts(false));
       } catch (error) {
         if ((error as ApiError).name === 'CanceledError') return;

@@ -1,9 +1,8 @@
-/* eslint-disable global-require */
 import {
   DToastContainer,
   DContextProvider,
 } from '@dynamic-framework/ui-react';
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
@@ -19,7 +18,7 @@ import './styles/base.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('transfer') as Element);
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <Provider store={store}>
       <DContextProvider
         portalName="portal"
@@ -31,5 +30,5 @@ root.render(
         <DToastContainer position="top-right" />
       </DContextProvider>
     </Provider>
-  </React.StrictMode>,
+  </StrictMode>,
 );

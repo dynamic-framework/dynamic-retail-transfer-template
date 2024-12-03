@@ -17,7 +17,7 @@ import {
   getScheduledTransfer,
 } from '../store/selectors';
 
-import OtpModal from './Otp/OtpModal';
+import OtpModal from './otp/OtpModal';
 
 export default function ModalConfirmTransfer() {
   const { t } = useTranslation();
@@ -37,30 +37,18 @@ export default function ModalConfirmTransfer() {
       return;
     }
 
-    if (selectedContact) {
-      await transfer(
-        {
-          toAccountId: selectedContact.id,
-          fromAccountId: originAccount.id,
-          amount: amountUsed,
-          scheduledAt,
-        },
-      );
-    }
-
-    if (selectedAccount) {
-      await transfer(
-        {
-          toAccountId: selectedAccount.id,
-          fromAccountId: originAccount.id,
-          amount: amountUsed,
-          scheduledAt,
-        },
-      );
-    }
+    await transfer(
+      {
+        toAccountId: selectedContact?.id || selectedAccount?.id,
+        fromAccountId: originAccount.id,
+        amount: amountUsed,
+        scheduledAt,
+      },
+    );
 
     closePortal();
-  }, [amountUsed,
+  }, [
+    amountUsed,
     closePortal,
     originAccount,
     selectedAccount,

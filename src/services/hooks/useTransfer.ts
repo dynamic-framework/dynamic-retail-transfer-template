@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { useAppDispatch } from '../../store/hooks';
-import { setCurrentView, setResult } from '../../store/slice';
+import { setCurrentStep, setIsTransferred } from '../../store/slice';
 import errorHandler from '../../utils/errorHandler';
 import { Transfer } from '../interface';
 import { TransferRepository } from '../repositories';
@@ -11,15 +11,13 @@ export default function useTransfer() {
   const dispatch = useAppDispatch();
 
   const callback = useCallback(async (transfer: Transfer) => {
-    const abortController = new AbortController();
     setLoading(true);
     try {
-      const result = await TransferRepository.transfer({
-        transferItem: transfer,
-        config: { abortSignal: abortController.signal },
+      await TransferRepository.transfer({
+        transferData: transfer,
       });
-      dispatch(setResult(result));
-      dispatch(setCurrentView('voucher'));
+      dispatch(setIsTransferred(true));
+      dispatch(setCurrentStep('voucher'));
       setLoading(false);
     } catch (error) {
       setLoading(false);

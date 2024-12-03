@@ -17,12 +17,16 @@ export default function ContactList() {
   if (loading) {
     return <LoaderList />;
   }
+
   return (
     <>
       <div className="d-flex flex-column favorite-contacts">
         <p className="px-4 py-2 fw-bold fs-6 text-gray-500 mb-0">{t('contactList.favorites')}</p>
         {favoriteContacts.map((contact) => (
-          <ContactListItem contact={contact} key={contact.id} />
+          <ContactListItem
+            contact={contact}
+            key={contact.id}
+          />
         ))}
         {!favoriteContacts.length && (
           <small className="text-center">
@@ -33,7 +37,10 @@ export default function ContactList() {
       <div className="d-flex flex-column contacts">
         <p className="px-4 py-2 fw-bold fs-6 text-gray-500 mb-0">{t('contactList.others')}</p>
         {regularContacts.map((contact) => (
-          <ContactListItem contact={contact} key={contact.id} />
+          <ContactListItem
+            contact={contact}
+            key={contact.id}
+          />
         ))}
         {!regularContacts.length && (
           <small className="text-center mb-4">

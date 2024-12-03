@@ -4,23 +4,23 @@ import { useEffect, useMemo } from 'react';
 import OngoingTransfer from './components/OngoingTransfer';
 import TransferPanel from './components/TransferPanel';
 import TransferResult from './components/TransferResult';
-import { CONTEXT_CONFIG, VIEW } from './config/widgetConfig';
+import { CONTEXT_CONFIG } from './config/widgetConfig';
 import { useAppSelector } from './store/hooks';
-import { getCurrentView } from './store/selectors';
+import { getCurrentStep } from './store/selectors';
 
-const VIEWS = {
-  [VIEW.init]: TransferPanel,
-  [VIEW.details]: OngoingTransfer,
-  [VIEW.voucher]: TransferResult,
+const STEPS = {
+  init: TransferPanel,
+  details: OngoingTransfer,
+  voucher: TransferResult,
 };
 
 export default function App() {
   const { setContext } = useDContext();
-  const view = useAppSelector(getCurrentView);
+  const currentStep = useAppSelector(getCurrentStep);
 
-  const CurrentView = useMemo(
-    () => VIEWS[view],
-    [view],
+  const CurrentStep = useMemo(
+    () => STEPS[currentStep],
+    [currentStep],
   );
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function App() {
 
   return (
     <div className="mx-auto col-xl-6">
-      <CurrentView />
+      <CurrentStep />
     </div>
   );
 }
