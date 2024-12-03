@@ -4,11 +4,10 @@ import {
   DInput,
   DInputCurrency,
   DSelect,
-  useDPortalContext,
   useDToast,
   DDatePicker,
-  DQuickActionSwitch,
   DCard,
+  DInputSwitch,
 } from '@dynamic-framework/ui-react';
 import {
   useEffect,
@@ -26,6 +25,7 @@ import {
 } from '../store/selectors';
 import {
   setAmountUsed,
+  setCurrentStep,
   setMessage,
   setOriginAccount,
   setScheduledTransaction,
@@ -35,7 +35,6 @@ import TransferTo from './TransferTo';
 
 export default function OngoingTransfer() {
   const { t } = useTranslation();
-  const { openPortal } = useDPortalContext();
   const dispatch = useAppDispatch();
 
   const [isScheduled, setIsScheduled] = useState(false);
@@ -92,16 +91,20 @@ export default function OngoingTransfer() {
           value={transferMessage}
           onChange={(value) => setTransferMessage(value)}
         />
-        <DQuickActionSwitch
-          label={t('collapse.schedule')}
-          hint={t('collapse.scheduleHint')}
-          id="scheduleTransfer"
-          checked={isScheduled}
-          onClick={() => {
-            setIsScheduled((prev) => !prev);
-            dispatch(setScheduledTransaction());
-          }}
-        />
+
+        <div>
+          <DInputSwitch
+            label={t('collapse.schedule')}
+            checked={isScheduled}
+            className="mb-0"
+            onChange={() => {
+              setIsScheduled((prev) => !prev);
+              dispatch(setScheduledTransaction());
+            }}
+          />
+          <small className="form-text">{t('collapse.scheduleHint')}</small>
+        </div>
+
         {isScheduled && (
           <DDatePicker
             date={scheduledTransfer}
@@ -130,7 +133,7 @@ export default function OngoingTransfer() {
             }
             dispatch(setMessage(transferMessage));
             dispatch(setAmountUsed(amount));
-            openPortal('modalConfirmTransfer', undefined);
+            dispatch(setCurrentStep('confirmation'));
           }}
         />
       </DCard.Body>

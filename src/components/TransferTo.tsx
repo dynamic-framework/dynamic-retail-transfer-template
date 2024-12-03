@@ -1,4 +1,3 @@
-import { DQuickActionButton } from '@dynamic-framework/ui-react';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -28,22 +27,34 @@ export default function TransferTo() {
       <h6 className="fw-bold sp px-2 text-gray">{t('ongoingTransfer.title')}</h6>
       <div>
         {selectedContact && (
-          <DQuickActionButton
-            className="w-100"
-            line1={selectedContact.name}
-            line2={`${selectedContact.bank} ${selectedContact.accountNumber.slice(-3)}`}
-            actionLinkText={t('ongoingTransfer.change')}
+          <button
+            type="button"
             onClick={handleChangeDestiny}
-          />
+            className="btn d-flex gap-4 align-items-center border border-gray-100 rounded w-100 p-5 reset-btn"
+          >
+            <div className="text-start">
+              <p className="mb-1">
+                <strong>{selectedContact.name}</strong>
+              </p>
+              <small className="text-gray-500">{`${selectedContact.bank} ${selectedContact.accountNumber.slice(-3)}`}</small>
+            </div>
+            <span className="text-primary ms-auto">{t('ongoingTransfer.change')}</span>
+          </button>
         )}
         {selectedAccount && (
-          <DQuickActionButton
-            className="w-100"
-            line1={selectedAccount.name}
-            line2={`*** ${selectedAccount.accountNumber.slice(-3)}`}
-            actionLinkText={t('ongoingTransfer.change')}
+          <button
+            type="button"
             onClick={handleChangeDestiny}
-          />
+            className="btn d-flex gap-4 align-items-center border rounded-1 w-100 p-5"
+          >
+            <div className="text-start">
+              <p className="mb-1">
+                <strong>{selectedAccount.name}</strong>
+              </p>
+              <small className="text-gray-500">{`*** ${selectedAccount.accountNumber.slice(-3)}`}</small>
+            </div>
+            <span className="text-primary ms-auto">{t('ongoingTransfer.change')}</span>
+          </button>
         )}
       </div>
     </div>

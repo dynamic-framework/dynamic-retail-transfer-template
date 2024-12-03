@@ -10,7 +10,6 @@ import './config/liquidConfig';
 import './config/i18nConfig';
 
 import App from './App';
-import ModalConfirmTransfer from './components/ModalConfirmTransfer';
 import store from './store/store';
 
 import '@dynamic-framework/ui-react/dist/css/dynamic-ui.css';
@@ -22,9 +21,6 @@ root.render(
     <Provider store={store}>
       <DContextProvider
         portalName="portal"
-        availablePortals={{
-          modalConfirmTransfer: ModalConfirmTransfer,
-        }}
       >
         <App />
         <DToastContainer position="top-right" />
