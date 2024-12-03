@@ -16,13 +16,13 @@ export const VARS_CURRENCY = {
 };
 
 // Steps
-export const STEP = {
-  init: 'init',
-  details: 'details',
-  voucher: 'voucher',
-} as const;
+export const STEP = [
+  'init',
+  'details',
+  'voucher',
+] as const;
 
-export type Step = keyof typeof STEP;
+export type Step = typeof STEP[number];
 
 export const VARS_FORMAT_DATE = liquidParser.parse('{{vars.format-date}}');
 
