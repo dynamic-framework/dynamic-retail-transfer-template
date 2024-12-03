@@ -1,7 +1,7 @@
 import { DIcon } from '@dynamic-framework/ui-react';
 import { useTranslation } from 'react-i18next';
 
-import { NEW_CONTACT_PATH } from '../config/widgetConfig';
+import { NEW_CONTACT_PATH, SITE_URL } from '../config/widgetConfig';
 
 export default function NewContact() {
   const { t } = useTranslation();
@@ -9,7 +9,7 @@ export default function NewContact() {
   return (
     <div className="mb-4">
       <a
-        href={NEW_CONTACT_PATH}
+        href={`${SITE_URL}/${NEW_CONTACT_PATH}`}
         className="d-flex gap-4 border border-gray-100 rounded p-4 text-black text-decoration-none"
       >
         <DIcon
