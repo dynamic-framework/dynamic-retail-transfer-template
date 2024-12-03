@@ -4,14 +4,14 @@ import { useEffect, useMemo } from 'react';
 import OngoingTransfer from './components/OngoingTransfer';
 import TransferPanel from './components/TransferPanel';
 import TransferResult from './components/TransferResult';
-import { CONTEXT_CONFIG, STEP } from './config/widgetConfig';
+import { CONTEXT_CONFIG } from './config/widgetConfig';
 import { useAppSelector } from './store/hooks';
 import { getCurrentStep } from './store/selectors';
 
 const STEPS = {
-  [STEP.init]: TransferPanel,
-  [STEP.details]: OngoingTransfer,
-  [STEP.voucher]: TransferResult,
+  init: TransferPanel,
+  details: OngoingTransfer,
+  voucher: TransferResult,
 };
 
 export default function App() {
