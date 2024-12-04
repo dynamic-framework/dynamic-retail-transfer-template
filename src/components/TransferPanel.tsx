@@ -43,6 +43,7 @@ export default function TransferPanel() {
         <DTabs
           options={TRANSFER_TABS}
           defaultSelected={TRANSFER_TABS[0].tab}
+          className="mb-4"
         >
           <DTabs.Tab tab={TRANSFER_TABS[0].tab}>
             <NewContact />

@@ -19,6 +19,7 @@ export const VARS_CURRENCY = {
 export const STEP = [
   'init',
   'details',
+  'confirmation',
   'voucher',
 ] as const;
 
