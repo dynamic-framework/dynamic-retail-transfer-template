@@ -29,12 +29,8 @@ export default function TransferTo() {
 
   useEffect(() => {
     if (queryId) {
-      const findContact = contacts.find(({ id }) => queryId === id);
-      if (findContact) {
-        dispatch(setSelectedContact(findContact));
-      } else {
-        dispatch(setSelectedContact(contacts[0]));
-      }
+      const findContact = contacts.find(({ id }) => queryId === id) || contacts[0];
+      dispatch(setSelectedContact(findContact));
     }
   }, [queryId, dispatch, contacts]);
 
