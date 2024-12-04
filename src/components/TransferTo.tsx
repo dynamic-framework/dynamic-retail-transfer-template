@@ -1,26 +1,52 @@
-import { useCallback } from 'react';
+import { getQueryString } from '@dynamic-framework/ui-react';
+import { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import useContacts from '../services/hooks/useContactsEffect';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { getSelectedAccount, getSelectedContact } from '../store/selectors';
+import {
+  getContacts,
+  getSelectedAccount,
+  getSelectedContact,
+} from '../store/selectors';
 import {
   setCurrentStep,
   setSelectedAccount,
   setSelectedContact,
 } from '../store/slice';
 
+import LoaderContact from './loaders/loaderContact';
+
 export default function TransferTo() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
+  const queryId = getQueryString('account_id');
+  const contacts = useAppSelector(getContacts);
   const selectedContact = useAppSelector(getSelectedContact);
   const selectedAccount = useAppSelector(getSelectedAccount);
+  const { loading } = useContacts();
+
+  useEffect(() => {
+    if (queryId) {
+      const findContact = contacts.find(({ id }) => queryId === id);
+      if (findContact) {
+        dispatch(setSelectedContact(findContact));
+      } else {
+        dispatch(setSelectedContact(contacts[0]));
+      }
+    }
+  }, [queryId, dispatch, contacts]);
 
   const handleChangeDestiny = useCallback(() => {
     dispatch(setSelectedContact(undefined));
     dispatch(setSelectedAccount(undefined));
     dispatch(setCurrentStep('init'));
   }, [dispatch]);
+
+  if (loading && !selectedContact) {
+    return <LoaderContact />;
+  }
 
   return (
     <div className="d-flex flex-column gap-2">

@@ -43,7 +43,6 @@ export default function OngoingTransfer() {
 
   const originAccount = useAppSelector(getOriginAccount);
   const accountsTransferFrom = useAppSelector(getAccountsTransferFrom);
-
   const scheduledTransfer = useAppSelector(getScheduledTransfer);
 
   const {
