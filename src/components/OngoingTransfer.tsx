@@ -64,7 +64,7 @@ export default function OngoingTransfer() {
       <DCard.Body className="d-flex flex-column gap-4">
         <DSelect
           label={t('ongoingTransfer.from')}
-          getOptionLabel={({ name, accountNumber }: DepositAccount) => `${name} *** ${accountNumber.slice(-3)}`}
+          getOptionLabel={({ name, accountNumber }: DepositAccount) => `${name} - ${accountNumber}`}
           getOptionValue={({ accountNumber }: DepositAccount) => accountNumber}
           options={accountsTransferFrom}
           onChange={(account) => (

@@ -44,6 +44,8 @@ export default function TransferTo() {
     return <LoaderContact />;
   }
 
+  console.log(contacts);
+
   return (
     <div className="d-flex flex-column gap-2">
       <h6 className="fw-bold sp px-2 text-gray">{t('ongoingTransfer.title')}</h6>
@@ -58,7 +60,7 @@ export default function TransferTo() {
               <p className="mb-1">
                 <strong>{selectedContact.name}</strong>
               </p>
-              <small className="text-gray-500">{`${selectedContact.bank} ${selectedContact.accountNumber.slice(-3)}`}</small>
+              <small className="text-gray-500">{`${selectedContact.bank} - ${selectedContact.accountNumber}`}</small>
             </div>
             <span className="text-primary ms-auto">{t('ongoingTransfer.change')}</span>
           </button>
@@ -73,7 +75,7 @@ export default function TransferTo() {
               <p className="mb-1">
                 <strong>{selectedAccount.name}</strong>
               </p>
-              <small className="text-gray-500">{`*** ${selectedAccount.accountNumber.slice(-3)}`}</small>
+              <small className="text-gray-500">{selectedAccount.accountNumber}</small>
             </div>
             <span className="text-primary ms-auto">{t('ongoingTransfer.change')}</span>
           </button>

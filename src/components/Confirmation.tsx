@@ -61,15 +61,11 @@ export default function Confirmation() {
           <div className="d-flex align-items-start gap-8">
             <div className="flex-1">
               <h5 className="mb-8">{t('confirmation.detail')}</h5>
-              <div>
-                {t('confirmation.from', { value: `${originAccount?.name} - ${originAccount?.accountNumber}` })}
-              </div>
-              <div>
-                {t('confirmation.to', { value: `${selectedAccount?.name} - ${selectedAccount?.accountNumber}` })}
-              </div>
-              <div>
-                {t('confirmation.amount', { value: amountUsedFormatted })}
-              </div>
+              <ul className="list-unstyled">
+                <li>{t('confirmation.from', { value: `${originAccount?.name} - ${originAccount?.accountNumber}` })}</li>
+                <li>{t('confirmation.to', { value: `${selectedAccount?.name} - ${selectedAccount?.accountNumber}` })}</li>
+                <li>{t('confirmation.amount', { value: amountUsedFormatted })}</li>
+              </ul>
             </div>
             <DButton
               className="ms-auto"
