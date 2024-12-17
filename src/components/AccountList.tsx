@@ -2,7 +2,7 @@ import { useAppSelector } from '../store/hooks';
 import { getAccounts, getIsLoadingAccounts } from '../store/selectors';
 
 import AccountListItem from './AccountListItem';
-import LoaderList from './LoaderList';
+import LoaderList from './loaders/LoaderList';
 
 export default function AccountList() {
   const isLoadingAccounts = useAppSelector(getIsLoadingAccounts);

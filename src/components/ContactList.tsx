@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import useContacts from '../services/hooks/useContactsEffect';
 
 import ContactListItem from './ContactListItem';
-import LoaderList from './LoaderList';
+import LoaderList from './loaders/LoaderList';
 
 export default function ContactList() {
   const { t } = useTranslation();

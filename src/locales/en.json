@@ -55,13 +55,13 @@
     "wrong": "Oops! Something Went Wrong",
     "newContactMessage": "Your new contact has been saved"
   },
-  "modal": {
-    "transfer": {
-      "title": "Transfer {amount}?",
-      "text": "You are sending money to {name} - {bank} {mask} from your {accountFrom}",
-      "transactionCost": "The transaction fee is: <strong>{charge}</strong>",
-      "timeTransfer": "The payment will be received within the next <strong>3 Business Days.</strong>"
-    }
+  "confirmation": {
+    "detail": "Detail",
+    "title": "Transfer {amount}?",
+    "from": "From: {value}",
+    "to": "To: {value}",
+    "bankTo": "Bank: {value}",
+    "amount": "Amount: {value}"
   },
   "hint": {
     "available": "{amount} available",
@@ -106,10 +106,16 @@
     "error": "Unable to update favorite contact"
   },
   "otp": {
+    "title": "Authorize",
     "problems": "<p>Problems with your digital token? <a>Contact us</a></p>",
     "countdown": "<p>Didn't you get any code? Resend in {value}</p>",
     "countdownResend": "<p>Didn't you get any code? <button></button></p>",
     "resend": "Resend code"
+  },
+  "steps": {
+    "selection": "Selection",
+    "detail": "Detail",
+    "confirmation": "Confirmation"
   },
   "voucher": {
     "message": "You will receive an invoice in the email associated with your account.",
