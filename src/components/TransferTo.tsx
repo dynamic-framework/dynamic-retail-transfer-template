@@ -44,8 +44,6 @@ export default function TransferTo() {
     return <LoaderContact />;
   }
 
-  console.log(contacts);
-
   return (
     <div className="d-flex flex-column gap-2">
       <h6 className="fw-bold sp px-2 text-gray">{t('ongoingTransfer.title')}</h6>
