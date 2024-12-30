@@ -37,7 +37,6 @@ export default function OngoingTransfer() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const [isScheduled, setIsScheduled] = useState(false);
   const [transferMessage, setTransferMessage] = useState<string>('');
   const { toast } = useDToast();
 
@@ -94,17 +93,16 @@ export default function OngoingTransfer() {
         <div>
           <DInputSwitch
             label={t('collapse.schedule')}
-            checked={isScheduled}
+            checked={!!scheduledTransfer}
             className="mb-0"
-            onChange={() => {
-              setIsScheduled((prev) => !prev);
-              dispatch(setScheduledTransaction());
+            onChange={(active) => {
+              dispatch(setScheduledTransaction(active ? new Date().toISOString() : undefined));
             }}
           />
           <small className="form-text">{t('collapse.scheduleHint')}</small>
         </div>
 
-        {isScheduled && (
+        {scheduledTransfer && (
           <DDatePicker
             date={scheduledTransfer}
             iconHeaderNextMonth="chevron-right"
