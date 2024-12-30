@@ -2,8 +2,9 @@ import {
   DCard,
   useFormatCurrency,
   DButton,
+  DButtonIcon,
 } from '@dynamic-framework/ui-react';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import useTransfer from '../services/hooks/useTransfer';
@@ -29,6 +30,11 @@ export default function Confirmation() {
 
   const { values: [amountUsedFormatted] } = useFormatCurrency(amountUsed, 0.12);
   const { callback: transfer, loading } = useTransfer();
+
+  const selectedContactToTransfer = useMemo(() => selectedContact || selectedAccount, [
+    selectedAccount,
+    selectedContact,
+  ]);
 
   const handleTransfer = useCallback(async () => {
     if (!originAccount) {
@@ -58,23 +64,27 @@ export default function Confirmation() {
       <DCard className="mb-8">
         <DCard.Body>
           <h4 className="mb-8">{t('confirmation.title', { amount: amountUsedFormatted })}</h4>
-          <div className="d-flex align-items-start gap-8">
-            <div className="flex-1">
-              <h5 className="mb-8">{t('confirmation.detail')}</h5>
-              <ul className="list-unstyled">
-                <li>{t('confirmation.from', { value: `${originAccount?.name} - ${originAccount?.accountNumber}` })}</li>
-                <li>{t('confirmation.to', { value: `${selectedAccount?.name} - ${selectedAccount?.accountNumber}` })}</li>
-                <li>{t('confirmation.amount', { value: amountUsedFormatted })}</li>
-              </ul>
-            </div>
+          <div className="d-flex align-items-center justify-content-between mb-4">
+            <h5>{t('confirmation.detail')}</h5>
             <DButton
-              className="ms-auto"
+              className="ms-auto d-none d-lg-flex"
               variant="link"
               iconStart="pencil"
               text={t('edit')}
               onClick={() => dispatch(setCurrentStep('details'))}
             />
+            <DButtonIcon
+              className="ms-auto d-lg-none"
+              variant="link"
+              icon="pencil"
+              onClick={() => dispatch(setCurrentStep('details'))}
+            />
           </div>
+          <ul className="list-unstyled">
+            <li>{t('confirmation.from', { value: `${originAccount?.name} - ${originAccount?.accountNumber}` })}</li>
+            <li>{t('confirmation.to', { value: `${selectedContactToTransfer?.name} - ${selectedContactToTransfer?.accountNumber}` })}</li>
+            <li>{t('confirmation.amount', { value: amountUsedFormatted })}</li>
+          </ul>
         </DCard.Body>
       </DCard>
       <OtpCard
