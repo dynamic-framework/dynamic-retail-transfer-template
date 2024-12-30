@@ -1,11 +1,9 @@
-import { getQueryString } from '@dynamic-framework/ui-react';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import useContacts from '../services/hooks/useContactsEffect';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
-  getContacts,
   getSelectedAccount,
   getSelectedContact,
 } from '../store/selectors';
@@ -21,18 +19,9 @@ export default function TransferTo() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const queryId = getQueryString('account_id');
-  const contacts = useAppSelector(getContacts);
   const selectedContact = useAppSelector(getSelectedContact);
   const selectedAccount = useAppSelector(getSelectedAccount);
   const { loading } = useContacts();
-
-  useEffect(() => {
-    if (queryId) {
-      const findContact = contacts.find(({ id }) => queryId === id) || contacts[0];
-      dispatch(setSelectedContact(findContact));
-    }
-  }, [queryId, dispatch, contacts]);
 
   const handleChangeDestiny = useCallback(() => {
     dispatch(setSelectedContact(undefined));
