@@ -26,7 +26,7 @@ export default function TransferPanel() {
   const contactQuery = useAppSelector(getContactsQuery);
 
   const TRANSFER_TABS = useMemo(() => [
-    { label: t('transferPanel.contact'), tab: 'contact' },
+    { label: t('transferPanel.contacts'), tab: 'contacts' },
     { label: t('transferPanel.betweenAccounts'), tab: 'accounts' },
   ], [t]);
 

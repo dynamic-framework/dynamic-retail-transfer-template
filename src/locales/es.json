@@ -6,7 +6,7 @@
   "transferPanel": {
     "transferTo": "Transfer funds to",
     "searchPlaceholder": "Search",
-    "contact": "Contact",
+    "contacts": "Contacts",
     "betweenAccounts": "Between accounts",
     "byPhone": "By phone number",
     "newContact": "Create new contact",
@@ -14,9 +14,10 @@
   },
   "contactList": {
     "favorites": "Favorites",
-    "others": "Other recipient",
-    "emptyFavorites": "You don't have favorite contacts",
-    "emptyRegulars": "You don't have regular contacts"
+    "others": "Other Recipients",
+    "emptyFavorites": "You have no favorite contacts",
+    "emptyRegulars": "You have no contacts",
+    "noMatch": "No matching contacts"
   },
   "createContact": {
     "name": "Name",
@@ -43,7 +44,7 @@
   "collapse": {
     "lessOptions": "Less Options",
     "schedule": "Schedule",
-    "scheduleHint": "The transfer will be instantaneous and will not auto-repeat.",
+    "scheduleHint": "This transfer will be immediate and non-recurring.",
     "recurring": "Recurring",
     "yesLabel": "Yes",
     "noLabel": "No",
@@ -94,7 +95,7 @@
     "moneyPaid": "Money to transfer",
     "transferTo": "Transfer to: {value}",
     "transactionId": "Transaction ID: {value}",
-    "timeDate": "Time & Date: {value}",
+    "timeDate": "Date & Time: {value}",
     "message": "Message: {value}",
     "terms": {
       "text": "All your transactions are safe and fast.",
@@ -108,9 +109,9 @@
   "otp": {
     "title": "Authorize",
     "problems": "<p>Problems with your digital token? <a>Contact us</a></p>",
-    "countdown": "<p>Didn't you get any code? Resend in {value}</p>",
-    "countdownResend": "<p>Didn't you get any code? <button></button></p>",
-    "resend": "Resend code"
+    "countdown": "<p>Didn’t receive a code? Resend in {value}</p>",
+    "countdownResend": "<p>Didn’t receive a code? <button></button></p>",
+    "resend": "Resend"
   },
   "steps": {
     "selection": "Selection",
@@ -118,11 +119,11 @@
     "confirmation": "Confirmation"
   },
   "voucher": {
-    "message": "You will receive an invoice in the email associated with your account.",
+    "message": "You will receive an invoice and summary of this transaction to the email associated with your account.",
     "share": "Share",
     "download": "Download",
-    "backToHome": "Back to Home",
-    "anotherOperation": "Another operation",
+    "backToHome": "Back Home",
+    "anotherOperation": "Another transfer",
     "details": "Transfer details",
     "moneySent": "Money sent"
   },

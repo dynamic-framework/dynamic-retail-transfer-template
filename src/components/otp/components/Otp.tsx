@@ -35,7 +35,7 @@ export default function Otp(
     children,
     helpLink = 'https://dynamicframework.dev',
     isLoading,
-    message = 'We will send you a 6-digit code to your associated phone number so you can continue with your request',
+    message = 'For authorization, please enter the 6-digit code we’ve sent to your associated phone number',
   }: Props,
 ) {
   const { closePortal } = useDPortalContext();
