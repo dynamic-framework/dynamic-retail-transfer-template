@@ -10,6 +10,7 @@ import {
   DInputSwitch,
 } from '@dynamic-framework/ui-react';
 import {
+  useCallback,
   useEffect,
   useState,
 } from 'react';
@@ -57,6 +58,27 @@ export default function OngoingTransfer() {
       dispatch(setOriginAccount(accountsTransferFrom[0]));
     }
   }, [dispatch, originAccount, accountsTransferFrom]);
+
+  const handleContinue = useCallback(() => {
+    if (!enableTransfer) {
+      toast({
+        title: t('errors.selectAmount'),
+        soft: true,
+        theme: 'danger',
+      });
+      return;
+    }
+    dispatch(setMessage(transferMessage));
+    dispatch(setAmountUsed(amount));
+    dispatch(setCurrentStep('confirmation'));
+  }, [
+    dispatch,
+    enableTransfer,
+    amount,
+    transferMessage,
+    t,
+    toast,
+  ]);
 
   return (
     <DCard>
@@ -119,19 +141,7 @@ export default function OngoingTransfer() {
         <DButton
           className="d-flex align-self-center"
           text={t('button.transfer')}
-          onClick={() => {
-            if (!enableTransfer) {
-              toast({
-                title: t('errors.selectAmount'),
-                soft: true,
-                theme: 'danger',
-              });
-              return;
-            }
-            dispatch(setMessage(transferMessage));
-            dispatch(setAmountUsed(amount));
-            dispatch(setCurrentStep('confirmation'));
-          }}
+          onClick={handleContinue}
         />
       </DCard.Body>
     </DCard>
