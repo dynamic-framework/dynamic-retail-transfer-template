@@ -22,14 +22,6 @@ export default function ContactList() {
     return <LoaderList />;
   }
 
-  const emptyFavoritesText = contactQuery
-    ? t('contactList.noMatch')
-    : t('contactList.emptyFavorites');
-
-  const emptyRegularsText = contactQuery
-    ? t('contactList.noMatch')
-    : t('contactList.emptyRegulars');
-
   return (
     <>
       <div className="d-flex flex-column favorite-contacts">
@@ -42,7 +34,7 @@ export default function ContactList() {
         ))}
         {!favoriteContacts.length && (
           <small className="text-center">
-            {emptyFavoritesText}
+            {t(contactQuery ? 'contactList.noMatch' : 'contactList.emptyFavorites')}
           </small>
         )}
       </div>
@@ -56,7 +48,7 @@ export default function ContactList() {
         ))}
         {!regularContacts.length && (
           <small className="text-center mb-4">
-            {emptyRegularsText}
+            {t(contactQuery ? 'contactList.noMatch' : 'contactList.emptyRegulars')}
           </small>
         )}
       </div>

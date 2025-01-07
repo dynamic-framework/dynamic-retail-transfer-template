@@ -13,7 +13,7 @@ import {
   setSelectedContact,
 } from '../store/slice';
 
-import LoaderContact from './loaders/loaderContact';
+import ContactLoader from './loaders/ContactLoader';
 
 export default function TransferTo() {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ export default function TransferTo() {
   }, [dispatch]);
 
   if (loading && !selectedContact) {
-    return <LoaderContact />;
+    return <ContactLoader />;
   }
 
   return (
