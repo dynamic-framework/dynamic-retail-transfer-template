@@ -49,7 +49,7 @@ export default function Steps() {
       options={steps}
       currentStep={STEPS[currentStep].value}
       breakpoint="md"
-      className="align-self-start align-self-md-auto mb-8"
+      className="mb-4 mb-lg-8 d-flex align-self-start d-md-block"
     />
   );
 }
