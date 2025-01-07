@@ -4,7 +4,7 @@ import {
   DButton,
   DButtonIcon,
 } from '@dynamic-framework/ui-react';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import useTransfer from '../services/hooks/useTransfer';
@@ -12,7 +12,6 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
   getAmountUsed,
   getOriginAccount,
-  getScheduledTransfer,
   getSelectedAccount,
   getSelectedContact,
 } from '../store/selectors';
@@ -25,7 +24,6 @@ export default function Confirmation() {
   const selectedContact = useAppSelector(getSelectedContact);
   const selectedAccount = useAppSelector(getSelectedAccount);
   const originAccount = useAppSelector(getOriginAccount);
-  const scheduledAt = useAppSelector(getScheduledTransfer);
   const dispatch = useAppDispatch();
 
   const { values: [amountUsedFormatted] } = useFormatCurrency(amountUsed, 0.12);
@@ -34,28 +32,6 @@ export default function Confirmation() {
   const selectedContactToTransfer = useMemo(() => selectedContact || selectedAccount, [
     selectedAccount,
     selectedContact,
-  ]);
-
-  const handleTransfer = useCallback(async () => {
-    if (!originAccount) {
-      return;
-    }
-
-    await transfer(
-      {
-        toAccountId: selectedContact?.id || selectedAccount?.id,
-        fromAccountId: originAccount.id,
-        amount: amountUsed,
-        scheduledAt,
-      },
-    );
-  }, [
-    amountUsed,
-    originAccount,
-    selectedAccount,
-    selectedContact,
-    scheduledAt,
-    transfer,
   ]);
 
   const { t } = useTranslation();
@@ -88,7 +64,7 @@ export default function Confirmation() {
         </DCard.Body>
       </DCard>
       <OtpCard
-        action={handleTransfer}
+        action={transfer}
         isLoading={loading}
         title={t('otp.title')}
       />
