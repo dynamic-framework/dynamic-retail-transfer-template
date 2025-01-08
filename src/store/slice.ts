@@ -1,3 +1,4 @@
+import { getQueryString } from '@dynamic-framework/ui-react';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
@@ -47,7 +48,7 @@ export type WidgetState = {
 const initialState = {
   accounts: [],
   contacts: [],
-  currentStep: 'init',
+  currentStep: getQueryString('account_id') ? 'details' : 'init',
   contactsQuery: '',
   banks: [],
   isLoadingAccounts: false,

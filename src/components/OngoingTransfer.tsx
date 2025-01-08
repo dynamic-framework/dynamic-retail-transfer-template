@@ -4,13 +4,13 @@ import {
   DInput,
   DInputCurrency,
   DSelect,
-  useDPortalContext,
   useDToast,
   DDatePicker,
-  DQuickActionSwitch,
   DCard,
+  DInputSwitch,
 } from '@dynamic-framework/ui-react';
 import {
+  useCallback,
   useEffect,
   useState,
 } from 'react';
@@ -26,6 +26,7 @@ import {
 } from '../store/selectors';
 import {
   setAmountUsed,
+  setCurrentStep,
   setMessage,
   setOriginAccount,
   setScheduledTransaction,
@@ -35,16 +36,13 @@ import TransferTo from './TransferTo';
 
 export default function OngoingTransfer() {
   const { t } = useTranslation();
-  const { openPortal } = useDPortalContext();
   const dispatch = useAppDispatch();
 
-  const [isScheduled, setIsScheduled] = useState(false);
   const [transferMessage, setTransferMessage] = useState<string>('');
   const { toast } = useDToast();
 
   const originAccount = useAppSelector(getOriginAccount);
   const accountsTransferFrom = useAppSelector(getAccountsTransferFrom);
-
   const scheduledTransfer = useAppSelector(getScheduledTransfer);
 
   const {
@@ -61,12 +59,33 @@ export default function OngoingTransfer() {
     }
   }, [dispatch, originAccount, accountsTransferFrom]);
 
+  const handleContinue = useCallback(() => {
+    if (!enableTransfer) {
+      toast({
+        title: t('errors.selectAmount'),
+        soft: true,
+        theme: 'danger',
+      });
+      return;
+    }
+    dispatch(setMessage(transferMessage));
+    dispatch(setAmountUsed(amount));
+    dispatch(setCurrentStep('confirmation'));
+  }, [
+    dispatch,
+    enableTransfer,
+    amount,
+    transferMessage,
+    t,
+    toast,
+  ]);
+
   return (
     <DCard>
       <DCard.Body className="d-flex flex-column gap-4">
         <DSelect
           label={t('ongoingTransfer.from')}
-          getOptionLabel={({ name, accountNumber }: DepositAccount) => `${name} *** ${accountNumber.slice(-3)}`}
+          getOptionLabel={({ name, accountNumber }: DepositAccount) => `${name} - ${accountNumber}`}
           getOptionValue={({ accountNumber }: DepositAccount) => accountNumber}
           options={accountsTransferFrom}
           onChange={(account) => (
@@ -92,17 +111,20 @@ export default function OngoingTransfer() {
           value={transferMessage}
           onChange={(value) => setTransferMessage(value)}
         />
-        <DQuickActionSwitch
-          label={t('collapse.schedule')}
-          hint={t('collapse.scheduleHint')}
-          id="scheduleTransfer"
-          checked={isScheduled}
-          onClick={() => {
-            setIsScheduled((prev) => !prev);
-            dispatch(setScheduledTransaction());
-          }}
-        />
-        {isScheduled && (
+
+        <div>
+          <DInputSwitch
+            label={t('collapse.schedule')}
+            checked={!!scheduledTransfer}
+            className="mb-0"
+            onChange={(active) => {
+              dispatch(setScheduledTransaction(active ? new Date().toISOString() : undefined));
+            }}
+          />
+          <small className="form-text">{t('collapse.scheduleHint')}</small>
+        </div>
+
+        {scheduledTransfer && (
           <DDatePicker
             date={scheduledTransfer}
             iconHeaderNextMonth="chevron-right"
@@ -119,19 +141,7 @@ export default function OngoingTransfer() {
         <DButton
           className="d-flex align-self-center"
           text={t('button.transfer')}
-          onClick={() => {
-            if (!enableTransfer) {
-              toast({
-                title: t('errors.selectAmount'),
-                soft: true,
-                theme: 'danger',
-              });
-              return;
-            }
-            dispatch(setMessage(transferMessage));
-            dispatch(setAmountUsed(amount));
-            openPortal('modalConfirmTransfer', undefined);
-          }}
+          onClick={handleContinue}
         />
       </DCard.Body>
     </DCard>

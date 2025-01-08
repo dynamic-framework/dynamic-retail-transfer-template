@@ -1,12 +1,16 @@
 import { useTranslation } from 'react-i18next';
 
 import useContacts from '../services/hooks/useContactsEffect';
+import { useAppSelector } from '../store/hooks';
+import { getContactsQuery } from '../store/selectors';
 
 import ContactListItem from './ContactListItem';
-import LoaderList from './LoaderList';
+import LoaderList from './loaders/LoaderList';
 
 export default function ContactList() {
   const { t } = useTranslation();
+
+  const contactQuery = useAppSelector(getContactsQuery);
 
   const {
     loading,
@@ -30,11 +34,11 @@ export default function ContactList() {
         ))}
         {!favoriteContacts.length && (
           <small className="text-center">
-            {t('contactList.emptyFavorites')}
+            {t(contactQuery ? 'contactList.noMatch' : 'contactList.emptyFavorites')}
           </small>
         )}
       </div>
-      <div className="d-flex flex-column contacts">
+      <div className="d-flex flex-column contacts mt-4">
         <p className="px-4 py-2 fw-bold fs-6 text-gray-500 mb-0">{t('contactList.others')}</p>
         {regularContacts.map((contact) => (
           <ContactListItem
@@ -44,7 +48,7 @@ export default function ContactList() {
         ))}
         {!regularContacts.length && (
           <small className="text-center mb-4">
-            {t('contactList.emptyRegulars')}
+            {t(contactQuery ? 'contactList.noMatch' : 'contactList.emptyRegulars')}
           </small>
         )}
       </div>

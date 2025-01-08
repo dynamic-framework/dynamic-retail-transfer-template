@@ -26,7 +26,7 @@ export default function TransferPanel() {
   const contactQuery = useAppSelector(getContactsQuery);
 
   const TRANSFER_TABS = useMemo(() => [
-    { label: t('transferPanel.contact'), tab: 'contact' },
+    { label: t('transferPanel.contacts'), tab: 'contacts' },
     { label: t('transferPanel.betweenAccounts'), tab: 'accounts' },
   ], [t]);
 
@@ -43,6 +43,7 @@ export default function TransferPanel() {
         <DTabs
           options={TRANSFER_TABS}
           defaultSelected={TRANSFER_TABS[0].tab}
+          className="mb-4"
         >
           <DTabs.Tab tab={TRANSFER_TABS[0].tab}>
             <NewContact />

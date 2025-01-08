@@ -1,4 +1,4 @@
-import { DAvatar, DButtonIcon } from '@dynamic-framework/ui-react';
+import { DAvatar, DIcon } from '@dynamic-framework/ui-react';
 import classNames from 'classnames';
 import { useCallback } from 'react';
 
@@ -34,10 +34,9 @@ export default function ContactListItem({ contact }: Props) {
           <small className="text-gray-500">{contact.accountNumber}</small>
         </div>
       </div>
-      <DButtonIcon
+      <DIcon
         theme="secondary"
         size="lg"
-        variant="link"
         icon={contact.isFavorite ? 'star-fill' : 'star'}
       />
     </button>

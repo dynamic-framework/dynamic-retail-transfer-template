@@ -5,8 +5,8 @@ export default function contactMapper(apiContact: ApiContact): Contact {
   return {
     id: apiContact.id,
     name: apiContact.account_holder_name,
-    bank: apiContact.bank,
-    accountNumber: apiContact.masked_account_number,
+    bank: apiContact.account.bank,
+    accountNumber: apiContact.account.account_number.masked_number,
     isFavorite: apiContact.is_favorite,
   };
 }

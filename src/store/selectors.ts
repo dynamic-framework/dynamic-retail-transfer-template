@@ -1,3 +1,4 @@
+import { getQueryString } from '@dynamic-framework/ui-react';
 import { createSelector } from '@reduxjs/toolkit';
 
 import { Contact } from '../services/interface';
@@ -23,7 +24,14 @@ export const getContacts = createSelector(
 
 export const getSelectedContact = createSelector(
   getState,
-  (widget) => widget.selectedContact,
+  (widget) => {
+    const accountId = getQueryString('account_id');
+    if (!accountId) {
+      return widget.selectedContact;
+    }
+    const findContact = widget.contacts.find(({ id }) => accountId === id) || widget.contacts[0];
+    return findContact;
+  },
 );
 
 export const getSelectedAccount = createSelector(
