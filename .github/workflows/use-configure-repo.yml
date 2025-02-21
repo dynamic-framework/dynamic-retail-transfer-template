@@ -1,0 +1,41 @@
+name: Check and Configure Repository
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  check-initialization:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.repository.is_template == false }}
+    outputs:
+      is_first_commit: ${{ steps.check_commit.outputs.is_first_commit }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check if this is the first commit
+        id: check_commit
+        run: |
+          commit_count=$(git rev-list --count HEAD)
+          echo "Commit count: $commit_count"
+          if [ "$commit_count" -eq 1 ]; then
+            echo "This is the first commit."
+            echo "is_first_commit=true" >> $GITHUB_OUTPUT
+          else
+            echo "This is not the first commit."
+            echo "is_first_commit=false" >> $GITHUB_OUTPUT
+          fi
+
+  configure-repo:
+    needs: check-initialization
+    if: ${{ github.event_name == 'workflow_dispatch' || needs.check-initialization.outputs.is_first_commit == 'true' }}
+    uses: dynamic-framework/.github/.github/workflows/configure-repo.yml@main
+    secrets: inherit
