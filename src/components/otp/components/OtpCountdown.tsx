@@ -1,7 +1,7 @@
 import { DButton } from '@dynamic-framework/ui-react';
 import { Trans, useTranslation } from 'react-i18next';
 
-import useCountdown from '../hooks/useCountDown';
+import useCountdown from '../hooks/useCountdown';
 
 type Props = {
   seconds: number;
