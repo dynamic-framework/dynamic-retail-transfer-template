@@ -7,7 +7,7 @@ type Props = {
   seconds: number;
 };
 
-export default function OtpCountDown(
+export default function OtpCountdown(
   {
     seconds,
   }: Props,
