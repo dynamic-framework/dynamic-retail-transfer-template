@@ -1,22 +1,39 @@
+import {
+  changeQueryString,
+  DInputSearch,
+  getQueryString,
+} from '@dynamic-framework/ui-react';
+import debounce from 'lodash.debounce';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import useContacts from '../services/hooks/useContactsEffect';
-import { useAppSelector } from '../store/hooks';
-import { getContactsQuery } from '../store/selectors';
+import useContactsEffect from '../services/hooks/useContactsEffect';
 
 import ContactListItem from './ContactListItem';
 import LoaderList from './loaders/LoaderList';
 
 export default function ContactList() {
+  const [query, setQuery] = useState(getQueryString('query', { default: '', useSearch: true }));
   const { t } = useTranslation();
-
-  const contactQuery = useAppSelector(getContactsQuery);
 
   const {
     loading,
     favoriteContacts,
     regularContacts,
-  } = useContacts();
+  } = useContactsEffect(query);
+
+  const handleSearch = debounce((value: string) => {
+    if (setQuery) {
+      setQuery(value);
+    }
+
+    changeQueryString({
+      query: value,
+    }, {
+      pushState: true,
+      useSearch: true,
+    });
+  }, 400);
 
   if (loading) {
     return <LoaderList />;
@@ -24,6 +41,13 @@ export default function ContactList() {
 
   return (
     <>
+      <DInputSearch
+        id="searchContacts"
+        label={t('transferPanel.transferTo')}
+        placeholder={t('transferPanel.searchPlaceholder')}
+        defaultValue={query}
+        onChange={(value) => handleSearch(value)}
+      />
       <div className="d-flex flex-column favorite-contacts">
         <p className="px-4 py-2 fw-bold fs-6 text-gray-500 mb-0">{t('contactList.favorites')}</p>
         {favoriteContacts.map((contact) => (
@@ -34,7 +58,7 @@ export default function ContactList() {
         ))}
         {!favoriteContacts.length && (
           <small className="text-center">
-            {t(contactQuery ? 'contactList.noMatch' : 'contactList.emptyFavorites')}
+            {t(query ? 'contactList.noMatch' : 'contactList.emptyFavorites')}
           </small>
         )}
       </div>
@@ -48,7 +72,7 @@ export default function ContactList() {
         ))}
         {!regularContacts.length && (
           <small className="text-center mb-4">
-            {t(contactQuery ? 'contactList.noMatch' : 'contactList.emptyRegulars')}
+            {t(query ? 'contactList.noMatch' : 'contactList.emptyRegulars')}
           </small>
         )}
       </div>
