@@ -1,4 +1,8 @@
-import { DCard, DTabs } from '@dynamic-framework/ui-react';
+import {
+  changeQueryString,
+  DCard,
+  DTabs,
+} from '@dynamic-framework/ui-react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -24,6 +28,12 @@ export default function TransferPanel() {
           options={TRANSFER_TABS}
           defaultSelected={TRANSFER_TABS[0].tab}
           className="mb-4 px-0"
+          onChange={() => {
+            changeQueryString(
+              { query: '' },
+              { pushState: true, useSearch: true },
+            );
+          }}
         >
           <DTabs.Tab
             tab={TRANSFER_TABS[0].tab}
@@ -32,7 +42,10 @@ export default function TransferPanel() {
             <NewContact />
             <ContactList />
           </DTabs.Tab>
-          <DTabs.Tab tab={TRANSFER_TABS[1].tab}>
+          <DTabs.Tab
+            tab={TRANSFER_TABS[1].tab}
+            className="d-flex flex-column gap-6"
+          >
             <AccountList />
           </DTabs.Tab>
         </DTabs>

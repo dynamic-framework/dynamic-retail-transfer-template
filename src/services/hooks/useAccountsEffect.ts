@@ -11,7 +11,7 @@ import errorHandler from '../../utils/errorHandler';
 import { AccountRepository } from '../repositories';
 import ApiError from '../utils/ApiError';
 
-export default function useAccountsEffect() {
+export default function useAccountsEffect(query?: string) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -24,6 +24,7 @@ export default function useAccountsEffect() {
           config: {
             abortSignal: abortController.signal,
           },
+          query,
         });
 
         const accountQueryId = getQueryString('from_account');
@@ -42,5 +43,5 @@ export default function useAccountsEffect() {
     return () => {
       abortController.abort();
     };
-  }, [dispatch]);
+  }, [dispatch, query]);
 }

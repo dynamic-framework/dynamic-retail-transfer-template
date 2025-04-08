@@ -35,47 +35,48 @@ export default function ContactList() {
     });
   }, 400);
 
-  if (loading) {
-    return <LoaderList />;
-  }
-
   return (
     <>
       <DInputSearch
         id="searchContacts"
-        label={t('transferPanel.transferTo')}
         placeholder={t('transferPanel.searchPlaceholder')}
         defaultValue={query}
         onChange={(value) => handleSearch(value)}
       />
-      <div className="d-flex flex-column favorite-contacts">
-        <p className="px-4 py-2 fw-bold fs-6 text-gray-500 mb-0">{t('contactList.favorites')}</p>
-        {favoriteContacts.map((contact) => (
-          <ContactListItem
-            contact={contact}
-            key={contact.id}
-          />
-        ))}
-        {!favoriteContacts.length && (
-          <small className="text-center">
-            {t(query ? 'contactList.noMatch' : 'contactList.emptyFavorites')}
-          </small>
-        )}
-      </div>
-      <div className="d-flex flex-column contacts mt-4">
-        <p className="px-4 py-2 fw-bold fs-6 text-gray-500 mb-0">{t('contactList.others')}</p>
-        {regularContacts.map((contact) => (
-          <ContactListItem
-            contact={contact}
-            key={contact.id}
-          />
-        ))}
-        {!regularContacts.length && (
-          <small className="text-center mb-4">
-            {t(query ? 'contactList.noMatch' : 'contactList.emptyRegulars')}
-          </small>
-        )}
-      </div>
+      {loading && (<LoaderList />)}
+
+      {!loading && (
+        <>
+          <div className="d-flex flex-column favorite-contacts">
+            <p className="py-2 fw-bold fs-6 text-gray-500 mb-0">{t('contactList.favorites')}</p>
+            {favoriteContacts.map((contact) => (
+              <ContactListItem
+                contact={contact}
+                key={contact.id}
+              />
+            ))}
+            {!favoriteContacts.length && (
+            <small className="text-center">
+              {t(query ? 'contactList.noMatch' : 'contactList.emptyFavorites')}
+            </small>
+            )}
+          </div>
+          <div className="d-flex flex-column contacts">
+            <p className="py-2 fw-bold fs-6 text-gray-500 mb-0">{t('contactList.others')}</p>
+            {regularContacts.map((contact) => (
+              <ContactListItem
+                contact={contact}
+                key={contact.id}
+              />
+            ))}
+            {!regularContacts.length && (
+            <small className="text-center mb-4">
+              {t(query ? 'contactList.noMatch' : 'contactList.emptyRegulars')}
+            </small>
+            )}
+          </div>
+        </>
+      )}
     </>
   );
 }
