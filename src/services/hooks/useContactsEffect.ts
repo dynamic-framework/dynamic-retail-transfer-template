@@ -11,7 +11,7 @@ import errorHandler from '../../utils/errorHandler';
 import { ContactRepository } from '../repositories';
 import ApiError from '../utils/ApiError';
 
-export default function useContacts() {
+export default function useContactsEffect(query?: string) {
   const [loading, setLoading] = useState(false);
   const data = useAppSelector(getContacts);
   const favoriteContacts = useAppSelector(getFavoriteContacts);
@@ -28,6 +28,7 @@ export default function useContacts() {
           config: {
             abortSignal: abortController.signal,
           },
+          query,
         });
         setLoading(false);
         dispatch(setContacts(response));
@@ -41,7 +42,7 @@ export default function useContacts() {
     return () => {
       abortController.abort();
     };
-  }, [dispatch]);
+  }, [dispatch, query]);
 
   return {
     loading,

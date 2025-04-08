@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import useContacts from '../services/hooks/useContactsEffect';
+import useContactsEffect from '../services/hooks/useContactsEffect';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
   getSelectedAccount,
@@ -21,7 +21,7 @@ export default function TransferTo() {
 
   const selectedContact = useAppSelector(getSelectedContact);
   const selectedAccount = useAppSelector(getSelectedAccount);
-  const { loading } = useContacts();
+  const { loading } = useContactsEffect();
 
   const handleChangeDestiny = useCallback(() => {
     dispatch(setSelectedContact(undefined));
