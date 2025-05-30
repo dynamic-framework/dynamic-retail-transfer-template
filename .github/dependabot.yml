@@ -1,0 +1,27 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    target-branch: "master"
+    schedule:
+      interval: "cron"
+      cronjob: "0 7 * * 1"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    reviewers:
+      - "dynamic-framework/dynamic-framework-team"
+    open-pull-requests-limit: 5
+    allow:
+      - dependency-name: "@dynamic-framework/ui-react"
+    ignore:
+      - dependency-name: "@dynamic-framework/ui-react"
+        update-types:
+          - version-update:semver-major
+    groups:
+      ui-react:
+        patterns:
+          - "@dynamic-framework/ui-react"
+        update-types:
+          - minor
+          - patch
