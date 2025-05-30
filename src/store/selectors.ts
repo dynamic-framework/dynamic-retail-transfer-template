@@ -97,7 +97,10 @@ export const getIsLoadingAccounts = createSelector(
 
 export const getScheduledTransfer = createSelector(
   getState,
-  (widget) => widget.scheduledTransaction,
+  (widget) => (widget.scheduledTransaction
+    ? new Date(widget.scheduledTransaction)
+    : undefined
+  ),
 );
 
 export const getIsTransfered = createSelector(

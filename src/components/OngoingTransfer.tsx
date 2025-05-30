@@ -126,13 +126,14 @@ export default function OngoingTransfer() {
 
         {scheduledTransfer && (
           <DDatePicker
-            date={new Date(scheduledTransfer)}
+            date={scheduledTransfer}
             iconHeaderNext="chevron-right"
             iconHeaderPrev="chevron-left"
             minDate={new Date()}
             placeholder={t('ongoingTransfer.selectDate')}
             iconInput="calendar"
             inputAriaLabel="Calendar"
+            selected={scheduledTransfer}
             onChange={(date: Date | null) => {
               dispatch(setScheduledTransaction(date?.toISOString()));
             }}
