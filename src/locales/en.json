@@ -109,10 +109,15 @@
   },
   "otp": {
     "title": "Authorize",
+    "message": "We will send you a 6-digit code to your associated phone number so you can continue with your request",
     "problems": "<p>Problems with your digital token? <a>Contact us</a></p>",
-    "countdown": "<p>Didn’t receive a code? Resend in {value}</p>",
-    "countdownResend": "<p>Didn’t receive a code? <button></button></p>",
-    "resend": "Resend"
+    "countdown": "<p>Didn't you get any code? Resend in {value}</p>",
+    "countdownResend": "<p>Didn't you get any code? <button></button></p>",
+    "helpLink": "https://dynamicframework.dev",
+    "actions": {
+      "resend": "Resend code",
+      "continue": "Authorize and Continue"
+    }
   },
   "steps": {
     "selection": "Selection",

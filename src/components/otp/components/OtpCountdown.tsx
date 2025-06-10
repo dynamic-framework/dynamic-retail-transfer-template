@@ -7,7 +7,7 @@ type Props = {
   seconds: number;
 };
 
-export default function OtpCountdown(
+export default function OtpCountDown(
   {
     seconds,
   }: Props,
@@ -25,7 +25,7 @@ export default function OtpCountdown(
         />,
         button: (
           <DButton
-            text={t('otp.resend')}
+            text={t('otp.actions.resend')}
             variant="link"
             className="p-0"
             onClick={() => restartCountdown()}
