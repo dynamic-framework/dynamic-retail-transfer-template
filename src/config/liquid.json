@@ -11,6 +11,6 @@
     "dashboard-path": "#",
     "new-contact-path": "#",
     "format-date": "dd/MM/yyyy",
-    "api-path": "https://dynamic-integration.modyo.be/mocks/online-banking"
+    "api-path": "https://dynamic.api.connect.modyo.com/mocks/online-banking"
   }
 }
