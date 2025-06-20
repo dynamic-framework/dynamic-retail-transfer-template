@@ -66,7 +66,6 @@ export default function Confirmation() {
       <OtpCard
         action={transfer}
         isLoading={loading}
-        title={t('otp.title')}
       />
     </>
   );

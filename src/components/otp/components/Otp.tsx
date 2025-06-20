@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable react/jsx-props-no-spreading */
 
 import {
   DButton,
@@ -12,17 +13,15 @@ import {
   useCallback,
   useState,
 } from 'react';
-import { Trans } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import OtpCountdown from './OtpCountdown';
 
 const OTP_LENGTH = 6;
+const OTP_SECONDS = 15;
 
 type Props = PropsWithChildren<{
-  actionText?: string;
   action: () => Promise<void> | void;
-  message?: string;
-  helpLink?: string;
   isLoading?: boolean;
   classNameActions?: string;
 }>;
@@ -31,16 +30,14 @@ export default function Otp(
   {
     classNameActions,
     action,
-    actionText = 'Authorize and Continue',
     children,
-    helpLink = 'https://dynamicframework.dev',
     isLoading,
-    message = 'For authorization, please enter the 6-digit code we’ve sent to your associated phone number',
   }: Props,
 ) {
   const { closePortal } = useDPortalContext();
   const [otp, setOtp] = useState('');
   const [invalid, setInvalid] = useState(false);
+  const { t } = useTranslation();
 
   const handler = useCallback(async () => {
     if (otp.length < OTP_LENGTH) {
@@ -57,17 +54,19 @@ export default function Otp(
   return (
     <>
       {children}
-      {message}
+      {t('otp.message')}
       <div className="d-flex flex-column gap-6 pb-4 px-lg-3">
         <div className="d-flex flex-column gap-6">
-          <DInputPin
-            className="modal-otp-pin"
-            characters={OTP_LENGTH}
-            onChange={(e) => setOtp(e)}
-            invalid={invalid && otp.length < OTP_LENGTH}
-            placeholder="0"
-          />
-          <OtpCountdown seconds={15} />
+          <div className="d-flex">
+            <DInputPin
+              className="modal-otp-pin"
+              characters={OTP_LENGTH}
+              onChange={(e) => setOtp(e)}
+              invalid={invalid && otp.length < OTP_LENGTH}
+              placeholder="0"
+            />
+          </div>
+          <OtpCountdown seconds={OTP_SECONDS} />
         </div>
         <hr className="m-0" />
         <div
@@ -77,7 +76,7 @@ export default function Otp(
           )}
         >
           <DButton
-            text={actionText}
+            text={t('otp.actions.continue')}
             onClick={handler}
             loading={isLoading}
           />
@@ -85,7 +84,7 @@ export default function Otp(
             i18nKey="otp.problems"
             components={{
               a: <a
-                href={helpLink}
+                href={t('otp.helpLink')}
                 className="link-primary text-nowrap"
                 target="_blank"
                 rel="noreferrer"
