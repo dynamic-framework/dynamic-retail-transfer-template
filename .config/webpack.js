@@ -25,7 +25,9 @@ module.exports = (env, argv) => {
         'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
       },
       allowedHosts: [
-        '.modyo.cloud'
+        'localhost',
+        '127.0.0.1',
+        '.modyo.cloud',
       ],
       client: {
         webSocketURL: {
