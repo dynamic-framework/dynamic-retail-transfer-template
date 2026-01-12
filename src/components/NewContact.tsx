@@ -12,13 +12,14 @@ export default function NewContact() {
       href={`${SITE_URL}/${NEW_CONTACT_PATH}`}
       className={classNames(
         'd-flex gap-4 border border-gray-100 rounded p-4 ',
-        'text-black text-decoration-none quick-action-button',
+        'text-black text-decoration-none hover:bg-gray-50 align-items-center',
       )}
     >
       <DIcon
-        icon="person-add"
-        size="40px"
-        className="text-secondary-500"
+        icon="UserRoundPlus"
+        size="1.5rem"
+        color="primary"
+        hasCircle
       />
       <div>
         <strong>{t('transferPanel.newContact')}</strong>

@@ -16,4 +16,9 @@
       background: var(--#{$prefix}gray-50);
     }
   }
+  .fill-yellow-500 {
+    svg {
+      fill: var(--#{$prefix}yellow-500);
+    }
+  }
 }

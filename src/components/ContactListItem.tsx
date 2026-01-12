@@ -35,9 +35,8 @@ export default function ContactListItem({ contact }: Props) {
         </div>
       </div>
       <DIcon
-        theme="secondary"
-        size="lg"
-        icon={contact.isFavorite ? 'star-fill' : 'star'}
+        className={`text-yellow-500 ${contact.isFavorite ? 'fill-yellow-500' : ''}`}
+        icon={contact.isFavorite ? 'Star' : 'Star'}
       />
     </button>
   );

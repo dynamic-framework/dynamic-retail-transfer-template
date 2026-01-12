@@ -1,6 +1,6 @@
 import {
   changeQueryString,
-  DInputSearch,
+  DInput,
   getQueryString,
 } from '@dynamic-framework/ui-react';
 import debounce from 'lodash.debounce';
@@ -37,7 +37,7 @@ export default function ContactList() {
 
   return (
     <>
-      <DInputSearch
+      <DInput
         id="searchContacts"
         placeholder={t('transferPanel.searchPlaceholder')}
         defaultValue={query}
