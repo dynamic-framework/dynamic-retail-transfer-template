@@ -45,11 +45,13 @@ export default function Steps() {
   if (currentStep === 'voucher') return null;
 
   return (
-    <DStepper
-      options={steps}
-      currentStep={STEPS[currentStep].value}
-      breakpoint="md"
-      className="mb-4 mb-lg-8 d-flex align-self-start d-md-block"
-    />
+    <div className="max-w-lg w-100 mx-auto">
+      <DStepper
+        options={steps}
+        currentStep={STEPS[currentStep].value}
+        breakpoint="md"
+        className="mb-4 mb-lg-8 d-flex align-self-start d-md-block"
+      />
+    </div>
   );
 }
