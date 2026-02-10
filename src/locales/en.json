@@ -125,12 +125,14 @@
   },
   "voucher": {
     "message": "You will receive an invoice and summary of this transaction to the email associated with your account.",
-    "share": "Share",
-    "download": "Download",
     "backToHome": "Back Home",
     "anotherOperation": "Another transfer",
     "details": "Transfer details",
-    "moneySent": "Money sent"
+    "moneySent": "Money sent",
+    "actions": {
+      "share": "Share",
+      "download": "Download"
+    }
   },
   "errors": {
     "selectAmount": "Select a valid amount"

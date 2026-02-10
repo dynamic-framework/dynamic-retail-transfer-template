@@ -51,8 +51,13 @@ export default function TransferResult() {
             amount={amountUsedFormatted}
             icon="CircleCheckBig"
             color="success"
-            shareText={t('voucher.share')}
-            downloadText={t('voucher.download')}
+            shareText={t('voucher.actions.share')}
+            downloadText={t('voucher.actions.download')}
+            amountDetails={(
+              <p className="m-0 text-center">
+                {t('voucher.moneySent')}
+              </p>
+            )}
           >
             <div className="d-flex flex-column gap-">
               {scheduled && (
