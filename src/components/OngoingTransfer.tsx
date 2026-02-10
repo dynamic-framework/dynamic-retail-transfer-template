@@ -63,8 +63,7 @@ export default function OngoingTransfer() {
     if (!enableTransfer) {
       toast({
         title: t('errors.selectAmount'),
-        soft: true,
-        theme: 'danger',
+        color: 'danger',
       });
       return;
     }
@@ -127,8 +126,8 @@ export default function OngoingTransfer() {
         {scheduledTransfer && (
           <DDatePicker
             date={scheduledTransfer}
-            iconHeaderNext="chevron-right"
-            iconHeaderPrev="chevron-left"
+            iconHeaderNext="ChevronRight"
+            iconHeaderPrev="ChevronLeft"
             minDate={new Date()}
             placeholder={t('ongoingTransfer.selectDate')}
             iconInput="calendar"

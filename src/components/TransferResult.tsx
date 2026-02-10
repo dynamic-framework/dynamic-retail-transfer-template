@@ -1,4 +1,6 @@
 import {
+  DCard,
+  DVoucher,
   DButton,
   DIcon,
   useFormatCurrency,
@@ -24,8 +26,6 @@ import {
   setCurrentStep,
 } from '../store/slice';
 
-import Voucher from './voucher/Voucher';
-
 export default function TransferResult() {
   const amountUsed = useAppSelector(getAmountUsed);
   const selectedContact = useAppSelector(getSelectedContact);
@@ -43,43 +43,49 @@ export default function TransferResult() {
 
   return (
     <>
-      <Voucher
-        title={t('result.transferSuccess')}
-        message={t('voucher.message')}
-        amount={amountUsedFormatted}
-        amountDetails={t('voucher.moneySent')}
-      >
-        <div className="d-flex flex-column gap-6">
-          {scheduled && (
-            <>
-              <div className="rounded-1 d-flex gap-4 align-items-center justify-content-center">
-                <DIcon
-                  theme="success"
-                  hasCircle
-                  icon="calendar"
-                  size="var(--bs-ref-spacer-4)"
-                />
-                <span>
-                  <Trans
-                    i18nKey="result.scheduledTransferSuccess"
-                    values={{
-                      date: DateTime.fromISO(scheduled).toFormat(VARS_FORMAT_DATE),
-                    }}
-                  />
-                </span>
+      <DCard className="mb-4">
+        <DCard.Body>
+          <DVoucher
+            title={t('result.transferSuccess')}
+            message={t('voucher.message')}
+            amount={amountUsedFormatted}
+            icon="CircleCheckBig"
+            color="success"
+            shareText={t('voucher.share')}
+            downloadText={t('voucher.download')}
+          >
+            <div className="d-flex flex-column gap-">
+              {scheduled && (
+                <>
+                  <div className="rounded-1 d-flex gap-4 align-items-center justify-content-center">
+                    <DIcon
+                      color="success"
+                      hasCircle
+                      icon="Calendar"
+                      size="var(--bs-ref-spacer-4)"
+                    />
+                    <span>
+                      <Trans
+                        i18nKey="result.scheduledTransferSuccess"
+                        values={{
+                          date: DateTime.fromISO(scheduled).toFormat(VARS_FORMAT_DATE),
+                        }}
+                      />
+                    </span>
+                  </div>
+                  <hr className="m-0" />
+                </>
+              )}
+              <div>
+                <h5 className="mb-2">{t('voucher.details')}</h5>
+                <div>{t('result.transferTo', { value: selectedContact?.name || selectedAccount?.name })}</div>
+                <div>{t('result.transactionId', { value: 'ax53-ns3g11' })}</div>
+                <div>{t('result.timeDate', { value: DateTime.now().toFormat('MM/dd/yy, hh:mm a') })}</div>
               </div>
-              <hr className="m-0" />
-            </>
-          )}
-          <div>
-            <h5 className="mb-2">{t('voucher.details')}</h5>
-            <div>{t('result.transferTo', { value: selectedContact?.name || selectedAccount?.name })}</div>
-            <div>{t('result.transactionId', { value: 'ax53-ns3g11' })}</div>
-            <div>{t('result.timeDate', { value: DateTime.now().toFormat('MM/dd/yy, hh:mm a') })}</div>
-          </div>
-        </div>
-
-      </Voucher>
+            </div>
+          </DVoucher>
+        </DCard.Body>
+      </DCard>
       <div className="d-flex justify-content-center align-items-center gap-6 w-100">
         <a
           href={`${SITE_URL}/${DASHBOARD_PATH}`}

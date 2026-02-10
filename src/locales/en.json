@@ -108,16 +108,15 @@
     "error": "Unable to update favorite contact"
   },
   "otp": {
-    "title": "Authorize",
-    "message": "We will send you a 6-digit code to your associated phone number so you can continue with your request",
-    "problems": "<p>Problems with your digital token? <a>Contact us</a></p>",
+    "title": "We will send you a 6-digit code to your associated phone number",
+    "resend": "Send again",
+    "resendText": "Request new code",
+    "submit": "Authorize and continue",
+    "problems": "<p>Problems with your digital token? <a>{linkText}</a></p>",
     "countdown": "<p>Didn't you get any code? Resend in {value}</p>",
     "countdownResend": "<p>Didn't you get any code? <button></button></p>",
     "helpLink": "https://dynamicframework.dev",
-    "actions": {
-      "resend": "Resend code",
-      "continue": "Authorize and Continue"
-    }
+    "contact": "Contact us"
   },
   "steps": {
     "selection": "Selection",

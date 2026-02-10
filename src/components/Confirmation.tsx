@@ -1,11 +1,12 @@
 import {
+  DOtp,
   DCard,
   useFormatCurrency,
   DButton,
   DButtonIcon,
 } from '@dynamic-framework/ui-react';
 import { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import useTransfer from '../services/hooks/useTransfer';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -16,8 +17,6 @@ import {
   getSelectedContact,
 } from '../store/selectors';
 import { setCurrentStep } from '../store/slice';
-
-import OtpCard from './otp/OtpCard';
 
 export default function Confirmation() {
   const amountUsed = useAppSelector(getAmountUsed);
@@ -45,14 +44,14 @@ export default function Confirmation() {
             <DButton
               className="ms-auto d-none d-lg-flex"
               variant="link"
-              iconStart="pencil"
+              iconStart="Pencil"
               text={t('edit')}
               onClick={() => dispatch(setCurrentStep('details'))}
             />
             <DButtonIcon
               className="ms-auto d-lg-none"
               variant="link"
-              icon="pencil"
+              icon="Pencil"
               onClick={() => dispatch(setCurrentStep('details'))}
             />
           </div>
@@ -63,10 +62,40 @@ export default function Confirmation() {
           </ul>
         </DCard.Body>
       </DCard>
-      <OtpCard
-        action={transfer}
-        isLoading={loading}
-      />
+      <DCard>
+        <DCard.Body>
+          <DOtp
+            action={transfer}
+            isLoading={loading}
+            seconds={60}
+            texts={{
+              title: t('otp.title'),
+              resend: t('otp.resend'),
+              resendText: t('otp.resendText'),
+              submit: t('otp.submit'),
+              contact: (
+                <Trans
+                  i18nKey="otp.problems"
+                  values={{ linkText: t('otp.contact') }}
+                  components={{
+                    p: <span />,
+                    a: (
+                      <a
+                        className="link-primary text-nowrap"
+                        href={t('otp.helpLink')}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        {t('otp.contact')}
+                      </a>
+                    ),
+                  }}
+                />
+              ),
+            }}
+          />
+        </DCard.Body>
+      </DCard>
     </>
   );
 }

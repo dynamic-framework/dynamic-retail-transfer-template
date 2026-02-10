@@ -75,7 +75,7 @@ export const getContactsFiltered = createSelector(
 
     return contacts.filter(({ name, accountNumber }: Contact) => (
       name.toLowerCase().includes(contactsQuery.toLowerCase())
-        || accountNumber.includes(contactsQuery.toLowerCase())
+      || accountNumber.includes(contactsQuery.toLowerCase())
     ));
   },
 );
