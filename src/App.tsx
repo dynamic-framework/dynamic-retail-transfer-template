@@ -33,7 +33,7 @@ export default function App() {
   return (
     <div className="container">
       <Steps />
-      <div className="mx-auto col-xl-6">
+      <div className="mx-auto w-full max-w-lg">
         <CurrentStep />
       </div>
     </div>
