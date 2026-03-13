@@ -7,15 +7,6 @@
       --#{$prefix}input-pin-form-control-size: var(--#{$prefix}ref-spacer-10);
     }
   }
-
-  .quick-action-button,
-  .reset-btn {
-    background: transparent;
-    &:hover {
-      text-decoration: none;
-      background: var(--#{$prefix}gray-50);
-    }
-  }
   .fill-yellow-500 {
     svg {
       fill: var(--#{$prefix}yellow-500);
