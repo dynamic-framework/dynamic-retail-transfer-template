@@ -25,7 +25,7 @@ export default function ContactListItem({ contact }: Props) {
         onClick={handleSelectContact}
         className={classNames(
           'd-flex gap-2 align-items-center justify-content-between w-100 p-2',
-          'border-0 text-start rounded-2 bg-transparent hover:bg-gray-50 quick-action-button',
+          'border-0 text-start rounded-2 bg-transparent hover:bg-primary-25 quick-action-button',
         )}
       >
         <div className="d-flex gap-4 align-items-center">

@@ -10,7 +10,6 @@ import useAccountsEffect from '../services/hooks/useAccountsEffect';
 
 import AccountList from './AccountList';
 import ContactList from './ContactList';
-import NewContact from './NewContact';
 
 export default function TransferPanel() {
   useAccountsEffect();
@@ -39,7 +38,6 @@ export default function TransferPanel() {
             tab={TRANSFER_TABS[0].tab}
             className="d-flex flex-column gap-6"
           >
-            <NewContact />
             <ContactList />
           </DTabs.Tab>
           <DTabs.Tab

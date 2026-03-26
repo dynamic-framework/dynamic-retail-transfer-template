@@ -11,6 +11,7 @@ import useContactsEffect from '../services/hooks/useContactsEffect';
 
 import ContactListItem from './ContactListItem';
 import LoaderList from './loaders/LoaderList';
+import NewContact from './NewContact';
 
 export default function ContactList() {
   const [query, setQuery] = useState(getQueryString('query', { default: '', useSearch: true }));
@@ -37,12 +38,18 @@ export default function ContactList() {
 
   return (
     <>
-      <DInput
-        id="searchContacts"
-        placeholder={t('transferPanel.searchPlaceholder')}
-        defaultValue={query}
-        onChange={(value) => handleSearch(value)}
-      />
+      <div className="d-flex gap-8">
+        <DInput
+          id="searchContacts"
+          className="flex-1"
+          placeholder={t('transferPanel.searchPlaceholder')}
+          defaultValue={query}
+          onChange={(value) => handleSearch(value)}
+        />
+        <div className="ms-auto">
+          <NewContact />
+        </div>
+      </div>
       {loading && (<LoaderList />)}
 
       {!loading && (

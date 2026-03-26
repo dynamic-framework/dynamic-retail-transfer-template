@@ -12,7 +12,7 @@ import './config/i18nConfig';
 import App from './App';
 import store from './store/store';
 
-// import '@dynamic-framework/ui-react/dist/css/dynamic-ui.css';
+import '@dynamic-framework/ui-react/dist/css/dynamic-ui.css';
 import './styles/base.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('transfer') as Element);
