@@ -1,6 +1,6 @@
 import {
   changeQueryString,
-  DCard,
+  DBox,
   DTabs,
 } from '@dynamic-framework/ui-react';
 import { useMemo } from 'react';
@@ -21,12 +21,12 @@ export default function TransferPanel() {
   ], [t]);
 
   return (
-    <DCard>
-      <DCard.Body className="d-flex flex-column gap-4">
+    <DBox>
+      <div className="d-flex flex-column gap-4">
         <DTabs
           options={TRANSFER_TABS}
           defaultSelected={TRANSFER_TABS[0].tab}
-          className="mb-4 px-0"
+          className="mb-4"
           onChange={() => {
             changeQueryString(
               { query: '' },
@@ -47,7 +47,7 @@ export default function TransferPanel() {
             <AccountList />
           </DTabs.Tab>
         </DTabs>
-      </DCard.Body>
-    </DCard>
+      </div>
+    </DBox>
   );
 }
